@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="segoePrintBoldTextAppearance">
+        <item name="fontFamily">@font/segoe_print_bold</item>
+    </style>
+
+    <style name="calendarTextAppearance" parent="segoePrintBoldTextAppearance">
+        <item name="android:textSize">22sp</item>
+        <item name="android:textColor">@color/text_color</item>
+    </style>
+
+</resources>

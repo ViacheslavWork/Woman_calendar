@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">Woman calendar</string>
+    <string name="title_home">Home</string>
+    <string name="title_advices">Advices</string>
+    <string name="month">Month</string>
+    <string name="period_in">Period in</string>
+    <string name="log_period">Log period</string>
+    <string name="my_daily_insights">My daily insights</string>
+    <string name="log_your_symptoms">Log your symptoms</string>
+    <string name="my_cycle">My cycle</string>
+    <string name="nn_days">%s days</string>
+    <string name="month_dd_month_dd">%s %s - %s %s</string>
+    <string name="started_month_dd_yyyy">Started %s %s, %s</string>
+    <string name="log_previous_cycles">Log previous cycles</string>
+    <string name="there_are_no_data_to_analyze_and_compare_yet">There are no data to analyze and compare yet</string>
+    <string name="log_at_least_2_periods_to_get_personalized_insights_about_your_previous_cycle_and_period_length">Log at least 2 periods to get personalized insights about your previous cycle and period length</string>
+    <string name="log_at_least_3_periods_to_get_insights_about_your_cycle_regularity">Log at least 3 periods to get insights about your cycle regularity</string>
+    <string name="log_previous_cycle">Log previous cycle</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="dates_are_auto_filled_tap_them_to_adjust">Dates are auto-filled. Tap them to adjust.</string>
+    <string name="contin">Continue</string>
+</resources>
