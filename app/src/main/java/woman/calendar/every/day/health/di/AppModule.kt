@@ -9,8 +9,7 @@ val appModule = module {
     viewModel {
         CalendarViewModel(
             getMonthUseCase = get(),
-            markPeriodDayUseCase = get(),
-            unmarkPeriodDayUseCase = get()
+            updatePeriodDayUseCase = get(),
         )
     }
     viewModel { HomeViewModel() }

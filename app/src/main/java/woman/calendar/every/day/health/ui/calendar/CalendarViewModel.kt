@@ -3,51 +3,53 @@ package woman.calendar.every.day.health.ui.calendar
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.launch
 import org.threeten.bp.LocalDate
-import timber.log.Timber
-import woman.calendar.every.day.health.domain.model.StateOfDay
 import woman.calendar.every.day.health.domain.usecase.GetMonthUseCase
-import woman.calendar.every.day.health.domain.usecase.MarkPeriodDayUseCase
-import woman.calendar.every.day.health.domain.usecase.UnmarkPeriodDayUseCase
+import woman.calendar.every.day.health.domain.usecase.UpdatePeriodDayUseCase
 
 private const val monthsCashSize = 8L
 
 class CalendarViewModel(
     private val getMonthUseCase: GetMonthUseCase,
-    private val markPeriodDayUseCase: MarkPeriodDayUseCase,
-    private val unmarkPeriodDayUseCase: UnmarkPeriodDayUseCase
+    private val updatePeriodDayUseCase: UpdatePeriodDayUseCase,
 ) : ViewModel() {
     private val _months = MutableLiveData<List<ItemMonth>>()
     val months: LiveData<List<ItemMonth>> = _months
     private lateinit var prevMonth: LocalDate
+    private var countOfMounts = monthsCashSize
 
     init {
-        fillInitialData()
+        viewModelScope.launch { fillInitialData() }
     }
 
     fun getPrevMonth() {
-        months.value
-            ?.toMutableList()
-            ?.let {
-                for (i in 0..monthsCashSize) {
-                    prevMonth = prevMonth.minusMonths(1)
-                    it.add(
-                        0,
-                        ItemMonth(
-                            date = prevMonth,
-                            days = getMonthUseCase.execute(prevMonth)
-                                .map { day -> ItemDay.fromDay(day) })
-                    )
+        viewModelScope.launch {
+            months.value
+                ?.toMutableList()
+                ?.let {
+                    countOfMounts += monthsCashSize
+                    for (i in 0..monthsCashSize) {
+                        prevMonth = prevMonth.minusMonths(1)
+                        it.add(
+                            0,
+                            ItemMonth(
+                                date = prevMonth,
+                                days = getMonthUseCase.execute(prevMonth)
+                                    .map { day -> ItemDay.fromDay(day) })
+                        )
+                    }
+                    _months.postValue(it)
                 }
-                _months.postValue(it)
-            }
+        }
     }
 
-    private fun fillInitialData() {
-        val date = LocalDate.now().minusMonths(monthsCashSize)
+    private suspend fun fillInitialData() {
+        val date = LocalDate.now().minusMonths(countOfMounts)
         prevMonth = date
         val months = mutableListOf<ItemMonth>()
-        for (i in 0..monthsCashSize + 1) {
+        for (i in 0..countOfMounts + 1) {
             val dateTemp = date.plusMonths(i)
             months.add(
                 ItemMonth(
@@ -62,12 +64,10 @@ class CalendarViewModel(
     fun handleEvent(event: CalendarEvent) {
         when (event) {
             is CalendarEvent.OnDayClick -> {
-                if (event.day.stateOfDay == StateOfDay.PERIOD) {
-                    markPeriodDayUseCase.execute(event.day.date)
-                } else {
-                    unmarkPeriodDayUseCase.execute(event.day.date)
+                viewModelScope.launch {
+                    updatePeriodDayUseCase.execute(event.day)
+                    fillInitialData()
                 }
-                fillInitialData()
             }
         }
     }

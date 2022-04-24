@@ -46,11 +46,6 @@ class CalendarFragment : Fragment(R.layout.fragment_calendrar) {
 
     private fun observeListEvent() {
         adapter.event.observe(viewLifecycleOwner) {
-            Toast.makeText(
-                requireContext(),
-                "Day ${it.day.date} clicked",
-                Toast.LENGTH_SHORT
-            ).show()
             viewModel.handleEvent(it)
         }
     }

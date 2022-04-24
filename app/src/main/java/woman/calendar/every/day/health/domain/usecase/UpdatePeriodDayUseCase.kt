@@ -5,13 +5,13 @@ import woman.calendar.every.day.health.domain.Repository
 import woman.calendar.every.day.health.domain.model.Day
 import woman.calendar.every.day.health.domain.model.StateOfDay
 
-class UnmarkPeriodDayUseCase(
+class UpdatePeriodDayUseCase(
     private val repository: Repository,
     private val recalculateFromDayUseCase: RecalculateFromDayUseCase
 ) {
-    fun execute(date: LocalDate) {
-        if (date.isAfter(LocalDate.now())) return
-        repository.setDay(Day(date,null))
-        recalculateFromDayUseCase.execute(date = date)
+    suspend fun execute(day: Day) {
+        if (day.date.isAfter(LocalDate.now())) return
+        repository.setDay(day)
+        recalculateFromDayUseCase.execute(date = day.date)
     }
 }

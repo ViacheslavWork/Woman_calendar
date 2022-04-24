@@ -13,7 +13,7 @@ import woman.calendar.every.day.health.R
 import woman.calendar.every.day.health.databinding.ItemCalendarDayBinding
 import woman.calendar.every.day.health.databinding.ItemCalendarMonthBinding
 import woman.calendar.every.day.health.domain.model.Day
-import woman.calendar.every.day.health.domain.model.StateOfDay
+import woman.calendar.every.day.health.domain.model.StateOfDay.*
 
 private const val TAG = "CalendarAdapter"
 
@@ -93,10 +93,10 @@ class DayHolder(private val binding: ItemCalendarDayBinding) :
     ) {
         item.stateOfDay?.let {
             when (it) {
-                StateOfDay.FERTILE -> {
+                FERTILE -> {
                     binding.dateTv.setTextColor(binding.root.resources.getColor(R.color.green))
                 }
-                StateOfDay.PERIOD -> {
+                PERIOD -> {
                     binding.root.background =
                         ResourcesCompat.getDrawable(
                             binding.root.resources,
@@ -105,7 +105,7 @@ class DayHolder(private val binding: ItemCalendarDayBinding) :
                         )
                     binding.dateTv.setTextColor(binding.root.resources.getColor(R.color.white))
                 }
-                StateOfDay.OVULATION -> {
+                OVULATION -> {
                     binding.root.background =
                         ResourcesCompat.getDrawable(
                             binding.root.resources,
@@ -114,23 +114,34 @@ class DayHolder(private val binding: ItemCalendarDayBinding) :
                         )
                     binding.dateTv.setTextColor(binding.root.resources.getColor(R.color.green))
                 }
-                StateOfDay.EXPECTED_NEW_PERIOD -> {
-                    binding.root.background =
-                        ResourcesCompat.getDrawable(
-                            binding.root.resources,
-                            R.drawable.bg_border_dashed_pink,
-                            null
-                        )
-                    binding.dateTv.setTextColor(binding.root.resources.getColor(R.color.pink))
+                EXPECTED_NEW_PERIOD -> {
+                    if (item.date?.isBefore(LocalDate.now()) == true) {
+                        binding.root.background =
+                            ResourcesCompat.getDrawable(
+                                binding.root.resources,
+                                R.color.gray4,
+                                null
+                            )
+                        binding.dateTv.setTextColor(binding.root.resources.getColor(R.color.white))
+                    } else {
+                        binding.root.background =
+                            ResourcesCompat.getDrawable(
+                                binding.root.resources,
+                                R.drawable.bg_border_dashed_pink,
+                                null
+                            )
+                        binding.dateTv.setTextColor(binding.root.resources.getColor(R.color.pink))
+                    }
                 }
-
+                PRE_PERIOD -> TODO()
+                DELAY -> TODO()
             }
         }
         item.numOfDay?.let { binding.dateTv.text = it }
         item.date?.let { date ->
             if (date.isAfter(LocalDate.now())) return@let
             binding.root.setOnClickListener {
-                if (item.stateOfDay != StateOfDay.PERIOD) {
+                if (item.stateOfDay != PERIOD) {
                     binding.root.background =
                         ResourcesCompat.getDrawable(
                             binding.root.resources,
@@ -138,11 +149,8 @@ class DayHolder(private val binding: ItemCalendarDayBinding) :
                             null
                         )
                     binding.dateTv.setTextColor(binding.root.resources.getColor(R.color.white))
-                    event.postValue(
-                        CalendarEvent.OnDayClick(
-                            Day(date, StateOfDay.PERIOD)
-                        )
-                    )
+
+                    event.postValue(CalendarEvent.OnDayClick(Day(date, PERIOD)))
                 } else {
                     binding.root.setBackgroundColor(Color.TRANSPARENT)
                     binding.dateTv.setTextColor(binding.root.resources.getColor(R.color.text_color))

@@ -1,20 +1,25 @@
 package woman.calendar.every.day.health.di
 
+import android.content.Context
+import androidx.room.Room
+import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
+import woman.calendar.every.day.health.data.database.mixes.DaysDao
+import woman.calendar.every.day.health.data.database.mixes.DaysDatabase
 
 const val DAYS_DATABASE_NAME = "Days.db"
 
 val roomModule = module {
-/*    fun providePersonsDatabase(context: Context): PersonsDatabase {
-        return Room.databaseBuilder(context, PersonsDatabase::class.java, PERSONS_DATABASE_NAME)
+    fun provideDaysDatabase(context: Context): DaysDatabase {
+        return Room.databaseBuilder(context, DaysDatabase::class.java, DAYS_DATABASE_NAME)
             .fallbackToDestructiveMigration()//dangerous thing!!!
             .build()
     }
 
-    fun providePersonsDao(database: PersonsDatabase): PersonsDao {
-        return database.personsDao
+    fun provideDaysDao(database: DaysDatabase): DaysDao {
+        return database.daysDao
     }
 
-    single { providePersonsDatabase(context = androidContext()) }
-    single { providePersonsDao(database = get()) }*/
+    single { provideDaysDatabase(context = androidContext()) }
+    single { provideDaysDao(get()) }
 }
