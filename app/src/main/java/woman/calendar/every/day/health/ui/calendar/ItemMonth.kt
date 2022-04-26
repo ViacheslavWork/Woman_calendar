@@ -1,10 +1,11 @@
 package woman.calendar.every.day.health.ui.calendar
 
 import org.threeten.bp.LocalDate
+import woman.calendar.every.day.health.utils.LocalDateHelper.getMonthName
 import java.util.*
 
-data class ItemMonth(val date: LocalDate, private val days: List<ItemDay>) {
-    val title: String = "${getMonthName(date)} ${date.year}"
+data class ItemMonth(val date: LocalDate, val days: List<ItemDay>) {
+    val title: String = "${date.getMonthName()} ${date.year}"
     val daysWithStartDelay = getDaysWithStartDelays()
 
     private fun getDaysWithStartDelays(): List<ItemDay> {
@@ -15,8 +16,4 @@ data class ItemMonth(val date: LocalDate, private val days: List<ItemDay>) {
         }
         return itemsDay
     }
-
-    private fun getMonthName(dateTemp: LocalDate) = dateTemp.month.toString()
-        .lowercase(Locale.getDefault())
-        .replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() }
 }

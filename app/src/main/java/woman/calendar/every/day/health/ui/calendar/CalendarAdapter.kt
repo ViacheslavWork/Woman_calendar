@@ -16,14 +16,23 @@ import woman.calendar.every.day.health.domain.model.Day
 import woman.calendar.every.day.health.domain.model.StateOfDay.*
 
 private const val TAG = "CalendarAdapter"
+private val mapDateToAdapter = mutableMapOf<LocalDate, DayAdapter>()
 
 class CalendarAdapter(
     val event: MutableLiveData<CalendarEvent> = MutableLiveData(),
 ) : ListAdapter<ItemMonth, MonthHolder>(MonthDiffCallbacks()) {
+    /*private val mapDateToAdapterPosition = mutableMapOf<LocalDate, Int>()
+    fun getPositionByDate(date: LocalDate): Int? {
+        Timber.d(mapDateToAdapterPosition.toString())
+        return mapDateToAdapterPosition[date]
+    }*/
 
-    lateinit var binding: ItemCalendarMonthBinding
+    fun updateMonths(months: List<ItemMonth>) {
+        months.forEach { mapDateToAdapter[it.date]?.submitList(it.daysWithStartDelay) }
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MonthHolder {
-        binding =
+        val binding =
             ItemCalendarMonthBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
@@ -33,18 +42,24 @@ class CalendarAdapter(
     }
 
     override fun onBindViewHolder(holder: MonthHolder, position: Int) {
-        getItem(position).let { holder.onBind(it, event) }
+        getItem(position).let {
+            /*mapDateToAdapterPosition[LocalDateHelper.getByMonth(it.date.year, it.date.month)] =
+                position*/
+            holder.onBind(it, event)
+        }
     }
 }
 
 class MonthHolder(private val binding: ItemCalendarMonthBinding) :
     RecyclerView.ViewHolder(binding.root) {
+    var isDateInitialized = false
     fun onBind(
         item: ItemMonth,
         event: MutableLiveData<CalendarEvent>
     ) {
         binding.monthTv.text = item.title
         val dayAdapter = DayAdapter(event)
+        mapDateToAdapter[item.date] = dayAdapter
         dayAdapter.submitList(item.daysWithStartDelay)
         binding.daysRv.adapter = dayAdapter
         binding.daysRv.setHasFixedSize(true)
@@ -61,8 +76,9 @@ private class MonthDiffCallbacks : DiffUtil.ItemCallback<ItemMonth>() {
     override fun areContentsTheSame(
         oldItem: ItemMonth,
         newItem: ItemMonth
-    ): Boolean =
-        (oldItem == newItem)
+    ): Boolean {
+        return (oldItem == newItem)
+    }
 }
 
 class DayAdapter(
@@ -94,7 +110,12 @@ class DayHolder(private val binding: ItemCalendarDayBinding) :
         item.stateOfDay?.let {
             when (it) {
                 FERTILE -> {
-                    binding.dateTv.setTextColor(binding.root.resources.getColor(R.color.green))
+                    binding.dateTv.setTextColor(
+                        binding.root.resources.getColor(
+                            R.color.green,
+                            null
+                        )
+                    )
                 }
                 PERIOD -> {
                     binding.root.background =
@@ -103,7 +124,12 @@ class DayHolder(private val binding: ItemCalendarDayBinding) :
                             R.color.pink,
                             null
                         )
-                    binding.dateTv.setTextColor(binding.root.resources.getColor(R.color.white))
+                    binding.dateTv.setTextColor(
+                        binding.root.resources.getColor(
+                            R.color.white,
+                            null
+                        )
+                    )
                 }
                 OVULATION -> {
                     binding.root.background =
@@ -112,7 +138,12 @@ class DayHolder(private val binding: ItemCalendarDayBinding) :
                             R.drawable.bg_border_dashed_green,
                             null
                         )
-                    binding.dateTv.setTextColor(binding.root.resources.getColor(R.color.green))
+                    binding.dateTv.setTextColor(
+                        binding.root.resources.getColor(
+                            R.color.green,
+                            null
+                        )
+                    )
                 }
                 EXPECTED_NEW_PERIOD -> {
                     if (item.date?.isBefore(LocalDate.now()) == true) {
@@ -122,7 +153,12 @@ class DayHolder(private val binding: ItemCalendarDayBinding) :
                                 R.color.gray4,
                                 null
                             )
-                        binding.dateTv.setTextColor(binding.root.resources.getColor(R.color.white))
+                        binding.dateTv.setTextColor(
+                            binding.root.resources.getColor(
+                                R.color.white,
+                                null
+                            )
+                        )
                     } else {
                         binding.root.background =
                             ResourcesCompat.getDrawable(
@@ -130,7 +166,12 @@ class DayHolder(private val binding: ItemCalendarDayBinding) :
                                 R.drawable.bg_border_dashed_pink,
                                 null
                             )
-                        binding.dateTv.setTextColor(binding.root.resources.getColor(R.color.pink))
+                        binding.dateTv.setTextColor(
+                            binding.root.resources.getColor(
+                                R.color.pink,
+                                null
+                            )
+                        )
                     }
                 }
                 PRE_PERIOD -> TODO()
@@ -165,11 +206,14 @@ private class DayDiffCallbacks : DiffUtil.ItemCallback<ItemDay>() {
     override fun areItemsTheSame(
         oldItem: ItemDay,
         newItem: ItemDay
-    ): Boolean =
-        (oldItem.date == newItem.date)
+    ): Boolean {
+        return (oldItem.date == newItem.date)
+    }
 
     override fun areContentsTheSame(
         oldItem: ItemDay,
         newItem: ItemDay
-    ): Boolean = (oldItem == newItem)
+    ): Boolean {
+        return (oldItem.stateOfDay == newItem.stateOfDay)
+    }
 }

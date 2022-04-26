@@ -8,8 +8,9 @@ import kotlinx.coroutines.launch
 import org.threeten.bp.LocalDate
 import woman.calendar.every.day.health.domain.usecase.GetMonthUseCase
 import woman.calendar.every.day.health.domain.usecase.UpdatePeriodDayUseCase
+import woman.calendar.every.day.health.utils.LocalDateHelper
 
-private const val monthsCashSize = 8L
+private const val monthsCashSize = 12L
 
 class CalendarViewModel(
     private val getMonthUseCase: GetMonthUseCase,
@@ -35,7 +36,7 @@ class CalendarViewModel(
                         it.add(
                             0,
                             ItemMonth(
-                                date = prevMonth,
+                                date = LocalDateHelper.getByMonth(prevMonth.year, prevMonth.month),
                                 days = getMonthUseCase.execute(prevMonth)
                                     .map { day -> ItemDay.fromDay(day) })
                         )
@@ -53,7 +54,7 @@ class CalendarViewModel(
             val dateTemp = date.plusMonths(i)
             months.add(
                 ItemMonth(
-                    date = dateTemp,
+                    date = LocalDateHelper.getByMonth(dateTemp.year, dateTemp.month),
                     days = getMonthUseCase.execute(dateTemp)
                         .map { day -> ItemDay.fromDay(day) })
             )

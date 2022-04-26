@@ -87,7 +87,7 @@
                 android:orientation="vertical"
                 app:layout_constraintGuide_end="20dp" />
 
-            <androidx.recyclerview.widget.RecyclerView
+            <!--<androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/week_rv"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -98,7 +98,48 @@
                 app:layout_constraintStart_toStartOf="@id/content_start"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:itemCount="7"
-                tools:listitem="@layout/item_week_day" />
+                tools:listitem="@layout/item_week_day" />-->
+
+            <androidx.constraintlayout.helper.widget.Flow
+                android:id="@+id/week_flow"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                app:constraint_referenced_ids="monday_item, tuesday_item,wednesday_item,thursday_item, friday_item, saturday_item, sunday_item"
+                app:flow_horizontalStyle="spread_inside"
+                app:flow_verticalGap="10dp"
+                app:flow_wrapMode="chain"
+                app:layout_constraintEnd_toEndOf="@id/content_end"
+                app:layout_constraintStart_toStartOf="@id/content_start"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <include
+                android:id="@+id/monday_item"
+                layout="@layout/item_week_day" />
+
+            <include
+                android:id="@+id/tuesday_item"
+                layout="@layout/item_week_day" />
+
+            <include
+                android:id="@+id/wednesday_item"
+                layout="@layout/item_week_day" />
+
+            <include
+                android:id="@+id/thursday_item"
+                layout="@layout/item_week_day" />
+
+            <include
+                android:id="@+id/friday_item"
+                layout="@layout/item_week_day" />
+
+            <include
+                android:id="@+id/saturday_item"
+                layout="@layout/item_week_day" />
+
+            <include
+                android:id="@+id/sunday_item"
+                layout="@layout/item_week_day" />
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/status"
@@ -110,9 +151,11 @@
                 app:cardCornerRadius="80dp"
                 app:layout_constraintEnd_toEndOf="@id/content_end"
                 app:layout_constraintStart_toStartOf="@id/content_start"
-                app:layout_constraintTop_toBottomOf="@id/week_rv">
+                app:layout_constraintTop_toBottomOf="@id/week_flow">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/status_cl"
+                    android:paddingHorizontal="50dp"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@color/beige">
@@ -134,16 +177,17 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/period_in"
+                        android:gravity="center"
                         android:textAppearance="@style/segoePrintBoldTextAppearance"
                         android:textSize="36sp"
-                        app:layout_constraintBottom_toTopOf="@+id/button"
+                        app:layout_constraintBottom_toTopOf="@+id/log_period_btn"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.5"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/status_title_tv" />
 
                     <Button
-                        android:id="@+id/button"
+                        android:id="@+id/log_period_btn"
                         style="@style/GlobalButtonStyle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -256,17 +300,22 @@
 
                 <include
                     android:id="@+id/current_cycle_item"
-                    layout="@layout/item_home_fragment_cycle" />
+                    layout="@layout/item_home_fragment_cycle"
+                    tools:visibility="visible"
+                    android:visibility="gone"/>
 
                 <include
                     android:id="@+id/prev_cycle_1_item"
                     layout="@layout/item_home_fragment_cycle"
-                    android:visibility="gone" />
+                    tools:visibility="visible"
+                    android:visibility="gone"/>
+
 
                 <include
                     android:id="@+id/prev_cycle_2_item"
                     layout="@layout/item_home_fragment_cycle"
-                    android:visibility="gone" />
+                    tools:visibility="visible"
+                    android:visibility="gone"/>
 
                 <View
                     android:id="@+id/pink_line_v"
@@ -311,9 +360,9 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
-                android:layout_marginBottom="40dp"
+                android:layout_marginBottom="16dp"
                 android:background="@drawable/bg_home_fragment_block"
-                android:padding="16dp"
+                android:paddingHorizontal="16dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@id/content_end"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -325,12 +374,15 @@
                     android:id="@+id/title_log_block_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
                     android:fontFamily="@font/roboto_medium"
                     android:gravity="center"
                     android:text="@string/there_are_no_data_to_analyze_and_compare_yet"
                     android:textColor="@color/text_color"
                     android:textSize="16sp"
+                    app:layout_constraintBottom_toTopOf="@+id/first_log_block_tv"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -343,37 +395,42 @@
                     android:text="@string/log_at_least_2_periods_to_get_personalized_insights_about_your_previous_cycle_and_period_length"
                     android:textColor="@color/text_color"
                     android:textSize="14sp"
+                    app:layout_constraintBottom_toTopOf="@+id/second_log_block_tv"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/title_log_block_tv" />
+                    app:layout_constraintTop_toBottomOf="@+id/title_log_block_tv" />
 
                 <TextView
                     android:id="@+id/second_log_block_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
                     android:fontFamily="@font/roboto_light"
                     android:text="@string/log_at_least_3_periods_to_get_insights_about_your_cycle_regularity"
                     android:textColor="@color/text_color"
                     android:textSize="14sp"
+                    app:layout_constraintBottom_toTopOf="@+id/log_prev_cycle_btn"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/first_log_block_tv" />
+                    app:layout_constraintTop_toBottomOf="@+id/first_log_block_tv" />
 
                 <Button
                     android:id="@+id/log_prev_cycle_btn"
                     style="@style/GlobalButtonStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
                     android:paddingHorizontal="@dimen/materialButtonHorizontalPadding"
                     android:paddingVertical="@dimen/materialButtonVerticalPadding"
                     android:text="@string/log_previous_cycle"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/second_log_block_tv" />
+                    app:layout_constraintTop_toBottomOf="@+id/second_log_block_tv"
+                    app:layout_constraintVertical_bias="0.0" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>

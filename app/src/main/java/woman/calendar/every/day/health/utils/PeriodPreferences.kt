@@ -6,7 +6,7 @@ import org.threeten.bp.LocalDate
 
 object PeriodPreferences {
     private const val PREF_FIRST_PERIOD = "first_period"
-    fun getFirstPeriodDate(context: Context): LocalDate? {
+    private fun getFirstPeriodDate(context: Context): LocalDate? {
         return LocalDate.parse(
             PreferenceManager.getDefaultSharedPreferences(context)
                 .getString(PREF_FIRST_PERIOD, null)

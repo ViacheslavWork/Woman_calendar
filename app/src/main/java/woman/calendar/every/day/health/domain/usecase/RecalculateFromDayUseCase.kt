@@ -1,6 +1,5 @@
 package woman.calendar.every.day.health.domain.usecase
 
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import org.threeten.bp.LocalDate
@@ -18,14 +17,13 @@ private const val MAX_COUNT_MONTHS_FOR_INSIGHT = 10L
 class RecalculateFromDayUseCase(
     private val repository: Repository,
 ) {
-    val scopeIO = CoroutineScope(Dispatchers.IO)
     suspend fun execute(date: LocalDate) = withContext(Dispatchers.Default) {
         val averagePeriodLength = calculateAveragePeriod() ?: 1L
         val averageInterval = calculateAverageInterval()
         var initialDate: LocalDate? = findNearestPeriod(date)
 
         while (initialDate != null) {
-            initialDate = calculatePeriod(initialDate,averagePeriodLength,averageInterval)
+            initialDate = calculatePeriod(initialDate, averagePeriodLength, averageInterval)
         }
     }
 

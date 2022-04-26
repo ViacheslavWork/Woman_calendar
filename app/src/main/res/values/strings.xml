@@ -8,7 +8,9 @@
     <string name="my_daily_insights">My daily insights</string>
     <string name="log_your_symptoms">Log your symptoms</string>
     <string name="my_cycle">My cycle</string>
+    <string name="current_cycle_nn_days">Current cycle: %s days</string>
     <string name="nn_days">%s days</string>
+    <string name="nn_day">%s day</string>
     <string name="month_dd_month_dd">%s %s - %s %s</string>
     <string name="started_month_dd_yyyy">Started %s %s, %s</string>
     <string name="log_previous_cycles">Log previous cycles</string>
@@ -20,4 +22,9 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="dates_are_auto_filled_tap_them_to_adjust">Dates are auto-filled. Tap them to adjust.</string>
     <string name="contin">Continue</string>
+    <string name="period">Period</string>
+    <string name="ovulation_in">Ovulation in</string>
+    <string name="edit_period_dates">Edit period dates</string>
+    <string name="period_may_start_today">Period may start today</string>
+    <string name="current_cycle">Current cycle</string>
 </resources>

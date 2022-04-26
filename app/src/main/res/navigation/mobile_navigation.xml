@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/calendarFragment">
+    app:startDestination="@+id/navigation_home">
 
     <fragment
         android:id="@+id/navigation_home"
@@ -20,6 +20,7 @@
         android:name="woman.calendar.every.day.health.ui.advices.AdvicesFragment"
         android:label="@string/title_advices"
         tools:layout="@layout/fragment_advices" />
+
     <fragment
         android:id="@+id/calendarFragment"
         android:name="woman.calendar.every.day.health.ui.calendar.CalendarFragment"

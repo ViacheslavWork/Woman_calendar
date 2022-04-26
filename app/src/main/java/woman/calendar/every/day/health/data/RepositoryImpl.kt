@@ -15,7 +15,7 @@ class RepositoryImpl(private val daysDao: DaysDao) : Repository {
     private val mDays = mutableMapOf<LocalDate, Day>()
 
     init {
-        GlobalScope.launch(Dispatchers.IO) { daysDao.deleteAll() }
+//        GlobalScope.launch(Dispatchers.IO) { daysDao.deleteAll() }
     }
 
     override suspend fun setDay(day: Day) = withContext(Dispatchers.IO) {
