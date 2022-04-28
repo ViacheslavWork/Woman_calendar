@@ -9,10 +9,10 @@ import woman.calendar.every.day.health.domain.model.StateOfDay.*
 private const val MAX_NUMBER_OF_MOUNTS_SEARCH = 12L
 
 class GetLastCyclesUseCase(val repository: Repository) {
-    suspend fun execute(numOfLastPeriods: Int): List<Cycle> {
+    suspend fun execute(numOfLastCycles: Int): List<Cycle> {
         var tempDate = LocalDate.now()
         val cycles = mutableListOf<Cycle>()
-        while (cycles.size < numOfLastPeriods
+        while (cycles.size < numOfLastCycles
             && tempDate.isAfter(LocalDate.now().minusMonths(MAX_NUMBER_OF_MOUNTS_SEARCH))
         ) {
             if (repository.getDay(tempDate)?.stateOfDay == PERIOD) {

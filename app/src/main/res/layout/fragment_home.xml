@@ -260,7 +260,7 @@
                     app:layout_constraintEnd_toStartOf="@id/plus_symptom_ib"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/log_your_symptoms_tv"
-                    tools:listitem="@layout/item_symptom" />
+                    tools:listitem="@layout/item_symptom_small" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <TextView

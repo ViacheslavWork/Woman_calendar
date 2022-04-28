@@ -1,7 +1,6 @@
 package woman.calendar.every.day.health.domain.usecase
 
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.*
 import org.threeten.bp.LocalDate
 import timber.log.Timber
 import woman.calendar.every.day.health.domain.Repository
@@ -17,13 +16,18 @@ private const val MAX_COUNT_MONTHS_FOR_INSIGHT = 10L
 class RecalculateFromDayUseCase(
     private val repository: Repository,
 ) {
+    private val ioScope = CoroutineScope(Dispatchers.IO)
     suspend fun execute(date: LocalDate) = withContext(Dispatchers.Default) {
-        val averagePeriodLength = calculateAveragePeriod() ?: 1L
-        val averageInterval = calculateAverageInterval()
+//        val startTime = System.currentTimeMillis()
+        val averagePeriodLength = ioScope.async { calculateAveragePeriod() ?: 1L }
+        val averageInterval = ioScope.async { calculateAverageInterval() }
         var initialDate: LocalDate? = findNearestPeriod(date)
 
         while (initialDate != null) {
-            initialDate = calculatePeriod(initialDate, averagePeriodLength, averageInterval)
+            val startTime = System.currentTimeMillis()
+            initialDate =
+                calculatePeriod(initialDate, averagePeriodLength.await(), averageInterval.await())
+            Timber.d("Calculate period time: ${System.currentTimeMillis() - startTime}")
         }
     }
 
@@ -33,13 +37,21 @@ class RecalculateFromDayUseCase(
         averageInterval: Long?
     ): LocalDate? {
 //        val startOfPeriod = getStartOfPeriod(dateInPeriod)
-        val endOfPeriod = getFinishOfPeriod(dateInPeriod)
+        val endOfPeriod = ioScope.async { getFinishOfPeriod(dateInPeriod) }
 
-        val endDelayAfterPeriod = setDelayAfterPeriod(start = endOfPeriod.plusDays(1))
-        val endFertileDays = setFertileDays(start = endDelayAfterPeriod.plusDays(1))
-        val ovulationDay = setOvulationDay(endOfPeriod)
-        val nextPeriodDate = clearDaysUntilNextPeriod(start = endFertileDays.plusDays(1))
-        setExpectedPeriodDays(averagePeriodLength, averageInterval, endOfPeriod)
+        val endDelayAfterPeriod =
+            ioScope.async { setDelayAfterPeriod(start = endOfPeriod.await().plusDays(1)) }
+        val endFertileDays = setFertileDays(start = endDelayAfterPeriod.await().plusDays(1))
+        val ovulationDay = setOvulationDay(endOfPeriod.await())
+        val nextPeriodDate =
+            clearDaysUntilNextPeriod(start = endFertileDays.plusDays(1))
+        ioScope.launch {
+            setExpectedPeriodDays(
+                averagePeriodLength,
+                averageInterval,
+                endOfPeriod.await()
+            )
+        }
 
 //        Timber.d("Start of period: $startOfPeriod")
 //        Timber.d("Finish of period: $finishOfPeriod")
@@ -68,7 +80,7 @@ class RecalculateFromDayUseCase(
         var tempDate = start
         var nextPeriodDate: LocalDate? = null
         while (isContinueRecalculation(tempDate)) {
-            repository.setDay(Day(tempDate))
+            repository.deleteDay(tempDate)
             tempDate = tempDate.plusDays(1)
             if (repository.getDay(tempDate)?.stateOfDay == StateOfDay.PERIOD) {
                 nextPeriodDate = tempDate
@@ -123,7 +135,7 @@ class RecalculateFromDayUseCase(
                     return@let
                 }
                 repository.setDay(Day(date, StateOfDay.EXPECTED_NEW_PERIOD))
-                Timber.d("expected date: $date")
+//                Timber.d("expected date: $date")
             }
         }
     }
@@ -153,7 +165,7 @@ class RecalculateFromDayUseCase(
             }
             tempDate = tempDate.plusDays(1)
         }
-        periods.forEach { Timber.d("lentht: ${it.getLengthDays().toString()}") }
+//        periods.forEach { Timber.d("lentht: ${it.getLengthDays().toString()}") }
         periods.forEach { sumOfIntervals = sumOfIntervals.plus(it.getLengthDays()) }
         if (periods.size < MIN_COUNT_PERIODS_FOR_INSIGHT - 1) return null
         return sumOfIntervals.toLong() / periods.size

@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/beige"
+    tools:context=".ui.symptoms.SymptomsFragment">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/tool_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintBottom_toBottomOf="@+id/textView"
+            app:layout_constraintTop_toBottomOf="@+id/textView"
+            tools:layout_editor_absoluteX="16dp">
+
+            <ImageButton
+                android:id="@+id/cross_ib"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@android:color/transparent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_cross" />
+
+            <TextView
+                android:id="@+id/date_toolbar_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_regular"
+                android:text="@string/dd_month"
+                android:textColor="@color/text_color"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toTopOf="@+id/cycle_day_toolbar_tv"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/cycle_day_toolbar_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_regular"
+                android:text="@string/cycle_day_s"
+                android:textColor="@color/text_color"
+                android:textSize="11sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/date_toolbar_tv" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.appcompat.widget.Toolbar>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tool_bar">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/content_start"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_begin="20dp" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/content_end"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_end="20dp" />
+
+            <TextView
+                android:id="@+id/weight_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/weight"
+                android:textAppearance="@style/symptomsTextAppearance"
+                app:layout_constraintBottom_toBottomOf="@+id/edit_weight_btn"
+                app:layout_constraintStart_toStartOf="@id/content_start"
+                app:layout_constraintTop_toTopOf="@+id/edit_weight_btn" />
+
+            <Button
+                android:id="@+id/edit_weight_btn"
+                style="@style/OutlinedButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/edit"
+                app:layout_constraintEnd_toEndOf="@id/content_end"
+                app:layout_constraintTop_toTopOf="parent"
+                app:strokeColor="@color/pink" />
+
+            <TextView
+                android:id="@+id/water_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/water"
+                android:textAppearance="@style/symptomsTextAppearance"
+                app:layout_constraintBottom_toBottomOf="@+id/edit_water_btn"
+                app:layout_constraintStart_toStartOf="@id/content_start"
+                app:layout_constraintTop_toTopOf="@+id/edit_water_btn" />
+
+            <Button
+                android:id="@+id/edit_water_btn"
+                style="@style/OutlinedButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/edit"
+                app:layout_constraintEnd_toEndOf="@id/content_end"
+                app:layout_constraintTop_toBottomOf="@id/edit_weight_btn"
+                app:strokeColor="@color/pink" />
+
+            <TextView
+                android:id="@+id/menstrual_flow_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="@string/menstrual_flow"
+                android:textAppearance="@style/symptomsTextAppearance"
+                app:layout_constraintStart_toStartOf="@id/content_start"
+                app:layout_constraintTop_toBottomOf="@+id/edit_water_btn"
+                tools:visibility="visible" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/menstrual_flow_rv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                app:layout_constraintEnd_toEndOf="@id/content_end"
+                app:layout_constraintStart_toStartOf="@id/content_start"
+                app:layout_constraintTop_toBottomOf="@id/menstrual_flow_tv"
+                tools:itemCount="4"
+                tools:listitem="@layout/item_symptom_small"
+                tools:visibility="visible" />
+
+
+            <TextView
+                android:id="@+id/sex_drive_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="@string/sex_and_sex_drive"
+                android:textAppearance="@style/symptomsTextAppearance"
+                app:layout_constraintStart_toStartOf="@id/content_start"
+                app:layout_constraintTop_toBottomOf="@+id/menstrual_flow_rv" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/sex_drive_rv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                app:layout_constraintEnd_toEndOf="@id/content_end"
+                app:layout_constraintStart_toStartOf="@id/content_start"
+                app:layout_constraintTop_toBottomOf="@id/sex_drive_tv"
+                tools:itemCount="4"
+                tools:listitem="@layout/item_symptom_small" />
+
+
+            <TextView
+                android:id="@+id/mood_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="@string/mood"
+                android:textAppearance="@style/symptomsTextAppearance"
+                app:layout_constraintStart_toStartOf="@id/content_start"
+                app:layout_constraintTop_toBottomOf="@+id/sex_drive_rv" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/mood_rv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                app:layout_constraintEnd_toEndOf="@id/content_end"
+                app:layout_constraintStart_toStartOf="@id/content_start"
+                app:layout_constraintTop_toBottomOf="@id/mood_tv"
+                tools:itemCount="4"
+                tools:listitem="@layout/item_symptom_small" />
+
+
+            <TextView
+                android:id="@+id/symptoms_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="@string/symptoms"
+                android:textAppearance="@style/symptomsTextAppearance"
+                app:layout_constraintStart_toStartOf="@id/content_start"
+                app:layout_constraintTop_toBottomOf="@+id/mood_rv" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/symptoms_rv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                app:layout_constraintEnd_toEndOf="@id/content_end"
+                app:layout_constraintStart_toStartOf="@id/content_start"
+                app:layout_constraintTop_toBottomOf="@id/symptoms_tv"
+                tools:itemCount="4"
+                tools:listitem="@layout/item_symptom_small" />
+
+
+            <TextView
+                android:id="@+id/vaginal_discharge_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="@string/vaginal_discharge"
+                android:textAppearance="@style/symptomsTextAppearance"
+                app:layout_constraintStart_toStartOf="@id/content_start"
+                app:layout_constraintTop_toBottomOf="@+id/symptoms_rv" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/vaginal_discharge_rv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                app:layout_constraintEnd_toEndOf="@id/content_end"
+                app:layout_constraintStart_toStartOf="@id/content_start"
+                app:layout_constraintTop_toBottomOf="@id/vaginal_discharge_tv"
+                tools:itemCount="4"
+                tools:listitem="@layout/item_symptom_small" />
+
+            <TextView
+                android:id="@+id/other_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="@string/other"
+                android:textAppearance="@style/symptomsTextAppearance"
+                app:layout_constraintStart_toStartOf="@id/content_start"
+                app:layout_constraintTop_toBottomOf="@+id/vaginal_discharge_rv" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/other_rv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                app:layout_constraintEnd_toEndOf="@id/content_end"
+                app:layout_constraintStart_toStartOf="@id/content_start"
+                app:layout_constraintTop_toBottomOf="@id/other_tv"
+                tools:itemCount="4"
+                tools:listitem="@layout/item_symptom_small" />
+
+            <TextView
+                android:id="@+id/notes_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="@string/notes"
+                android:textAppearance="@style/symptomsTextAppearance"
+                app:layout_constraintStart_toStartOf="@id/content_start"
+                app:layout_constraintTop_toBottomOf="@+id/other_rv" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

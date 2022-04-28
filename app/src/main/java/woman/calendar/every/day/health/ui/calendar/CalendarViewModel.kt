@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 import org.threeten.bp.LocalDate
+import timber.log.Timber
 import woman.calendar.every.day.health.domain.usecase.GetMonthUseCase
 import woman.calendar.every.day.health.domain.usecase.UpdatePeriodDayUseCase
 import woman.calendar.every.day.health.utils.LocalDateHelper
@@ -47,6 +48,8 @@ class CalendarViewModel(
     }
 
     private suspend fun fillInitialData() {
+        val start = System.currentTimeMillis()
+
         val date = LocalDate.now().minusMonths(countOfMounts)
         prevMonth = date
         val months = mutableListOf<ItemMonth>()
@@ -59,6 +62,7 @@ class CalendarViewModel(
                         .map { day -> ItemDay.fromDay(day) })
             )
         }
+        Timber.d("fillInitialData time: ${System.currentTimeMillis() - start}")
         _months.postValue(months)
     }
 

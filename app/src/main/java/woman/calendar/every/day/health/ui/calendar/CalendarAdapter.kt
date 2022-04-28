@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import org.threeten.bp.LocalDate
+import timber.log.Timber
 import woman.calendar.every.day.health.R
 import woman.calendar.every.day.health.databinding.ItemCalendarDayBinding
 import woman.calendar.every.day.health.databinding.ItemCalendarMonthBinding
@@ -17,6 +18,7 @@ import woman.calendar.every.day.health.domain.model.StateOfDay.*
 
 private const val TAG = "CalendarAdapter"
 private val mapDateToAdapter = mutableMapOf<LocalDate, DayAdapter>()
+private var timeStart = 0L
 
 class CalendarAdapter(
     val event: MutableLiveData<CalendarEvent> = MutableLiveData(),
@@ -107,6 +109,8 @@ class DayHolder(private val binding: ItemCalendarDayBinding) :
         item: ItemDay,
         event: MutableLiveData<CalendarEvent>
     ) {
+
+        Timber.d("time between click and show ${System.currentTimeMillis() - timeStart}")
         item.stateOfDay?.let {
             when (it) {
                 FERTILE -> {
@@ -179,9 +183,11 @@ class DayHolder(private val binding: ItemCalendarDayBinding) :
             }
         }
         item.numOfDay?.let { binding.dateTv.text = it }
+
         item.date?.let { date ->
             if (date.isAfter(LocalDate.now())) return@let
             binding.root.setOnClickListener {
+                timeStart = System.currentTimeMillis()
                 if (item.stateOfDay != PERIOD) {
                     binding.root.background =
                         ResourcesCompat.getDrawable(

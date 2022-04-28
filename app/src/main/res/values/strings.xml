@@ -27,4 +27,17 @@
     <string name="edit_period_dates">Edit period dates</string>
     <string name="period_may_start_today">Period may start today</string>
     <string name="current_cycle">Current cycle</string>
+    <string name="dd_month">%s %s</string>
+    <string name="weight">Weight</string>
+    <string name="edit">edit</string>
+    <string name="water">Water</string>
+    <string name="sex_and_sex_drive">Sex and sex drive</string>
+    <string name="mood">Mood</string>
+    <string name="symptoms">Symptoms</string>
+    <string name="vaginal_discharge">Vaginal Discharge</string>
+    <string name="other">Other</string>
+    <string name="notes">Notes</string>
+    <string name="cycle_day_s">Cycle day %s</string>
+    <string name="calm">Calm</string>
+    <string name="menstrual_flow">Menstrual flow</string>
 </resources>

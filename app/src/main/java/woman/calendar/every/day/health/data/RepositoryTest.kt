@@ -16,4 +16,8 @@ class RepositoryTest() : Repository {
     override suspend fun getDay(date: LocalDate): Day? = withContext(Dispatchers.IO) {
         return@withContext mDays[date]
     }
+
+    override suspend fun deleteDay(date: LocalDate) {
+        mDays.remove(date)
+    }
 }

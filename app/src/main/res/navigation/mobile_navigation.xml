@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_home">
+    app:startDestination="@+id/symptomsFragment">
 
     <fragment
         android:id="@+id/navigation_home"
@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_navigation_home_to_calendarFragment"
             app:destination="@id/calendarFragment" />
+        <action
+            android:id="@+id/action_navigation_home_to_symptomsFragment"
+            app:destination="@id/symptomsFragment" />
     </fragment>
 
     <fragment
@@ -26,5 +29,10 @@
         android:name="woman.calendar.every.day.health.ui.calendar.CalendarFragment"
         android:label="fragment_calendrar"
         tools:layout="@layout/fragment_calendrar" />
+    <fragment
+        android:id="@+id/symptomsFragment"
+        android:name="woman.calendar.every.day.health.ui.symptoms.SymptomsFragment"
+        android:label="fragment_symptoms"
+        tools:layout="@layout/fragment_symptoms" />
 
 </navigation>

@@ -5,6 +5,7 @@ import org.koin.dsl.module
 import woman.calendar.every.day.health.ui.advices.AdvicesViewModel
 import woman.calendar.every.day.health.ui.calendar.CalendarViewModel
 import woman.calendar.every.day.health.ui.home.HomeViewModel
+import woman.calendar.every.day.health.ui.symptoms.SymptomsViewModel
 
 
 val appModule = module {
@@ -22,4 +23,12 @@ val appModule = module {
         )
     }
     viewModel { AdvicesViewModel() }
+    viewModel {
+        SymptomsViewModel(
+            getSymptomsUseCase = get(),
+            saveSelectedSymptomsUseCase = get(),
+            getDayUseCase = get(),
+            getLastCyclesUseCase = get()
+        )
+    }
 }

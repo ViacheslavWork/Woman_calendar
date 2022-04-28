@@ -1,8 +1,6 @@
 package woman.calendar.every.day.health.data
 
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.threeten.bp.LocalDate
 import woman.calendar.every.day.health.data.database.entity.DayEntity
@@ -26,5 +24,9 @@ class RepositoryImpl(private val daysDao: DaysDao) : Repository {
     override suspend fun getDay(date: LocalDate): Day? = withContext(Dispatchers.IO) {
 //        return@withContext mDays[date]
         return@withContext daysDao.getDay(date)?.toDay()
+    }
+
+    override suspend fun deleteDay(date: LocalDate) = withContext(Dispatchers.IO) {
+        daysDao.delete(date)
     }
 }

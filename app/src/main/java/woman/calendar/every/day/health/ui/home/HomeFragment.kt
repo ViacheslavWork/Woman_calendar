@@ -18,6 +18,7 @@ import woman.calendar.every.day.health.domain.model.Cycle
 import woman.calendar.every.day.health.domain.model.CycleStatus
 import woman.calendar.every.day.health.domain.model.StateOfDay.*
 import woman.calendar.every.day.health.ui.calendar.CalendarFragment
+import woman.calendar.every.day.health.ui.symptoms.SymptomsFragment
 import woman.calendar.every.day.health.utils.LocalDateHelper
 import woman.calendar.every.day.health.utils.LocalDateHelper.getMonthName
 import java.util.*
@@ -353,6 +354,10 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         }
         binding.toolBarCalendarBtn.setOnClickListener {
             findNavController().navigate(HomeFragmentDirections.actionNavigationHomeToCalendarFragment())
+        }
+        binding.plusSymptomIb.setOnClickListener {
+            findNavController().navigate(R.id.action_navigation_home_to_symptomsFragment,
+                bundleOf(SymptomsFragment.ARG_DATE to LocalDate.now()))
         }
     }
 
