@@ -69,4 +69,10 @@ dependencies {
 
     //local time
     implementation 'com.jakewharton.threetenabp:threetenabp:1.2.1'
+
+    //Gson
+    implementation 'com.google.code.gson:gson:2.9.0'
+
+    //code input
+    implementation 'com.raycoarana.codeinputview:codeinputview:2.1.1'
 }

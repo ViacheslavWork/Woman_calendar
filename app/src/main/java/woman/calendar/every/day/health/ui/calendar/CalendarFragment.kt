@@ -22,6 +22,7 @@ class CalendarFragment : Fragment(R.layout.fragment_calendrar) {
     private lateinit var adapter: CalendarAdapter
     private val viewModel: CalendarViewModel by viewModel()
     private var dateForScroll: LocalDate? = null
+    private var isAbleToDownloadNewMonth = true
 
     companion object {
         const val ARG_DATE_MONTH_FOR_SCROLL = "ARG_DATE_FOR_SCROLL"
@@ -50,7 +51,16 @@ class CalendarFragment : Fragment(R.layout.fragment_calendrar) {
 
     private fun observeMonths() {
         viewModel.months.observe(viewLifecycleOwner) {
+//            Timber.d(it.size.toString())
+            /* if (isFirstTime) {
+                 isFirstTime = false
+                 adapter.submitList(it)
+             } else {
+                 adapter.updateMonths(it)
+             }*/
+//            it.forEach { Timber.d(it.date.toString()) }
             Timber.d(it.size.toString())
+            isAbleToDownloadNewMonth = true
             adapter.submitList(it)
             scrollIfNeeded(it)
         }
@@ -86,12 +96,15 @@ class CalendarFragment : Fragment(R.layout.fragment_calendrar) {
         val linearLayoutManager = LinearLayoutManager(context)
         recyclerView = binding.calendarRv
         recyclerView.layoutManager = linearLayoutManager
-        recyclerView.setHasFixedSize(true)
+//        recyclerView.setHasFixedSize(true)
         recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
                 if (linearLayoutManager.findFirstVisibleItemPosition() == 0) {
-                    viewModel.getPrevMonth()
+                    if (isAbleToDownloadNewMonth) {
+                        isAbleToDownloadNewMonth = false
+                        viewModel.getPrevMonth()
+                    }
                 }
             }
         })

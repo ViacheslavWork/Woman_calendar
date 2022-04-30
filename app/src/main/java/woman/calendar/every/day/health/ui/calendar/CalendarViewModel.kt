@@ -42,14 +42,14 @@ class CalendarViewModel(
                                     .map { day -> ItemDay.fromDay(day) })
                         )
                     }
-                    _months.postValue(it)
+                    it.forEach { Timber.d(it.date.toString()) }
+                    _months.value= it
                 }
         }
     }
 
     private suspend fun fillInitialData() {
         val start = System.currentTimeMillis()
-
         val date = LocalDate.now().minusMonths(countOfMounts)
         prevMonth = date
         val months = mutableListOf<ItemMonth>()

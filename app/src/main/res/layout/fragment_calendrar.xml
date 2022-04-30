@@ -84,7 +84,7 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="60dp"
         android:layout_marginBottom="48dp"
-        android:paddingVertical="12dp"
+        android:paddingVertical="@dimen/btn_padding_vertical"
         android:text="@string/contin"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

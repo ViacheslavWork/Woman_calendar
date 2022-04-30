@@ -1,11 +1,13 @@
 package woman.calendar.every.day.health.data
 
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.threeten.bp.LocalDate
 import woman.calendar.every.day.health.data.database.entity.DayEntity
 import woman.calendar.every.day.health.data.database.entity.toDay
-import woman.calendar.every.day.health.data.database.mixes.DaysDao
+import woman.calendar.every.day.health.data.database.days.DaysDao
 import woman.calendar.every.day.health.domain.Repository
 import woman.calendar.every.day.health.domain.model.Day
 

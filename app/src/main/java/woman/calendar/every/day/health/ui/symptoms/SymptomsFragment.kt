@@ -11,10 +11,12 @@ import androidx.recyclerview.widget.RecyclerView
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.threeten.bp.LocalDate
+import timber.log.Timber
 import woman.calendar.every.day.health.R
 import woman.calendar.every.day.health.databinding.FragmentSymptomsBinding
 import woman.calendar.every.day.health.domain.model.SymptomType
 import woman.calendar.every.day.health.utils.LocalDateHelper.getMonthName
+import woman.calendar.every.day.health.utils.WeightPreferences
 
 class SymptomsFragment : Fragment(R.layout.fragment_symptoms) {
     private var _binding: FragmentSymptomsBinding? = null
@@ -45,6 +47,12 @@ class SymptomsFragment : Fragment(R.layout.fragment_symptoms) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         date = (arguments?.getSerializable(ARG_DATE) as LocalDate?) ?: LocalDate.now()
+        viewModel.init(date)
+    }
+
+    override fun onStart() {
+        viewModel.updateUI()
+        super.onStart()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -55,6 +63,17 @@ class SymptomsFragment : Fragment(R.layout.fragment_symptoms) {
         setUpListeners()
         observeSymptoms()
         observeSymptomsEvent()
+        observeWater()
+    }
+
+
+    private fun observeWater() {
+        viewModel.volumeOfWater.observe(viewLifecycleOwner) {
+            binding.waterNumberTv.text = String.format(
+                resources.getString(R.string.water_l),
+                it
+            )
+        }
     }
 
     private fun setUpUI() {
@@ -68,6 +87,11 @@ class SymptomsFragment : Fragment(R.layout.fragment_symptoms) {
                 viewModel.getDayOfLastCycle().toString()
             )
         }
+        WeightPreferences.getWeight(requireContext())?.also {
+            binding.weightNumberTv.text =
+                String.format(resources.getString(R.string.s_kg), it.toString())
+        }
+        lifecycleScope.launch { Timber.d(viewModel.isPeriod(date).toString()) }
     }
 
     private fun observeSymptomsEvent() {
@@ -78,6 +102,16 @@ class SymptomsFragment : Fragment(R.layout.fragment_symptoms) {
 
     private fun setUpListeners() {
         binding.crossIb.setOnClickListener { findNavController().popBackStack() }
+        binding.editWaterBtn.setOnClickListener {
+            findNavController().navigate(
+                SymptomsFragmentDirections.actionSymptomsFragmentToWaterFragment()
+            )
+        }
+        binding.editWeightBtn.setOnClickListener {
+            findNavController().navigate(
+                SymptomsFragmentDirections.actionSymptomsFragmentToWeightFragment()
+            )
+        }
     }
 
     private fun observeSymptoms() {
@@ -119,7 +153,7 @@ class SymptomsFragment : Fragment(R.layout.fragment_symptoms) {
 
     private fun setUpRecycler(recyclerView: RecyclerView, symptomsAdapter: SymptomsAdapter) {
         recyclerView.layoutManager = GridLayoutManager(requireContext(), 4)
-        recyclerView.setHasFixedSize(true)
+//        recyclerView.setHasFixedSize(true)
         recyclerView.adapter = symptomsAdapter
     }
 

@@ -1,13 +1,16 @@
 package woman.calendar.every.day.health.domain.usecase
 
-import kotlinx.coroutines.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import org.threeten.bp.LocalDate
 import timber.log.Timber
 import woman.calendar.every.day.health.domain.Repository
-import woman.calendar.every.day.health.domain.model.Day
 import woman.calendar.every.day.health.domain.model.Interval
 import woman.calendar.every.day.health.domain.model.Period
 import woman.calendar.every.day.health.domain.model.StateOfDay
+import woman.calendar.every.day.health.domain.model.StateOfDay.*
 import woman.calendar.every.day.health.utils.Constants
 
 private const val MIN_COUNT_PERIODS_FOR_INSIGHT = 2
@@ -15,16 +18,16 @@ private const val MAX_COUNT_MONTHS_FOR_INSIGHT = 10L
 
 class RecalculateFromDayUseCase(
     private val repository: Repository,
+    private val getDayUseCase: GetDayUseCase
 ) {
-    private val ioScope = CoroutineScope(Dispatchers.IO)
-    suspend fun execute(date: LocalDate) = withContext(Dispatchers.Default) {
-//        val startTime = System.currentTimeMillis()
-        val averagePeriodLength = ioScope.async { calculateAveragePeriod() ?: 1L }
-        val averageInterval = ioScope.async { calculateAverageInterval() }
+    suspend fun execute(date: LocalDate) = withContext(Dispatchers.IO) {
+        val startTime = System.currentTimeMillis()
+        val averagePeriodLength = async { calculateAveragePeriod() ?: 1L }
+        val averageInterval = async { calculateAverageInterval() }
         var initialDate: LocalDate? = findNearestPeriod(date)
 
         while (initialDate != null) {
-            val startTime = System.currentTimeMillis()
+//            val startTime = System.currentTimeMillis()
             initialDate =
                 calculatePeriod(initialDate, averagePeriodLength.await(), averageInterval.await())
             Timber.d("Calculate period time: ${System.currentTimeMillis() - startTime}")
@@ -35,23 +38,26 @@ class RecalculateFromDayUseCase(
         dateInPeriod: LocalDate,
         averagePeriodLength: Long,
         averageInterval: Long?
-    ): LocalDate? {
+    ): LocalDate? = withContext(Dispatchers.IO) {
 //        val startOfPeriod = getStartOfPeriod(dateInPeriod)
-        val endOfPeriod = ioScope.async { getFinishOfPeriod(dateInPeriod) }
+        val endOfPeriod = async { getFinishOfPeriod(dateInPeriod) }
+        val nextPeriodDate = getNextPeriodDate(endOfPeriod.await().plusDays(1))
 
-        val endDelayAfterPeriod =
-            ioScope.async { setDelayAfterPeriod(start = endOfPeriod.await().plusDays(1)) }
-        val endFertileDays = setFertileDays(start = endDelayAfterPeriod.await().plusDays(1))
-        val ovulationDay = setOvulationDay(endOfPeriod.await())
-        val nextPeriodDate =
-            clearDaysUntilNextPeriod(start = endFertileDays.plusDays(1))
-        ioScope.launch {
-            setExpectedPeriodDays(
-                averagePeriodLength,
-                averageInterval,
-                endOfPeriod.await()
-            )
+        launch {
+            val endDelayAfterPeriod =
+                setDelayAfterPeriod(start = endOfPeriod.await().plusDays(1))
+            val endFertileDays = setFertileDays(start = endDelayAfterPeriod.plusDays(1))
+            val ovulationDay = setOvulationDay(endOfPeriod.await())
+            clearStatusDaysUntilNextPeriod(start = endFertileDays.plusDays(1))
+            launch {
+                setExpectedPeriodDays(
+                    averagePeriodLength,
+                    averageInterval,
+                    endOfPeriod.await()
+                )
+            }
         }
+
 
 //        Timber.d("Start of period: $startOfPeriod")
 //        Timber.d("Finish of period: $finishOfPeriod")
@@ -60,29 +66,41 @@ class RecalculateFromDayUseCase(
 //        Timber.d("averagePeriodLength: $averagePeriodLength")
 //        Timber.d("averageInterval: $averageInterval")
 //        Timber.d("ovulationDay: $ovulationDay")
+        return@withContext nextPeriodDate
+    }
+
+    private suspend fun getNextPeriodDate(date: LocalDate): LocalDate? {
+        var tempDate = date
+        var nextPeriodDate: LocalDate? = null
+        while (isContinueRecalculation(tempDate)) {
+            tempDate = tempDate.plusDays(1)
+            if (repository.getDay(tempDate)?.stateOfDay == PERIOD) {
+                nextPeriodDate = tempDate
+            }
+        }
         return nextPeriodDate
     }
 
     private suspend fun findNearestPeriod(date: LocalDate): LocalDate? {
         var initialDate: LocalDate? = date
         while (initialDate != null
-            && repository.getDay(initialDate)?.stateOfDay != StateOfDay.PERIOD
+            && repository.getDay(initialDate)?.stateOfDay != PERIOD
         ) {
             initialDate = initialDate.minusDays(1)
             if (initialDate.isBefore(date.minusMonths(2))) {
-                initialDate = clearDaysUntilNextPeriod(initialDate)
+                initialDate = clearStatusDaysUntilNextPeriod(initialDate)
             }
         }
         return initialDate
     }
 
-    private suspend fun clearDaysUntilNextPeriod(start: LocalDate): LocalDate? {
+    private suspend fun clearStatusDaysUntilNextPeriod(start: LocalDate): LocalDate? {
         var tempDate = start
         var nextPeriodDate: LocalDate? = null
         while (isContinueRecalculation(tempDate)) {
-            repository.deleteDay(tempDate)
+            setStateToDay(tempDate, null)
             tempDate = tempDate.plusDays(1)
-            if (repository.getDay(tempDate)?.stateOfDay == StateOfDay.PERIOD) {
+            if (repository.getDay(tempDate)?.stateOfDay == PERIOD) {
                 nextPeriodDate = tempDate
             }
         }
@@ -97,16 +115,16 @@ class RecalculateFromDayUseCase(
         var finishOfInterval: LocalDate? = null
         var sumOfIntervals = 0
         while (tempDate.isBefore(LocalDate.now())) {
-            if (repository.getDay(tempDate.minusDays(1))?.stateOfDay == StateOfDay.PERIOD
-                && repository.getDay(tempDate)?.stateOfDay != StateOfDay.PERIOD
+            if (repository.getDay(tempDate.minusDays(1))?.stateOfDay == PERIOD
+                && repository.getDay(tempDate)?.stateOfDay != PERIOD
             ) {
                 startOfInterval = tempDate
                 do {
                     tempDate = tempDate.plusDays(1)
-                    if (repository.getDay(tempDate.plusDays(1))?.stateOfDay == StateOfDay.PERIOD) {
+                    if (repository.getDay(tempDate.plusDays(1))?.stateOfDay == PERIOD) {
                         finishOfInterval = tempDate
                     }
-                } while (repository.getDay(tempDate.plusDays(1))?.stateOfDay != StateOfDay.PERIOD
+                } while (repository.getDay(tempDate.plusDays(1))?.stateOfDay != PERIOD
                     && tempDate.isBefore(LocalDate.now())
                 )
                 finishOfInterval?.let { intervals.add(Interval(startOfInterval!!, it)) }
@@ -134,8 +152,7 @@ class RecalculateFromDayUseCase(
                 if (!isContinueRecalculation(date)) {
                     return@let
                 }
-                repository.setDay(Day(date, StateOfDay.EXPECTED_NEW_PERIOD))
-//                Timber.d("expected date: $date")
+                setStateToDay(date, EXPECTED_NEW_PERIOD)
             }
         }
     }
@@ -148,13 +165,13 @@ class RecalculateFromDayUseCase(
         var finishOfPeriod: LocalDate? = null
         var sumOfIntervals = 0
         while (tempDate.isBefore(LocalDate.now())) {
-            if (repository.getDay(tempDate.minusDays(1))?.stateOfDay != StateOfDay.PERIOD
-                && repository.getDay(tempDate)?.stateOfDay == StateOfDay.PERIOD
+            if (repository.getDay(tempDate.minusDays(1))?.stateOfDay != PERIOD
+                && repository.getDay(tempDate)?.stateOfDay == PERIOD
             ) {
                 startOfPeriod = tempDate
                 while (repository.getDay(tempDate) != null) {
-                    if (repository.getDay(tempDate)?.stateOfDay == StateOfDay.PERIOD
-                        && repository.getDay(tempDate.plusDays(1))?.stateOfDay != StateOfDay.PERIOD
+                    if (repository.getDay(tempDate)?.stateOfDay == PERIOD
+                        && repository.getDay(tempDate.plusDays(1))?.stateOfDay != PERIOD
                     ) {
                         finishOfPeriod = tempDate
                         periods.add(Period(startOfPeriod, finishOfPeriod))
@@ -174,8 +191,8 @@ class RecalculateFromDayUseCase(
 
     private suspend fun setOvulationDay(finishOfPeriod: LocalDate): LocalDate {
         val ovulationDay = finishOfPeriod.plusDays(Constants.OVULATION_DELAY_AFTER_PERIOD.toLong())
-        if (repository.getDay(ovulationDay)?.stateOfDay == StateOfDay.FERTILE)
-            repository.setDay(Day(ovulationDay, StateOfDay.OVULATION))
+        if (repository.getDay(ovulationDay)?.stateOfDay == FERTILE)
+            setStateToDay(ovulationDay, OVULATION)
         return ovulationDay
     }
 
@@ -183,10 +200,10 @@ class RecalculateFromDayUseCase(
         var tempDate = start
         for (i in 1 until Constants.SIZE_OF_FERTILE_DAYS) {
             if (isContinueRecalculation(tempDate)) {
-                repository.setDay(Day(tempDate, StateOfDay.FERTILE))
+                setStateToDay(tempDate, FERTILE)
                 tempDate = tempDate.plusDays(1)
             } else {
-                return tempDate
+                return tempDate.minusDays(1)
             }
         }
         return tempDate.minusDays(1)
@@ -196,7 +213,7 @@ class RecalculateFromDayUseCase(
         var tempDate = start/*.plusDays(1)*/
         for (i in 0 until Constants.SIZE_OF_DELAY_AFTER_PERIOD) {
             if (isContinueRecalculation(tempDate)) {
-                repository.setDay(Day(tempDate, null))
+                setStateToDay(tempDate, null)
                 tempDate = tempDate.plusDays(1)
             } else {
                 return tempDate
@@ -205,9 +222,14 @@ class RecalculateFromDayUseCase(
         return tempDate.minusDays(1)
     }
 
+    private suspend fun setStateToDay(date: LocalDate, stateOfDay: StateOfDay?) {
+        val dayFromStorage = getDayUseCase.execute(date)
+        repository.setDay(dayFromStorage.apply { this.stateOfDay = stateOfDay })
+    }
+
     private suspend fun getStartOfPeriod(initialDate: LocalDate): LocalDate {
         var tempDate = initialDate
-        while (repository.getDay(tempDate.minusDays(1))?.stateOfDay == StateOfDay.PERIOD) {
+        while (repository.getDay(tempDate.minusDays(1))?.stateOfDay == PERIOD) {
             tempDate = tempDate.minusDays(1)
         }
         return tempDate
@@ -215,13 +237,13 @@ class RecalculateFromDayUseCase(
 
     private suspend fun getFinishOfPeriod(initialDate: LocalDate): LocalDate {
         var tempDate = initialDate
-        while (repository.getDay(tempDate.plusDays(1))?.stateOfDay == StateOfDay.PERIOD) {
+        while (repository.getDay(tempDate.plusDays(1))?.stateOfDay == PERIOD) {
             tempDate = tempDate.plusDays(1)
         }
         return tempDate
     }
 
     private suspend fun isContinueRecalculation(date: LocalDate) =
-        repository.getDay(date)?.stateOfDay != StateOfDay.PERIOD
+        repository.getDay(date)?.stateOfDay != PERIOD
                 && date.isBefore(LocalDate.now().plusMonths(2))
 }

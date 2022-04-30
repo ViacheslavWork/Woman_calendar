@@ -9,7 +9,6 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import woman.calendar.every.day.health.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
-
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -4,23 +4,29 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import androidx.room.TypeConverter
 import androidx.room.TypeConverters
+import com.google.gson.Gson
 import org.threeten.bp.LocalDate
 import woman.calendar.every.day.health.domain.model.Day
 import woman.calendar.every.day.health.domain.model.StateOfDay
-
+import woman.calendar.every.day.health.domain.model.Symptom
 
 @Entity(tableName = "days")
 data class DayEntity(
     @PrimaryKey
     @TypeConverters(DateConverters::class)
     val date: LocalDate,
-    var stateOfDay: StateOfDay? = null
+    val stateOfDay: StateOfDay? = null,
+    @TypeConverters(SymptomsSetConverter::class)
+    val symptoms: MutableSet<Symptom>,
+    val volumeOfWater: Float = 0F
 ) {
     companion object {
         fun fromDay(day: Day): DayEntity {
             return DayEntity(
                 date = day.date,
-                stateOfDay = day.stateOfDay
+                stateOfDay = day.stateOfDay,
+                symptoms = day.symptoms,
+                volumeOfWater = day.volumeOfWater
             )
         }
     }
@@ -29,8 +35,18 @@ data class DayEntity(
 fun DayEntity.toDay(): Day {
     return Day(
         date = date,
-        stateOfDay = stateOfDay
+        stateOfDay = stateOfDay,
+        symptoms = symptoms,
+        volumeOfWater = volumeOfWater
     )
+}
+
+class SymptomsSetConverter {
+    @TypeConverter
+    fun setToJson(value: Set<Symptom>?): String = Gson().toJson(value)
+
+    @TypeConverter
+    fun jsonToSet(value: String) = Gson().fromJson(value, Array<Symptom>::class.java).toMutableSet()
 }
 
 class DateConverters {

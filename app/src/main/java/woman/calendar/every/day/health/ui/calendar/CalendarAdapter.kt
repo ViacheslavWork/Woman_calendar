@@ -30,6 +30,7 @@ class CalendarAdapter(
     }*/
 
     fun updateMonths(months: List<ItemMonth>) {
+        Timber.d(months.toString())
         months.forEach { mapDateToAdapter[it.date]?.submitList(it.daysWithStartDelay) }
     }
 
@@ -64,7 +65,7 @@ class MonthHolder(private val binding: ItemCalendarMonthBinding) :
         mapDateToAdapter[item.date] = dayAdapter
         dayAdapter.submitList(item.daysWithStartDelay)
         binding.daysRv.adapter = dayAdapter
-        binding.daysRv.setHasFixedSize(true)
+//        binding.daysRv.setHasFixedSize(true)
     }
 }
 
@@ -79,7 +80,7 @@ private class MonthDiffCallbacks : DiffUtil.ItemCallback<ItemMonth>() {
         oldItem: ItemMonth,
         newItem: ItemMonth
     ): Boolean {
-        return (oldItem == newItem)
+        return (oldItem.days == newItem.days)
     }
 }
 
@@ -110,7 +111,9 @@ class DayHolder(private val binding: ItemCalendarDayBinding) :
         event: MutableLiveData<CalendarEvent>
     ) {
 
-        Timber.d("time between click and show ${System.currentTimeMillis() - timeStart}")
+        if (System.currentTimeMillis() - timeStart < 1000) {
+            Timber.d("time between click and show ${item.date} ${System.currentTimeMillis() - timeStart}")
+        }
         item.stateOfDay?.let {
             when (it) {
                 FERTILE -> {
@@ -188,6 +191,7 @@ class DayHolder(private val binding: ItemCalendarDayBinding) :
             if (date.isAfter(LocalDate.now())) return@let
             binding.root.setOnClickListener {
                 timeStart = System.currentTimeMillis()
+
                 if (item.stateOfDay != PERIOD) {
                     binding.root.background =
                         ResourcesCompat.getDrawable(
@@ -195,12 +199,21 @@ class DayHolder(private val binding: ItemCalendarDayBinding) :
                             R.color.pink,
                             null
                         )
-                    binding.dateTv.setTextColor(binding.root.resources.getColor(R.color.white))
-
+                    binding.dateTv.setTextColor(
+                        binding.root.resources.getColor(
+                            R.color.white,
+                            null
+                        )
+                    )
                     event.postValue(CalendarEvent.OnDayClick(Day(date, PERIOD)))
                 } else {
                     binding.root.setBackgroundColor(Color.TRANSPARENT)
-                    binding.dateTv.setTextColor(binding.root.resources.getColor(R.color.text_color))
+                    binding.dateTv.setTextColor(
+                        binding.root.resources.getColor(
+                            R.color.text_color,
+                            null
+                        )
+                    )
                     event.postValue(CalendarEvent.OnDayClick(Day(date, null)))
                 }
             }
@@ -213,7 +226,7 @@ private class DayDiffCallbacks : DiffUtil.ItemCallback<ItemDay>() {
         oldItem: ItemDay,
         newItem: ItemDay
     ): Boolean {
-        return (oldItem.date == newItem.date)
+        return (oldItem.date?.dayOfMonth == newItem.date?.dayOfMonth)
     }
 
     override fun areContentsTheSame(

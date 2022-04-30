@@ -4,8 +4,11 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import org.threeten.bp.LocalDate
+import timber.log.Timber
 import woman.calendar.every.day.health.domain.model.Symptom
 import woman.calendar.every.day.health.domain.usecase.GetDayUseCase
 import woman.calendar.every.day.health.domain.usecase.GetLastCyclesUseCase
@@ -22,11 +25,27 @@ class SymptomsViewModel(
     private val _symptoms = MutableLiveData<List<SymptomItem>>()
     val symptoms: LiveData<List<SymptomItem>> = _symptoms
 
-    private val selectedSymptoms = mutableSetOf<Symptom>()
-    private val date = LocalDate.now()
+    private val _volumeOfWater = MutableLiveData<Float>()
+    val volumeOfWater: LiveData<Float> = _volumeOfWater
 
-    init {
+    private val selectedSymptoms = mutableSetOf<Symptom>()
+    lateinit var date: LocalDate
+
+    //TODO
+    private val cycle = viewModelScope.async {
+        getLastCyclesUseCase.execute(1).let {
+            if (it.isNotEmpty()) return@let it[0]
+            else return@let null
+        }
+    }
+
+    fun init(date: LocalDate) {
+        this.date = date
         downloadSymptoms()
+    }
+
+    fun updateUI() {
+        setVolumeOfWater()
     }
 
     private fun downloadSymptoms() {
@@ -39,9 +58,10 @@ class SymptomsViewModel(
     }
 
     fun saveSymptoms() {
-        viewModelScope.launch {
+        GlobalScope.launch {
+            Timber.d("saveSymptoms")
             saveSelectedSymptomsUseCase.execute(
-                LocalDate.now(),
+                date,
                 selectedSymptoms
             )
         }
@@ -61,10 +81,15 @@ class SymptomsViewModel(
         }
     }
 
+    private fun setVolumeOfWater() {
+        viewModelScope.launch { _volumeOfWater.postValue(getDayUseCase.execute(date).volumeOfWater) }
+    }
+
     suspend fun getDayOfLastCycle(): Int {
-        return getLastCyclesUseCase.execute(1).let {
-            if (it.isNotEmpty()) return@let it[0].getDaysAfterStartOfPeriod()
-            else return@let 0
-        }
+        return cycle.await()?.getDaysAfterStartOfPeriod() ?: 0
+    }
+
+    suspend fun isPeriod(date: LocalDate): Boolean {
+        return cycle.await()?.period?.finish?.let { date.isAfter(it) } == true
     }
 }

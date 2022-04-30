@@ -2,9 +2,12 @@ package woman.calendar.every.day.health.domain.model
 
 import org.threeten.bp.LocalDate
 
-data class Day(val date: LocalDate, var stateOfDay: StateOfDay? = null) {
-    val symptoms = mutableSetOf<Symptom>()
-}
+data class Day(
+    val date: LocalDate,
+    var stateOfDay: StateOfDay? = null,
+    val symptoms: MutableSet<Symptom> = mutableSetOf<Symptom>(),
+    var volumeOfWater: Float = 0F
+)
 
 enum class StateOfDay {
     PRE_PERIOD, PERIOD, FERTILE, EXPECTED_NEW_PERIOD, DELAY, OVULATION

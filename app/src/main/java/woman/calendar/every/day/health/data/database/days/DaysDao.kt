@@ -1,4 +1,4 @@
-package woman.calendar.every.day.health.data.database.mixes
+package woman.calendar.every.day.health.data.database.days
 
 import androidx.room.Dao
 import androidx.room.Insert

@@ -4,8 +4,8 @@ import android.content.Context
 import androidx.room.Room
 import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
-import woman.calendar.every.day.health.data.database.mixes.DaysDao
-import woman.calendar.every.day.health.data.database.mixes.DaysDatabase
+import woman.calendar.every.day.health.data.database.days.DaysDao
+import woman.calendar.every.day.health.data.database.days.DaysDatabase
 
 const val DAYS_DATABASE_NAME = "Days.db"
 

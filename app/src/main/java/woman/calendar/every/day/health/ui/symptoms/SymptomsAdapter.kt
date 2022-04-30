@@ -53,8 +53,9 @@ class SymptomHolder(private val binding: ItemSymptomBigBinding) :
 
         binding.imageView.setImageResource(item.image)
         binding.symptomTv.text = item.title
-        binding.root.setOnClickListener {
+        binding.circleView.setOnClickListener {
             isChecked = !isChecked
+            Timber.d("isChecked $isChecked")
             bindingAdapter?.notifyItemChanged(bindingAdapterPosition, item.apply { this.isChecked = isChecked })
             event.postValue(SymptomEvent.OnSymptomClick(item.apply { this.isChecked = isChecked }))
         }

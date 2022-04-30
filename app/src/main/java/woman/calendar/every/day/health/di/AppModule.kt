@@ -6,6 +6,7 @@ import woman.calendar.every.day.health.ui.advices.AdvicesViewModel
 import woman.calendar.every.day.health.ui.calendar.CalendarViewModel
 import woman.calendar.every.day.health.ui.home.HomeViewModel
 import woman.calendar.every.day.health.ui.symptoms.SymptomsViewModel
+import woman.calendar.every.day.health.ui.water.WaterViewModel
 
 
 val appModule = module {
@@ -19,16 +20,25 @@ val appModule = module {
         HomeViewModel(
             getWeekUseCase = get(),
             getCountOfPeriodsUseCase = get(),
-            getLastCyclesUseCase = get()
+            getLastCyclesUseCase = get(),
+            getDayUseCase = get()
         )
     }
     viewModel { AdvicesViewModel() }
+    viewModel {
+        WaterViewModel(
+            getWaterPerDayUseCase = get(),
+            addWaterUseCase = get(),
+            subWaterUseCase = get(),
+            getDayUseCase = get()
+        )
+    }
     viewModel {
         SymptomsViewModel(
             getSymptomsUseCase = get(),
             saveSelectedSymptomsUseCase = get(),
             getDayUseCase = get(),
-            getLastCyclesUseCase = get()
+            getLastCyclesUseCase = get(),
         )
     }
 }

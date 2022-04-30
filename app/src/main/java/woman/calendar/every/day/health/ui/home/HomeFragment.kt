@@ -1,12 +1,17 @@
 package woman.calendar.every.day.health.ui.home
 
+import android.app.ActionBar
 import android.os.Bundle
 import android.util.TypedValue
 import android.view.View
+import android.view.ViewTreeObserver
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.os.bundleOf
+import androidx.core.view.updateLayoutParams
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.threeten.bp.LocalDate
 import timber.log.Timber
@@ -23,10 +28,18 @@ import woman.calendar.every.day.health.utils.LocalDateHelper
 import woman.calendar.every.day.health.utils.LocalDateHelper.getMonthName
 import java.util.*
 
+
 class HomeFragment : Fragment(R.layout.fragment_home) {
     private val viewModel: HomeViewModel by viewModel()
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
+    private lateinit var symptomsRecyclerView: RecyclerView
+    private lateinit var symptomsAdapter: HomeSymptomsAdapter
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        viewModel.updateUI()
+        super.onCreate(savedInstanceState)
+    }
 
     override fun onStart() {
         viewModel.updateUI()
@@ -38,15 +51,30 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
         setUpUI()
         setUpListeners()
+        setUpSymptomsRecycler()
 
         observeWeek()
         observeLastCycles()
         observeCountOfPeriods()
+        observeSymptoms()
+    }
+
+    private fun setUpSymptomsRecycler() {
+        symptomsRecyclerView = binding.symptomsRv
+        symptomsAdapter = HomeSymptomsAdapter()
+        symptomsRecyclerView.layoutManager =
+            LinearLayoutManager(context).apply { orientation = RecyclerView.HORIZONTAL }
+        symptomsRecyclerView.adapter = symptomsAdapter
+    }
+
+    private fun observeSymptoms() {
+        viewModel.symptoms.observe(viewLifecycleOwner) {
+            symptomsAdapter.submitList(it)
+        }
     }
 
     private fun observeWeek() {
         viewModel.weekDays.observe(viewLifecycleOwner) {
-            Timber.d(it.toString())
             getWeekItemsBinding().forEachIndexed { index, itemWeekDayBinding ->
                 val date = it[index].date
                 itemWeekDayBinding.weekDayTv.text = it[index].dayOfWeek
@@ -139,7 +167,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     private fun observeLastCycles() {
         viewModel.lastCycles.observe(viewLifecycleOwner) {
-            Timber.d(it.toString())
             if (it.isEmpty()) return@observe
 
             updateStatus(it[0])
@@ -356,8 +383,10 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             findNavController().navigate(HomeFragmentDirections.actionNavigationHomeToCalendarFragment())
         }
         binding.plusSymptomIb.setOnClickListener {
-            findNavController().navigate(R.id.action_navigation_home_to_symptomsFragment,
-                bundleOf(SymptomsFragment.ARG_DATE to LocalDate.now()))
+            findNavController().navigate(
+                R.id.action_navigation_home_to_symptomsFragment,
+                bundleOf(SymptomsFragment.ARG_DATE to LocalDate.now())
+            )
         }
     }
 

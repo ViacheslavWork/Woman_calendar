@@ -40,4 +40,13 @@
     <string name="cycle_day_s">Cycle day %s</string>
     <string name="calm">Calm</string>
     <string name="menstrual_flow">Menstrual flow</string>
+    <string name="consumed_this_day">Consumed this day</string>
+    <string name="volume_of_water">%.2f / %.2f L</string>
+    <string name="water_l">%.2f L</string>
+    <string name="logged_weight">Logged Weight</string>
+    <string name="apply">Apply</string>
+    <string name="s_kg">%s kg</string>
+    <string name="kg">kg</string>
+    <string name="__kg">-- kg</string>
+    <string name="__l">-- L</string>
 </resources>

@@ -14,11 +14,13 @@
     <color name="pink">#FC78D7</color>
     <color name="pink_dark_1">#AF378E</color>
     <color name="pink_dark_2">#B752AA</color>
+    <color name="pink_50">#80FC78D7</color>
+    <color name="pink_30">#4DFC78D7</color>
+    <color name="pink_15">#26FC78D7</color>
     <color name="lilac">#BB6FF8</color>
     <color name="lilac_pale">#A579A9</color>
-    <color name="pink_15">#26FC78D7</color>
-    <color name="pale_red">#FF9CA2</color>
     <color name="red">#EB5757</color>
+    <color name="pale_red">#FF9CA2</color>
     <color name="green">#7BCD9D</color>
     <color name="gray3">#828282</color>
     <color name="gray4">#BDBDBD</color>

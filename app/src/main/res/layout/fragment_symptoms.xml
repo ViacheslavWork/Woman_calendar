@@ -98,6 +98,17 @@
                 app:layout_constraintStart_toStartOf="@id/content_start"
                 app:layout_constraintTop_toTopOf="@+id/edit_weight_btn" />
 
+            <TextView
+                android:id="@+id/weight_number_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="@string/__kg"
+                android:textAppearance="@style/symptomsTextAppearance"
+                app:layout_constraintBottom_toBottomOf="@+id/edit_weight_btn"
+                app:layout_constraintStart_toEndOf="@id/weight_tv"
+                app:layout_constraintTop_toTopOf="@+id/edit_weight_btn" />
+
             <Button
                 android:id="@+id/edit_weight_btn"
                 style="@style/OutlinedButtonStyle"
@@ -117,6 +128,17 @@
                 app:layout_constraintBottom_toBottomOf="@+id/edit_water_btn"
                 app:layout_constraintStart_toStartOf="@id/content_start"
                 app:layout_constraintTop_toTopOf="@+id/edit_water_btn" />
+
+            <TextView
+                android:id="@+id/water_number_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/__l"
+                android:textAppearance="@style/symptomsTextAppearance"
+                app:layout_constraintBottom_toBottomOf="@+id/edit_water_btn"
+                app:layout_constraintStart_toStartOf="@id/weight_number_tv"
+                app:layout_constraintTop_toTopOf="@+id/edit_water_btn" />
+
 
             <Button
                 android:id="@+id/edit_water_btn"

@@ -8,6 +8,7 @@ import kotlinx.coroutines.launch
 import org.threeten.bp.LocalDate
 import woman.calendar.every.day.health.domain.model.Cycle
 import woman.calendar.every.day.health.domain.usecase.GetCountOfPeriodsUseCase
+import woman.calendar.every.day.health.domain.usecase.GetDayUseCase
 import woman.calendar.every.day.health.domain.usecase.GetLastCyclesUseCase
 import woman.calendar.every.day.health.domain.usecase.GetWeekUseCase
 
@@ -15,7 +16,8 @@ import woman.calendar.every.day.health.domain.usecase.GetWeekUseCase
 class HomeViewModel(
     private val getWeekUseCase: GetWeekUseCase,
     private val getCountOfPeriodsUseCase: GetCountOfPeriodsUseCase,
-    private val getLastCyclesUseCase: GetLastCyclesUseCase
+    private val getLastCyclesUseCase: GetLastCyclesUseCase,
+    private val getDayUseCase: GetDayUseCase
 ) : ViewModel() {
     private val _weekDays = MutableLiveData<List<ItemDayOfWeek>>()
     val weekDays: LiveData<List<ItemDayOfWeek>> = _weekDays
@@ -26,14 +28,29 @@ class HomeViewModel(
     private val _lastCycles = MutableLiveData<List<Cycle>>()
     val lastCycles: LiveData<List<Cycle>> = _lastCycles
 
+    private val _symptoms = MutableLiveData<List<HomeSymptomItem>>()
+    val symptoms: LiveData<List<HomeSymptomItem>> = _symptoms
+
     init {
         updateUI()
     }
 
     fun updateUI() {
+        updateSymptoms()
         updateWeek()
         updateCountOfPeriods()
         updateLastCycles()
+    }
+
+    private fun updateSymptoms() {
+        viewModelScope.launch {
+            _symptoms.postValue(
+                getDayUseCase.execute(LocalDate.now()).symptoms
+                    .map { HomeSymptomItem.fromSymptom(it) }
+                    .sortedBy { it.symptomType }
+                    .toList()
+            )
+        }
     }
 
     private fun updateWeek() {
