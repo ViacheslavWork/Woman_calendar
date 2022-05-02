@@ -1,4 +1,4 @@
-package woman.calendar.every.day.health
+package woman.calendar.every.day.health.ui
 
 import android.os.Bundle
 import android.view.View
@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import woman.calendar.every.day.health.R
 import woman.calendar.every.day.health.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -25,7 +26,7 @@ class MainActivity : AppCompatActivity() {
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
                 R.id.navigation_home,
-                R.id.navigation_advices -> navView.visibility = View.VISIBLE
+                R.id.navigation_articles -> navView.visibility = View.VISIBLE
                 else -> navView.visibility = View.GONE
             }
         }

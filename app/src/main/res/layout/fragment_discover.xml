@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/tool_bar"
+    tools:context=".ui.articles.discover.DiscoverFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/content_start"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="20dp" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/content_end"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="20dp" />
+
+        <TextView
+            android:id="@+id/reproductive_health_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_article_title_top"
+            android:text="@string/reproductive_health"
+            android:textAppearance="@style/symptomsTextAppearance"
+            app:layout_constraintStart_toStartOf="@id/content_start"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/reproductive_health_rv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_article_recycler_top"
+            android:orientation="horizontal"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintEnd_toEndOf="@id/content_end"
+            app:layout_constraintStart_toStartOf="@id/content_start"
+            app:layout_constraintTop_toBottomOf="@id/reproductive_health_tv"
+            tools:itemCount="4"
+            tools:listitem="@layout/item_articles_big_card" />
+
+        <TextView
+            android:id="@+id/sex_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_article_title_top"
+            android:text="@string/sex"
+            android:textAppearance="@style/symptomsTextAppearance"
+            app:layout_constraintStart_toStartOf="@id/content_start"
+            app:layout_constraintTop_toBottomOf="@+id/reproductive_health_rv" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/sex_rv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_article_recycler_top"
+            android:orientation="horizontal"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintEnd_toEndOf="@id/content_end"
+            app:layout_constraintStart_toStartOf="@id/content_start"
+            app:layout_constraintTop_toBottomOf="@id/sex_tv"
+            tools:itemCount="4"
+            tools:listitem="@layout/item_articles_big_card" />
+
+        <TextView
+            android:id="@+id/your_cycle_phase_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_article_title_top"
+            android:text="@string/your_cycle_phase_luteal"
+            android:textAppearance="@style/symptomsTextAppearance"
+            app:layout_constraintStart_toStartOf="@id/content_start"
+            app:layout_constraintTop_toBottomOf="@+id/sex_rv" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/your_cycle_phase_rv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_article_recycler_top"
+            android:orientation="horizontal"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintEnd_toEndOf="@id/content_end"
+            app:layout_constraintStart_toStartOf="@id/content_start"
+            app:layout_constraintTop_toBottomOf="@id/your_cycle_phase_tv"
+            tools:itemCount="4"
+            tools:listitem="@layout/item_articles_big_card" />
+
+
+        <TextView
+            android:id="@+id/the_latest_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_article_title_top"
+            android:text="@string/the_latest"
+            android:textAppearance="@style/symptomsTextAppearance"
+            app:layout_constraintStart_toStartOf="@id/content_start"
+            app:layout_constraintTop_toBottomOf="@+id/your_cycle_phase_rv" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/the_latest_rv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_article_recycler_top"
+            android:orientation="horizontal"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintEnd_toEndOf="@id/content_end"
+            app:layout_constraintStart_toStartOf="@id/content_start"
+            app:layout_constraintTop_toBottomOf="@id/the_latest_tv"
+            tools:itemCount="4"
+            tools:listitem="@layout/item_articles_big_card" />
+
+
+        <TextView
+            android:id="@+id/lgbtq_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_article_title_top"
+            android:text="@string/lgbtq"
+            android:textAppearance="@style/symptomsTextAppearance"
+            app:layout_constraintStart_toStartOf="@id/content_start"
+            app:layout_constraintTop_toBottomOf="@+id/the_latest_rv" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/lgbtq_rv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_article_recycler_top"
+            android:orientation="horizontal"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintEnd_toEndOf="@id/content_end"
+            app:layout_constraintStart_toStartOf="@id/content_start"
+            app:layout_constraintTop_toBottomOf="@id/lgbtq_tv"
+            tools:itemCount="4"
+            tools:listitem="@layout/item_articles_big_card" />
+
+        <TextView
+            android:id="@+id/trips_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_article_title_top"
+            android:text="@string/trips_for_a_pain_free_cycle"
+            android:textAppearance="@style/symptomsTextAppearance"
+            app:layout_constraintStart_toStartOf="@id/content_start"
+            app:layout_constraintTop_toBottomOf="@+id/lgbtq_rv" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/trips_rv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_article_recycler_top"
+            android:orientation="horizontal"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintEnd_toEndOf="@id/content_end"
+            app:layout_constraintStart_toStartOf="@id/content_start"
+            app:layout_constraintTop_toBottomOf="@id/trips_tv"
+            tools:itemCount="4"
+            tools:listitem="@layout/item_articles_big_card" />
+
+        <TextView
+            android:id="@+id/nutrition_and_fitness_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_article_title_top"
+            android:text="@string/nutrition_and_fitness"
+            android:textAppearance="@style/articleCategoryTextAppearance"
+            app:layout_constraintStart_toStartOf="@id/content_start"
+            app:layout_constraintTop_toBottomOf="@+id/trips_rv" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/nutrition_and_fitness_rv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_article_recycler_top"
+            android:orientation="horizontal"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintEnd_toEndOf="@id/content_end"
+            app:layout_constraintStart_toStartOf="@id/content_start"
+            app:layout_constraintTop_toBottomOf="@id/nutrition_and_fitness_tv"
+            tools:itemCount="4"
+            tools:listitem="@layout/item_articles_big_card" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>

@@ -153,7 +153,6 @@ class SymptomsFragment : Fragment(R.layout.fragment_symptoms) {
 
     private fun setUpRecycler(recyclerView: RecyclerView, symptomsAdapter: SymptomsAdapter) {
         recyclerView.layoutManager = GridLayoutManager(requireContext(), 4)
-//        recyclerView.setHasFixedSize(true)
         recyclerView.adapter = symptomsAdapter
     }
 

@@ -7,9 +7,9 @@
         android:title="@string/title_home" />
 
     <item
-        android:id="@+id/navigation_advices"
+        android:id="@+id/navigation_articles"
         android:icon="@drawable/ic_graph"
-        android:title="@string/title_advices"
+        android:title="@string/title_articles"
         />
 
 </menu>

@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Woman calendar</string>
     <string name="title_home">Home</string>
-    <string name="title_advices">Advices</string>
+    <string name="title_articles">Articles</string>
     <string name="month">Month</string>
     <string name="period_in">Period in</string>
     <string name="log_period">Log period</string>
@@ -49,4 +49,15 @@
     <string name="kg">kg</string>
     <string name="__kg">-- kg</string>
     <string name="__l">-- L</string>
+    <string name="discover">Discover</string>
+    <string name="reproductive_health">Reproductive Health</string>
+    <string name="sex">Sex</string>
+    <string name="your_cycle_phase_luteal">Your Cycle Phase: Luteal</string>
+    <string name="the_latest">The Latest</string>
+    <string name="lgbtq">LGBTQ+</string>
+    <string name="trips_for_a_pain_free_cycle">Trips for a Pain-Free Cycle</string>
+    <string name="nutrition_and_fitness">Nutrition and Fitness</string>
+    <string name="early_sights_of_pregnancy_content">Waiting for your period and puzzled if what you\'re feeling is pregnancy signs or just PMS? Not sure how and when to do a pregnancy test? Wondering if your birth control has you covered or you need a backup plan? Freaking out about getting pregnant so much you\'d rather avoid sex at all? Read on to get the answers!</string>
+    <string name="text">Text</string>
+    <string name="text_long">Waiting for your period and puzzled if what you\'re feeling is pregnancy signs or just PMS? Not sure how and when to do a pregnancy test? Wondering if your birth control has you covered or you need a backup plan? Freaking out about getting pregnant so much you\'d rather avoid sex at all? Read on to get the answers!</string>
 </resources>

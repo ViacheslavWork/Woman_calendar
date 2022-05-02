@@ -2,6 +2,8 @@ package woman.calendar.every.day.health.di
 
 import org.koin.dsl.module
 import woman.calendar.every.day.health.domain.usecase.*
+import woman.calendar.every.day.health.domain.usecase.articles.GetArticleGroupsUseCase
+import woman.calendar.every.day.health.domain.usecase.articles.GetArticleUseCase
 import woman.calendar.every.day.health.domain.usecase.water.AddWaterUseCase
 import woman.calendar.every.day.health.domain.usecase.water.GetWaterPerDayUseCase
 import woman.calendar.every.day.health.domain.usecase.water.SubWaterUseCase
@@ -33,6 +35,9 @@ val domainModule = module {
             recalculateFromDayUseCase = get()
         )
     }
+    //articles
+    single { GetArticleGroupsUseCase(articlesProvider = get()) }
+    single { GetArticleUseCase(articlesProvider = get()) }
     //water
     single<GetWaterPerDayUseCase> { GetWaterPerDayUseCase() }
     single<AddWaterUseCase> { AddWaterUseCase(getDayUseCase = get(), repository = get()) }

@@ -2,7 +2,9 @@ package woman.calendar.every.day.health.di
 
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
-import woman.calendar.every.day.health.ui.advices.AdvicesViewModel
+import woman.calendar.every.day.health.ui.articles.ArticlesViewModel
+import woman.calendar.every.day.health.ui.articles.details.ArticleDetailsViewModel
+import woman.calendar.every.day.health.ui.articles.discover.DiscoverViewModel
 import woman.calendar.every.day.health.ui.calendar.CalendarViewModel
 import woman.calendar.every.day.health.ui.home.HomeViewModel
 import woman.calendar.every.day.health.ui.symptoms.SymptomsViewModel
@@ -24,7 +26,7 @@ val appModule = module {
             getDayUseCase = get()
         )
     }
-    viewModel { AdvicesViewModel() }
+    viewModel { ArticlesViewModel() }
     viewModel {
         WaterViewModel(
             getWaterPerDayUseCase = get(),
@@ -41,4 +43,6 @@ val appModule = module {
             getLastCyclesUseCase = get(),
         )
     }
+    viewModel { DiscoverViewModel(getArticleGroupsUseCase = get()) }
+    viewModel { ArticleDetailsViewModel(getArticleUseCase = get()) }
 }
