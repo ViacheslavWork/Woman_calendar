@@ -1,9 +1,9 @@
-package woman.calendar.every.day.health.domain.usecase
+package woman.calendar.every.day.health.domain.usecase.periods
 
 import org.threeten.bp.LocalDate
 import woman.calendar.every.day.health.domain.Repository
 import woman.calendar.every.day.health.domain.model.Day
-import woman.calendar.every.day.health.domain.model.StateOfDay
+import woman.calendar.every.day.health.domain.usecase.RecalculateFromDayUseCase
 
 class UpdatePeriodDayUseCase(
     private val repository: Repository,

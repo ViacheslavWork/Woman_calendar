@@ -25,5 +25,7 @@
     <color name="green">#7BCD9D</color>
     <color name="gray3">#828282</color>
     <color name="gray4">#BDBDBD</color>
+    <color name="gray_stories">#CCCCCC</color>
+    <color name="brown_stories">#E8CCCC</color>
     <color name="yellow">#FFC700</color>
 </resources>

@@ -1,14 +1,25 @@
 package woman.calendar.every.day.health.di
 
 import org.koin.dsl.module
-import woman.calendar.every.day.health.domain.usecase.*
+import woman.calendar.every.day.health.domain.usecase.GetDailyNotificationDataUseCase
+import woman.calendar.every.day.health.domain.usecase.RecalculateFromDayUseCase
 import woman.calendar.every.day.health.domain.usecase.articles.GetArticleGroupsUseCase
 import woman.calendar.every.day.health.domain.usecase.articles.GetArticleUseCase
+import woman.calendar.every.day.health.domain.usecase.cycles.GetLastCyclesUseCase
+import woman.calendar.every.day.health.domain.usecase.days.GetDayUseCase
+import woman.calendar.every.day.health.domain.usecase.days.GetMonthUseCase
+import woman.calendar.every.day.health.domain.usecase.days.GetWeekUseCase
+import woman.calendar.every.day.health.domain.usecase.periods.GetCountOfPeriodsUseCase
+import woman.calendar.every.day.health.domain.usecase.periods.GetLastPeriodsUseCase
+import woman.calendar.every.day.health.domain.usecase.periods.UpdatePeriodDayUseCase
+import woman.calendar.every.day.health.domain.usecase.symptoms.GetSymptomsUseCase
+import woman.calendar.every.day.health.domain.usecase.symptoms.SaveSelectedSymptomsUseCase
 import woman.calendar.every.day.health.domain.usecase.water.AddWaterUseCase
 import woman.calendar.every.day.health.domain.usecase.water.GetWaterPerDayUseCase
 import woman.calendar.every.day.health.domain.usecase.water.SubWaterUseCase
 
 val domainModule = module {
+
     single<GetMonthUseCase> { GetMonthUseCase(repository = get()) }
     single<GetDayUseCase> { GetDayUseCase(repository = get()) }
     single<GetWeekUseCase> { GetWeekUseCase(repository = get()) }
@@ -35,6 +46,8 @@ val domainModule = module {
             recalculateFromDayUseCase = get()
         )
     }
+    //notifications
+    single { GetDailyNotificationDataUseCase(getNotificationDataProvider = get()) }
     //articles
     single { GetArticleGroupsUseCase(articlesProvider = get()) }
     single { GetArticleUseCase(articlesProvider = get()) }

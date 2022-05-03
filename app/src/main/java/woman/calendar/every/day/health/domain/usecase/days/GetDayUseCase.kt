@@ -1,4 +1,4 @@
-package woman.calendar.every.day.health.domain.usecase
+package woman.calendar.every.day.health.domain.usecase.days
 
 import org.threeten.bp.LocalDate
 import woman.calendar.every.day.health.domain.Repository

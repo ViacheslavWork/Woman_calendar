@@ -7,8 +7,8 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 import org.threeten.bp.LocalDate
 import timber.log.Timber
-import woman.calendar.every.day.health.domain.usecase.GetMonthUseCase
-import woman.calendar.every.day.health.domain.usecase.UpdatePeriodDayUseCase
+import woman.calendar.every.day.health.domain.usecase.days.GetMonthUseCase
+import woman.calendar.every.day.health.domain.usecase.periods.UpdatePeriodDayUseCase
 import woman.calendar.every.day.health.utils.LocalDateHelper
 
 private const val monthsCashSize = 12L

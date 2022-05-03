@@ -1,4 +1,4 @@
-package woman.calendar.every.day.health.domain.usecase
+package woman.calendar.every.day.health.domain.usecase.symptoms
 
 import woman.calendar.every.day.health.domain.SymptomsProvider
 import woman.calendar.every.day.health.domain.model.Symptom

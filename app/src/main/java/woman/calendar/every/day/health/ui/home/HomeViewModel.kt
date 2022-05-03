@@ -7,10 +7,10 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 import org.threeten.bp.LocalDate
 import woman.calendar.every.day.health.domain.model.Cycle
-import woman.calendar.every.day.health.domain.usecase.GetCountOfPeriodsUseCase
-import woman.calendar.every.day.health.domain.usecase.GetDayUseCase
-import woman.calendar.every.day.health.domain.usecase.GetLastCyclesUseCase
-import woman.calendar.every.day.health.domain.usecase.GetWeekUseCase
+import woman.calendar.every.day.health.domain.usecase.cycles.GetLastCyclesUseCase
+import woman.calendar.every.day.health.domain.usecase.periods.GetCountOfPeriodsUseCase
+import woman.calendar.every.day.health.domain.usecase.days.GetDayUseCase
+import woman.calendar.every.day.health.domain.usecase.days.GetWeekUseCase
 
 
 class HomeViewModel(

@@ -60,4 +60,116 @@
     <string name="early_sights_of_pregnancy_content">Waiting for your period and puzzled if what you\'re feeling is pregnancy signs or just PMS? Not sure how and when to do a pregnancy test? Wondering if your birth control has you covered or you need a backup plan? Freaking out about getting pregnant so much you\'d rather avoid sex at all? Read on to get the answers!</string>
     <string name="text">Text</string>
     <string name="text_long">Waiting for your period and puzzled if what you\'re feeling is pregnancy signs or just PMS? Not sure how and when to do a pregnancy test? Wondering if your birth control has you covered or you need a backup plan? Freaking out about getting pregnant so much you\'d rather avoid sex at all? Read on to get the answers!</string>
+    <string name="next">Next</string>
+    <string name="today_is_n_your_cycle_day_s">Today is\n Your Cycle Day %s</string>
+    <string name="the_prediction_is_based_on_the_last_period_n_you_logged">The prediction is based on the last period\n you logged</string>
+    <string name="month_dd_cycle_day_nn">%s %d, Cycle day %d</string>
+    <string name="hormones_and_body_today">Hormones and body today</string>
+    <string name="in_the_latter_part_of_your_period">In the latter part of your period, progesterone is low but estrogen starts rising, which may give energy levels a boost</string>
+    <string name="today_s_wins">Today’s wins</string>
+    <string name="today_s_challenges">Today’s challenges</string>
+
+    <string name="hormones_and_body_post_period">You may experience a surge in estrogen-based energy and productivity, though there is a risk of overdoing things</string>
+    <string name="hormones_and_body_period_start">Your progesterone and estrogen levels are low but stable - though you may lack energy, your mood should feel steady</string>
+    <string name="hormones_and_body_period_mid">After ovulation, estrogen falls and progesterone rises, so you may feel calmer, but lacking energy</string>
+    <string name="hormones_and_body_period_end">In the latter part of your period, progesterone is low but estrogen starts rising, which may give energy levels a boost</string>
+    <string name="hormones_and_body_pre_period_start">After ovulation, estrogen falls and progesterone rises, so you may feel calmer, but lacking energy</string>
+    <string name="hormones_and_body_pre_period_mid">After ovulation, estrogen falls and progesterone rises, so you may feel calmer, but lacking energy</string>
+    <string name="hormones_and_body_pre_period_end">After ovulation, estrogen falls and progesterone rises, so you may feel calmer, but lacking energy</string>
+    <string name="hormones_and_body_post_fertile_start">With estrogen and progesterone up, your sense of direction and coordination are up in the luteal phase, but you may experience oilyskin</string>
+    <string name="hormones_and_body_post_fertile_mid">With estrogen and progesterone up, your sense of direction and coordination are up in the luteal phase, but you may experience oilyskin</string>
+    <string name="hormones_and_body_post_fertile_end">At the end of the luteal phase, with rising estrogen and progesterone, you may have all the feels, but stress can be a big one Today</string>
+    <string name="hormones_and_body_fertile_start">With estrogen and progesterone up, your sense of direction and coordination are up in the luteal phase, but you may experience oilyskin</string>
+    <string name="hormones_and_body_ovulation_day">With estrogen and progesterone up, your sense of direction and coordination are up in the luteal phase, but you may experience oilyskin</string>
+    <string name="hormones_and_body_fertile_mid">With estrogen and progesterone up, your sense of direction and coordination are up in the luteal phase, but you may experience oilyskin</string>
+    <string name="hormones_and_body_fertile_end">With estrogen and progesterone up, your sense of direction and coordination are up in the luteal phase, but you may experience oilyskin</string>
+
+    <string name="greater_stamina">Greater stamina</string>
+    <string name="greater_stamina_content">As estrogen rises, your body may shift from finite glycogen (carbohydrates) to fat as an
+energy source - now\'s the time to wow your family or friends with a dinner or cocktail party</string>
+    <string name="increased_productivity">Increased productivity</string>
+    <string name="increased_productivity_content">Rising levels of estrogen may improve working memory - used during reasoning, learning, and comprehension-based activities.
+This is a good day for learning a couple of new words</string>
+    <string name="overdoing_things">Overdoing things</string>
+    <string name="overdoing_things_content">Though you may be enjoying increased energy and reward-based motivation due to
+rising estrogen levels, try to pace yourself. Take a time-out with a mind-clearing walk outdoors</string>
+    <string name="sensitive_hearing">Sensitive hearing</string>
+    <string name="sensitive_hearing_content">Estrogen is linked with hearing, and rising levels at this time may cause increased audio sensitivity. Be mindful if you\'re going to loud
+places like concerts or nightclubs</string>
+    <string name="breast_comfort">Breast comfort</string>
+    <string name="breast_comfort_content">Breast tenderness, caused by pre-period hormonal drop, has eased, making going for
+a walk, swimming, or cycling more pleasant</string>
+    <string name="better_digestion">Better digestion</string>
+    <string name="better_digestion_content">If you\'ve been suffering from bloating or diarrhea, these symptoms should ease up now that prostaglandin activity (a key trigger)
+is in decline. Celebrate with some tasty takeout</string>
+    <string name="disrupted_sleep">Disrupted sleep</string>
+    <string name="disrupted_sleep_content">Progesterone is linked to sleep, so low levels may mean you find it harder to fall asleep. Stop screen use an hour before bed and try
+a simple meditation</string>
+    <string name="low_mood">Low mood</string>
+    <string name="low_mood_content">Although estrogen is rising, it\'s still relatively low, restricting production of serotonin (AKA the happy hormone). Try a positive, mindful
+activity like gratitude journaling</string>
+    <string name="zen_vibes">Zen vibes</string>
+    <string name="zen_vibes_content">With hormones low but stable, this is
+a comparatively calmer time, so you may feel more able to concentrate. This is a good time
+to return to more complex work projects</string>
+    <string name="battery_recharging">Battery recharging</string>
+    <string name="battery_recharging_content">With symptoms from bleeding to cramping still going on and low estrogen affecting energy levels, try activities that help you rest and relax, such as mindful meditation</string>
+    <string name="tricky_skin">Tricky skin</string>
+    <string name="tricky_skin_content">Low estrogen levels can affect the skin, resulting in excessive sebum production that blocks pores and causes breakouts. Try
+a deep cleansing treatment like a charcoal face mask</string>
+    <string name="period_pain">Period pain</string>
+    <string name="period_pain_content">You may still be experiencing cramps and back pain due to the release of prostaglandins. Try a simple yoga pose, such as child\'s pose or seated cat-cow</string>
+    <string name="speedy_scanning">Speedy scanning</string>
+    <string name="speedy_scanning_content">Due to falling progesterone and estrogen, the late luteal phase is linked to higher perceptual speed when comparing/scanning figures
+today\'s the day to crush that spreadsheet</string>
+    <string name="winning_words">Winning words</string>
+    <string name="winning_words_content">As levels of estrogen and progesterone decline, you may find verbal fluency increases, making you more articulate. Channel this into creative writing or blogging</string>
+    <string name="pre_period_pain">Pre-period pain</string>
+    <string name="pre_period_pain_content">Before your period, you may experience cramps caused by prostaglandins, which make the muscles in the uterus contract.
+Putting a heat pad on your stomach can help</string>
+    <string name="easy_orientation">Easy orientation</string>
+    <string name="easy_orientation_content">Spatial navigation improves due to declining estrogen and progesterone levels, meaning you may find map-reading and orientation easier. A good day to go for a hike somewhere new</string>
+    <string name="emotional_intelligence">Emotional intelligence</string>
+    <string name="emotional_intelligence_content">Though progesterone is falling, relatively high levels are linked to emotional perceptiveness. Tackle relationship conflicts while you\'re in your prime</string>
+    <string name="water_retention">Water retention</string>
+    <string name="water_retention_content">As progesterone falls, you may experience bloating, which can impact digestion. Try to avoid salty foods and stay hydrated</string>
+    <string name="breast_discomfort">Breast discomfort</string>
+    <string name="breast_discomfort_content">Fluctuations in estrogen and progesterone may trigger breast pain, so it may be a good day to opt for looser, more comfortable tops (though a supportive bra is a must)</string>
+    <string name="emotional_intelligence_content_post_fertile">Due to rising estrogen, emotional awareness and sensitivity to others\' reactions may increase, especially sadness. Reach out to loved ones who may be in need</string>
+    <string name="extra_empathy">Extra empathy</string>
+    <string name="extra_empathy_content">Increased understanding of negative emotions is linked to the luteal phase, so this could be a good day to tackle thorny conversations with colleagues or managers</string>
+    <string name="oily_skin">Oily skin</string>
+    <string name="oily_skin_content">High progesterone is linked to sebum production, so your skin may look greasier. Use a cleansing brush at night to deep clean your skin before using a light moisturizer</string>
+    <string name="low_mood_content_post_fertile">High levels of progesterone can increase amygdala reactivity in the brain, which can trigger feelings of stress. Try a guided meditation before bed to help you let go of
+any worries</string>
+    <string name="easy_orientation_content_post_fertile">Increased progesterone boosts spatial navigation, meaning you may find it easier to navigate journeys. Volunteer to helm a road
+trip with friends</string>
+    <string name="smooth_moves">Smooth moves</string>
+    <string name="smooth_moves_content">As estrogen and progesterone rise, you may find your fine motor coordination improves, making this the perfect time for a dance class</string>
+    <string name="feeling_sweaty">Feeling sweaty</string>
+    <string name="feeling_sweaty_content">As progesterone rises, basal body temperature increases, so you may sweat more. Opt for lighter clothing options in natural fibers to feel more comfortable</string>
+    <string name="less_swelling">Less swelling</string>
+    <string name="less_swelling_content">Estrogen is linked to water retention, which can cause swollen fingers and puffy ankles
+- as it falls, you may find swelling eases off. You can safely wear your favorite heels or
+sandals</string>
+    <string name="emotional_intelligence_content_fertile">Falling estrogen levels may be linked to greater emotional awareness and sensitivity in terms of perceiving others\' reactions and feelings a good day to help those in need</string>
+    <string name="major_munchies">Major munchies</string>
+    <string name="major_munchies_content">Rising levels of progesterone have been linked to increased appetite and the desire for sugar and fat-rich foods. Try to fill up on
+healthy veggies with a big salad</string>
+    <string name="energy_loss">Energy loss</string>
+    <string name="energy_loss_content">Estrogen - linked to more efficient energy metabolism - is falling, so you may find you are fatigued sooner. Opt for moderate exercise like a shorter-than-normal jog</string>
+
+    <string name="notification_post_period_1">You might feel friskier today. What else to expect? Tap to see</string>
+    <string name="notification_post_period_2">You can expect bloating and acne among other things. See why</string>
+    <string name="notification_period_end">You may have a headache today. What else to expect? Tap to see</string>
+    <string name="notification_period_mid">You may feel bloated today. What else to expect? Tap to see</string>
+    <string name="notification_period_start">Your breasts may be extra sensitive today. What else to expect? Tap to see</string>
+    <string name="notification_pre_period_end">Bloating is common today. What are your symptoms? Log now to get expert tips</string>
+    <string name="notification_pre_period_mid">A backache could occur at this time. What do you feel? Log your symptoms to get tips</string>
+    <string name="notification_pre_period_start">Breast sensitivity is common today. What do you feel? Log your symptoms to get tips</string>
+    <string name="notification_post_fertile_end">You might notice a headache today. What else to expect? Tap to see</string>
+    <string name="notification_post_fertile_start_mid">You may notice increased appetite among other things. See what else to expect</string>
+    <string name="notification_fertile">You might notice bloating today. What else to expect? Tap to see 👉</string>
+    <string name="notification_ovulation_day">Your most fertile days are today! You might notice bloating today. What else to expect? Tap to see 👉</string>
+
 </resources>

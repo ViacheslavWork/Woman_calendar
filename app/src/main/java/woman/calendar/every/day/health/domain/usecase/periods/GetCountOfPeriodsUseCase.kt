@@ -1,4 +1,4 @@
-package woman.calendar.every.day.health.domain.usecase
+package woman.calendar.every.day.health.domain.usecase.periods
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext

@@ -7,6 +7,7 @@ import woman.calendar.every.day.health.ui.articles.details.ArticleDetailsViewMod
 import woman.calendar.every.day.health.ui.articles.discover.DiscoverViewModel
 import woman.calendar.every.day.health.ui.calendar.CalendarViewModel
 import woman.calendar.every.day.health.ui.home.HomeViewModel
+import woman.calendar.every.day.health.ui.notification_screens.NotificationScreenViewModel
 import woman.calendar.every.day.health.ui.symptoms.SymptomsViewModel
 import woman.calendar.every.day.health.ui.water.WaterViewModel
 
@@ -45,4 +46,5 @@ val appModule = module {
     }
     viewModel { DiscoverViewModel(getArticleGroupsUseCase = get()) }
     viewModel { ArticleDetailsViewModel(getArticleUseCase = get()) }
+    viewModel { NotificationScreenViewModel(getDailyNotificationDataUseCase = get()) }
 }

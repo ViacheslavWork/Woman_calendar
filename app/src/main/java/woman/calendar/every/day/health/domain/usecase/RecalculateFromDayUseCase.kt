@@ -11,6 +11,7 @@ import woman.calendar.every.day.health.domain.model.Interval
 import woman.calendar.every.day.health.domain.model.Period
 import woman.calendar.every.day.health.domain.model.StateOfDay
 import woman.calendar.every.day.health.domain.model.StateOfDay.*
+import woman.calendar.every.day.health.domain.usecase.days.GetDayUseCase
 import woman.calendar.every.day.health.utils.Constants
 
 private const val MIN_COUNT_PERIODS_FOR_INSIGHT = 2

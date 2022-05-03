@@ -1,4 +1,4 @@
-package woman.calendar.every.day.health.data
+package woman.calendar.every.day.health.data.providers
 
 import woman.calendar.every.day.health.R
 import woman.calendar.every.day.health.domain.SymptomsProvider

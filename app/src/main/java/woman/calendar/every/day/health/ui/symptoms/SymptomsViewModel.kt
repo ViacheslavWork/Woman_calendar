@@ -10,10 +10,10 @@ import kotlinx.coroutines.launch
 import org.threeten.bp.LocalDate
 import timber.log.Timber
 import woman.calendar.every.day.health.domain.model.Symptom
-import woman.calendar.every.day.health.domain.usecase.GetDayUseCase
-import woman.calendar.every.day.health.domain.usecase.GetLastCyclesUseCase
-import woman.calendar.every.day.health.domain.usecase.GetSymptomsUseCase
-import woman.calendar.every.day.health.domain.usecase.SaveSelectedSymptomsUseCase
+import woman.calendar.every.day.health.domain.usecase.cycles.GetLastCyclesUseCase
+import woman.calendar.every.day.health.domain.usecase.days.GetDayUseCase
+import woman.calendar.every.day.health.domain.usecase.symptoms.GetSymptomsUseCase
+import woman.calendar.every.day.health.domain.usecase.symptoms.SaveSelectedSymptomsUseCase
 import woman.calendar.every.day.health.ui.symptoms.SymptomEvent.OnSymptomClick
 
 class SymptomsViewModel(

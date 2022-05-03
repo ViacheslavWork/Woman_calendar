@@ -1,4 +1,4 @@
-package woman.calendar.every.day.health.data
+package woman.calendar.every.day.health.data.providers
 
 import android.content.Context
 import woman.calendar.every.day.health.R

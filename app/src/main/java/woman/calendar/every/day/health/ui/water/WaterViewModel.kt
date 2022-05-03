@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 import org.threeten.bp.LocalDate
-import woman.calendar.every.day.health.domain.usecase.GetDayUseCase
+import woman.calendar.every.day.health.domain.usecase.days.GetDayUseCase
 import woman.calendar.every.day.health.domain.usecase.water.AddWaterUseCase
 import woman.calendar.every.day.health.domain.usecase.water.GetWaterPerDayUseCase
 import woman.calendar.every.day.health.domain.usecase.water.SubWaterUseCase
