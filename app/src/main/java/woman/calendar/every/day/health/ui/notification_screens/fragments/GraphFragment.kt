@@ -4,9 +4,11 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
+import org.threeten.bp.LocalDate
 import woman.calendar.every.day.health.R
 import woman.calendar.every.day.health.databinding.FragmentGraphBinding
 import woman.calendar.every.day.health.ui.notification_screens.NotificationScreenViewModel
+import woman.calendar.every.day.health.utils.LocalDateHelper.getMonthName
 
 class GraphFragment : Fragment(R.layout.fragment_graph) {
     private var _binding: FragmentGraphBinding? = null
@@ -22,6 +24,15 @@ class GraphFragment : Fragment(R.layout.fragment_graph) {
     private fun observeData() {
         viewModel.notificationData.observe(viewLifecycleOwner) {
             binding.graphIv.setImageResource(it.graphImage)
+        }
+        viewModel.lengthOfCycle.observe(viewLifecycleOwner) {
+            binding.dateTv.text = String.format(
+                resources.getString(R.string.month_dd_cycle_day_nn),
+                //TODO
+                LocalDate.now().getMonthName(),
+                LocalDate.now().dayOfMonth,
+                it.toString()
+            )
         }
     }
 

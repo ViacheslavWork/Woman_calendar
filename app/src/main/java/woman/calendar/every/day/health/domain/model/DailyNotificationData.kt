@@ -12,5 +12,21 @@ data class DailyNotificationData(
     val secondChallengesMessage: Message,
     val notificationText: String
 )
+enum class DailyNotificationStatus {
+    PERIOD_START,
+    PERIOD_MID,
+    PERIOD_END,
+    POST_PERIOD,
+    FERTILE_START,
+    FERTILE_MID,
+    FERTILE_END,
+    OVULATION_DAY,
+    POST_FERTILE_START,
+    POST_FERTILE_MID,
+    POST_FERTILE_END,
+    PRE_PERIOD_START,
+    PRE_PERIOD_MID,
+    PRE_PERIOD_END,
+}
 
 

@@ -10,6 +10,10 @@ import woman.calendar.every.day.health.R
 import woman.calendar.every.day.health.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
+    companion object {
+        const val ACTION_SHOW_NOTIFICATION_SCREEN = "ACTION_SHOW_NOTIFICATION_SCREEN"
+    }
+
     private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {

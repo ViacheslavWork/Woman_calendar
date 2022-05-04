@@ -23,6 +23,7 @@ import woman.calendar.every.day.health.domain.model.Cycle
 import woman.calendar.every.day.health.domain.model.CycleStatus
 import woman.calendar.every.day.health.domain.model.StateOfDay.*
 import woman.calendar.every.day.health.ui.calendar.CalendarFragment
+import woman.calendar.every.day.health.ui.notifications.EverydayNotification
 import woman.calendar.every.day.health.ui.symptoms.SymptomsFragment
 import woman.calendar.every.day.health.utils.LocalDateHelper
 import woman.calendar.every.day.health.utils.LocalDateHelper.getMonthName
@@ -370,6 +371,9 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     }
 
     private fun setUpListeners() {
+        binding.bellIb.setOnClickListener {
+            EverydayNotification(requireContext(), "HEllo").start()
+        }
         binding.logPeriodBtn.setOnClickListener {
             findNavController().navigate(HomeFragmentDirections.actionNavigationHomeToCalendarFragment())
         }

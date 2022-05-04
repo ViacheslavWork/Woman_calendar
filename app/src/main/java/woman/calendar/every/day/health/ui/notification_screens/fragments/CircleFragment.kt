@@ -22,6 +22,12 @@ class CircleFragment : Fragment(R.layout.fragment_circle) {
         viewModel.notificationData.observe(viewLifecycleOwner) {
             binding.circleIv.setImageResource(it.circleImage)
         }
+        viewModel.lengthOfCycle.observe(viewLifecycleOwner) {
+            binding.titleTv.text = String.format(
+                resources.getString(R.string.today_is_n_your_cycle_day_s),
+                it.toString()
+            )
+        }
     }
 
 

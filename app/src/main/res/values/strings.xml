@@ -63,7 +63,7 @@
     <string name="next">Next</string>
     <string name="today_is_n_your_cycle_day_s">Today is\n Your Cycle Day %s</string>
     <string name="the_prediction_is_based_on_the_last_period_n_you_logged">The prediction is based on the last period\n you logged</string>
-    <string name="month_dd_cycle_day_nn">%s %d, Cycle day %d</string>
+    <string name="month_dd_cycle_day_nn">%s %d, Cycle day %s</string>
     <string name="hormones_and_body_today">Hormones and body today</string>
     <string name="in_the_latter_part_of_your_period">In the latter part of your period, progesterone is low but estrogen starts rising, which may give energy levels a boost</string>
     <string name="today_s_wins">Today’s wins</string>

@@ -47,7 +47,12 @@ val domainModule = module {
         )
     }
     //notifications
-    single { GetDailyNotificationDataUseCase(getNotificationDataProvider = get()) }
+    single {
+        GetDailyNotificationDataUseCase(
+            getNotificationDataProvider = get(),
+            getLastCyclesUseCase = get()
+        )
+    }
     //articles
     single { GetArticleGroupsUseCase(articlesProvider = get()) }
     single { GetArticleUseCase(articlesProvider = get()) }

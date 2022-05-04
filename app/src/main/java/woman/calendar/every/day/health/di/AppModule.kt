@@ -46,5 +46,10 @@ val appModule = module {
     }
     viewModel { DiscoverViewModel(getArticleGroupsUseCase = get()) }
     viewModel { ArticleDetailsViewModel(getArticleUseCase = get()) }
-    viewModel { NotificationScreenViewModel(getDailyNotificationDataUseCase = get()) }
+    viewModel {
+        NotificationScreenViewModel(
+            getDailyNotificationDataUseCase = get(),
+            getLastCyclesUseCase = get()
+        )
+    }
 }

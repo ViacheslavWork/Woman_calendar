@@ -5,9 +5,11 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
+import org.threeten.bp.LocalDate
 import woman.calendar.every.day.health.R
 import woman.calendar.every.day.health.databinding.FragmentChallengesBinding
 import woman.calendar.every.day.health.ui.notification_screens.NotificationScreenViewModel
+import woman.calendar.every.day.health.utils.LocalDateHelper.getMonthName
 
 class ChallengesFragment : Fragment(R.layout.fragment_challenges) {
     private var _binding: FragmentChallengesBinding? = null
@@ -25,6 +27,15 @@ class ChallengesFragment : Fragment(R.layout.fragment_challenges) {
             binding.firstCardContentTv.text = it.firstChallengesMessage.content
             binding.secondCardTitleTv.text = it.secondChallengesMessage.title
             binding.secondCardContentTv.text = it.secondChallengesMessage.content
+        }
+        viewModel.lengthOfCycle.observe(viewLifecycleOwner) {
+            binding.dateTv.text = String.format(
+                resources.getString(R.string.month_dd_cycle_day_nn),
+                //TODO
+                LocalDate.now().getMonthName(),
+                LocalDate.now().dayOfMonth,
+                it.toString()
+            )
         }
     }
 

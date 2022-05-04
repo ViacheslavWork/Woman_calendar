@@ -3,6 +3,7 @@ package woman.calendar.every.day.health.domain.model
 import org.threeten.bp.LocalDate
 import timber.log.Timber
 import woman.calendar.every.day.health.domain.model.CycleStatus.*
+import woman.calendar.every.day.health.domain.model.DailyNotificationStatus.*
 
 data class Cycle(
     val start: LocalDate,
@@ -72,8 +73,31 @@ data class Cycle(
         }
         return daysBeforeOvulation
     }
+
+    fun getDailyNotificationStatus(date: LocalDate): DailyNotificationStatus {
+        return when {
+            date == period.start -> PERIOD_START
+            date.isAfter(period.start) && date.isBefore(period.finish) -> PERIOD_MID
+            date == period.finish -> PERIOD_END
+            date.isAfter(period.finish) && date.isBefore(fertileStart) -> POST_PERIOD
+            date == fertileStart -> FERTILE_START
+            date == ovulationDay -> OVULATION_DAY
+            date.isAfter(fertileStart) && date.isBefore(fertileEnd) -> FERTILE_MID
+            date == fertileEnd -> FERTILE_END
+            date == fertileEnd?.plusDays(1) -> POST_FERTILE_START
+            date.isAfter(fertileEnd?.plusDays(1)) && date.isBefore(expectedNewPeriod?.minusDays(1)) -> POST_FERTILE_MID
+            date == expectedNewPeriod?.minusDays(1) -> POST_FERTILE_END
+            date == expectedNewPeriod -> PRE_PERIOD_START
+            //TODO
+            date.isAfter(expectedNewPeriod) -> PRE_PERIOD_MID
+            else -> PRE_PERIOD_END
+        }
+    }
 }
 
 enum class CycleStatus {
-    FERTILE_BEFORE_OVULATION, FERTILE_AFTER_OVULATION, PERIOD, EXPECTED_NEW_PERIOD
+    PERIOD,
+    FERTILE_BEFORE_OVULATION,
+    FERTILE_AFTER_OVULATION,
+    EXPECTED_NEW_PERIOD
 }
