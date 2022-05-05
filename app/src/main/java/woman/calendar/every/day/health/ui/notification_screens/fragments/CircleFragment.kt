@@ -20,7 +20,7 @@ class CircleFragment : Fragment(R.layout.fragment_circle) {
 
     private fun observeData() {
         viewModel.notificationData.observe(viewLifecycleOwner) {
-            binding.circleIv.setImageResource(it.circleImage)
+            it?.let { binding.circleIv.setImageResource(it.circleImage) }
         }
         viewModel.lengthOfCycle.observe(viewLifecycleOwner) {
             binding.titleTv.text = String.format(

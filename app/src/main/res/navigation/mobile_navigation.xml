@@ -5,6 +5,10 @@
     android:id="@+id/mobile_navigation"
     app:startDestination="@+id/notificationScreensContainerFragment">
 
+    <action android:id="@+id/action_global_to_notificationScreen"
+        app:destination="@id/notificationScreensContainerFragment"
+        app:launchSingleTop="true"/>
+
     <fragment
         android:id="@+id/navigation_home"
         android:name="woman.calendar.every.day.health.ui.home.HomeFragment"
@@ -76,7 +80,8 @@
         tools:layout="@layout/fragment_notification_screens_container" >
         <action
             android:id="@+id/action_notificationScreensContainerFragment_to_navigation_home"
-            app:destination="@id/navigation_home" />
+            app:destination="@id/navigation_home"
+            app:popUpToInclusive="true" />
     </fragment>
 
 </navigation>

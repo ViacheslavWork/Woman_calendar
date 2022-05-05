@@ -14,8 +14,8 @@ class NotificationScreenViewModel(
     private val getDailyNotificationDataUseCase: GetDailyNotificationDataUseCase,
     private val getLastCyclesUseCase: GetLastCyclesUseCase
 ) : ViewModel() {
-    private val _notificationData = MutableLiveData<DailyNotificationData>()
-    val notificationData: LiveData<DailyNotificationData> = _notificationData
+    private val _notificationData = MutableLiveData<DailyNotificationData?>()
+    val notificationData: LiveData<DailyNotificationData?> = _notificationData
 
     private val _lengthOfCycle = MutableLiveData<Int>()
     val lengthOfCycle: LiveData<Int> = _lengthOfCycle
@@ -23,9 +23,11 @@ class NotificationScreenViewModel(
     fun init(date: LocalDate) {
         viewModelScope.launch {
             _notificationData.postValue(getDailyNotificationDataUseCase.execute(date))
-            _lengthOfCycle.postValue(getLastCyclesUseCase
-                .execute(1)[0]
-                .getDaysAfterStartOfPeriod())
+            if (getLastCyclesUseCase.execute(1).isNotEmpty()) {
+                _lengthOfCycle.postValue(
+                    getLastCyclesUseCase.execute(1)[0].getDaysAfterStartOfPeriod()
+                )
+            }
         }
     }
 }

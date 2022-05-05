@@ -3,7 +3,6 @@ package woman.calendar.every.day.health.ui.notification_screens.fragments
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import org.threeten.bp.LocalDate
 import woman.calendar.every.day.health.R
@@ -21,12 +20,15 @@ class ChallengesFragment : Fragment(R.layout.fragment_challenges) {
         setUpListeners()
         observeData()
     }
+
     private fun observeData() {
         viewModel.notificationData.observe(viewLifecycleOwner) {
-            binding.firstCardTitleTv.text = it.firstChallengesMessage.title
-            binding.firstCardContentTv.text = it.firstChallengesMessage.content
-            binding.secondCardTitleTv.text = it.secondChallengesMessage.title
-            binding.secondCardContentTv.text = it.secondChallengesMessage.content
+            it?.let {
+                binding.firstCardTitleTv.text = it.firstChallengesMessage.title
+                binding.firstCardContentTv.text = it.firstChallengesMessage.content
+                binding.secondCardTitleTv.text = it.secondChallengesMessage.title
+                binding.secondCardContentTv.text = it.secondChallengesMessage.content
+            }
         }
         viewModel.lengthOfCycle.observe(viewLifecycleOwner) {
             binding.dateTv.text = String.format(

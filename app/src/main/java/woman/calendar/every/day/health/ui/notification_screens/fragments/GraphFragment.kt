@@ -23,7 +23,9 @@ class GraphFragment : Fragment(R.layout.fragment_graph) {
 
     private fun observeData() {
         viewModel.notificationData.observe(viewLifecycleOwner) {
-            binding.graphIv.setImageResource(it.graphImage)
+            it?.let {
+                binding.graphIv.setImageResource(it.graphImage)
+            }
         }
         viewModel.lengthOfCycle.observe(viewLifecycleOwner) {
             binding.dateTv.text = String.format(

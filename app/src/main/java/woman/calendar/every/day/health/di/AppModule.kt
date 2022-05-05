@@ -1,7 +1,9 @@
 package woman.calendar.every.day.health.di
 
+import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
+import woman.calendar.every.day.health.notifications.EverydayNotificationScheduler
 import woman.calendar.every.day.health.ui.articles.ArticlesViewModel
 import woman.calendar.every.day.health.ui.articles.details.ArticleDetailsViewModel
 import woman.calendar.every.day.health.ui.articles.discover.DiscoverViewModel
@@ -52,4 +54,6 @@ val appModule = module {
             getLastCyclesUseCase = get()
         )
     }
+    //notification
+    single { EverydayNotificationScheduler(androidContext()) }
 }

@@ -171,5 +171,6 @@ healthy veggies with a big salad</string>
     <string name="notification_post_fertile_start_mid">You may notice increased appetite among other things. See what else to expect</string>
     <string name="notification_fertile">You might notice bloating today. What else to expect? Tap to see 👉</string>
     <string name="notification_ovulation_day">Your most fertile days are today! You might notice bloating today. What else to expect? Tap to see 👉</string>
+    <string name="_month_dd_your_forecast">%s %d: Your forecast</string>
 
 </resources>

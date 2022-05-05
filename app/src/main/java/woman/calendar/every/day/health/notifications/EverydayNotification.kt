@@ -1,4 +1,4 @@
-package woman.calendar.every.day.health.ui.notifications
+package woman.calendar.every.day.health.notifications
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
@@ -8,12 +8,14 @@ import android.content.Intent
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
+import org.threeten.bp.LocalDate
 import woman.calendar.every.day.health.R
 import woman.calendar.every.day.health.ui.MainActivity
 import woman.calendar.every.day.health.utils.Constants
+import woman.calendar.every.day.health.utils.LocalDateHelper.getMonthName
 
-class EverydayNotification(val context: Context, val content: String) {
-    fun start() {
+class EverydayNotification(val context: Context) {
+    fun show(date: LocalDate, content: String) {
         val notificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE)
                 as NotificationManager
 
@@ -22,6 +24,14 @@ class EverydayNotification(val context: Context, val content: String) {
         }
 
         val notificationBuilder = getNotificationBuilder()
+            .setContentTitle(
+                String.format(
+                    context.getString(R.string._month_dd_your_forecast),
+                    date.getMonthName(),
+                    date.dayOfMonth
+                )
+            )
+            .setContentText(content)
         notificationManager.notify(
             Constants.EVERYDAY_NOTIFICATION_ID,
             notificationBuilder.build()
@@ -46,7 +56,6 @@ class EverydayNotification(val context: Context, val content: String) {
         .setOngoing(false)
         //TODO
         .setSmallIcon(R.drawable.ic_alcohol)
-        .setContentTitle(content)
         .setContentIntent(getMainActivityPendingIntent())
 
     private fun getMainActivityPendingIntent() = PendingIntent.getActivity(

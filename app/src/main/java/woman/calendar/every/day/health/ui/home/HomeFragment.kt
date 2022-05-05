@@ -1,20 +1,17 @@
 package woman.calendar.every.day.health.ui.home
 
-import android.app.ActionBar
 import android.os.Bundle
 import android.util.TypedValue
 import android.view.View
-import android.view.ViewTreeObserver
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.os.bundleOf
-import androidx.core.view.updateLayoutParams
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.threeten.bp.LocalDate
-import timber.log.Timber
 import woman.calendar.every.day.health.R
 import woman.calendar.every.day.health.databinding.FragmentHomeBinding
 import woman.calendar.every.day.health.databinding.ItemHomeFragmentCycleBinding
@@ -22,8 +19,8 @@ import woman.calendar.every.day.health.databinding.ItemWeekDayBinding
 import woman.calendar.every.day.health.domain.model.Cycle
 import woman.calendar.every.day.health.domain.model.CycleStatus
 import woman.calendar.every.day.health.domain.model.StateOfDay.*
+import woman.calendar.every.day.health.notifications.EverydayNotificationScheduler
 import woman.calendar.every.day.health.ui.calendar.CalendarFragment
-import woman.calendar.every.day.health.ui.notifications.EverydayNotification
 import woman.calendar.every.day.health.ui.symptoms.SymptomsFragment
 import woman.calendar.every.day.health.utils.LocalDateHelper
 import woman.calendar.every.day.health.utils.LocalDateHelper.getMonthName
@@ -32,6 +29,7 @@ import java.util.*
 
 class HomeFragment : Fragment(R.layout.fragment_home) {
     private val viewModel: HomeViewModel by viewModel()
+    private val everydayNotificationScheduler: EverydayNotificationScheduler by inject()
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
     private lateinit var symptomsRecyclerView: RecyclerView
@@ -372,7 +370,8 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     private fun setUpListeners() {
         binding.bellIb.setOnClickListener {
-            EverydayNotification(requireContext(), "HEllo").start()
+//            EverydayNotification(requireContext()).show(LocalDate.now(), "Hello")
+            everydayNotificationScheduler.schedule(1,15,47)
         }
         binding.logPeriodBtn.setOnClickListener {
             findNavController().navigate(HomeFragmentDirections.actionNavigationHomeToCalendarFragment())

@@ -3,9 +3,10 @@ package woman.calendar.every.day.health.ui.notification_screens.fragments
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
+import androidx.viewpager2.widget.ViewPager2
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import org.threeten.bp.LocalDate
+import timber.log.Timber
 import woman.calendar.every.day.health.R
 import woman.calendar.every.day.health.databinding.FragmentNotificationScreensContainerBinding
 import woman.calendar.every.day.health.ui.notification_screens.NotificationScreenType
@@ -24,6 +25,7 @@ class NotificationScreensContainerFragment :
         viewModel.init(LocalDate.now())
         setUpAdapter()
         setUpListeners()
+
     }
 
     private fun setUpAdapter() {
@@ -35,12 +37,23 @@ class NotificationScreensContainerFragment :
     }
 
     private fun setUpListeners() {
-        binding.nextBtn.setOnClickListener { TODO() }
-        binding.crossIb.setOnClickListener {
-            findNavController().navigate(
-                NotificationScreensContainerFragmentDirections.actionNotificationScreensContainerFragmentToNavigationHome()
-            )
+        binding.nextBtn.setOnClickListener {
+            binding.screensVp.currentItem = binding.screensVp.currentItem + 1
         }
+        binding.crossIb.setOnClickListener {
+            requireActivity().onBackPressed()
+        }
+        binding.screensVp.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+            override fun onPageSelected(position: Int) {
+                Timber.d(position.toString())
+                if (position == NotificationScreenType.values().size - 1) {
+                    binding.nextBtn.visibility = View.GONE
+                } else {
+                    binding.nextBtn.visibility = View.VISIBLE
+                }
+                super.onPageSelected(position)
+            }
+        })
     }
 
     override fun onDestroyView() {
