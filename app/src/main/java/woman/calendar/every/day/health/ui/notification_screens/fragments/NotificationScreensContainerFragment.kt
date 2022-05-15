@@ -3,6 +3,7 @@ package woman.calendar.every.day.health.ui.notification_screens.fragments
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import org.threeten.bp.LocalDate
@@ -41,7 +42,7 @@ class NotificationScreensContainerFragment :
             binding.screensVp.currentItem = binding.screensVp.currentItem + 1
         }
         binding.crossIb.setOnClickListener {
-            requireActivity().onBackPressed()
+            findNavController().navigate(NotificationScreensContainerFragmentDirections.actionNotificationScreensContainerFragmentToNavigationHome())
         }
         binding.screensVp.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {

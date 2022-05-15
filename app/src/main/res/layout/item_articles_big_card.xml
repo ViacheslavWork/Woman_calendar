@@ -32,6 +32,7 @@
             android:breakStrategy="balanced"
             android:fontFamily="@font/roboto_bold"
             android:padding="10dp"
+            android:maxWidth="130dp"
             android:text="Text"
             android:textAlignment="viewStart"
             android:textColor="@color/text_color"

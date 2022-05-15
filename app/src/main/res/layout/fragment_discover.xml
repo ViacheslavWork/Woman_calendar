@@ -151,7 +151,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_article_title_top"
-            android:text="@string/trips_for_a_pain_free_cycle"
+            android:text="@string/tips_for_a_pain_free_cycle"
             android:textAppearance="@style/symptomsTextAppearance"
             app:layout_constraintStart_toStartOf="@id/content_start"
             app:layout_constraintTop_toBottomOf="@+id/lgbtq_rv" />

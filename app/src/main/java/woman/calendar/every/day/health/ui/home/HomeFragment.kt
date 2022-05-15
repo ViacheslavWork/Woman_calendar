@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.threeten.bp.LocalDate
+import timber.log.Timber
 import woman.calendar.every.day.health.R
 import woman.calendar.every.day.health.databinding.FragmentHomeBinding
 import woman.calendar.every.day.health.databinding.ItemHomeFragmentCycleBinding
@@ -19,9 +20,9 @@ import woman.calendar.every.day.health.databinding.ItemWeekDayBinding
 import woman.calendar.every.day.health.domain.model.Cycle
 import woman.calendar.every.day.health.domain.model.CycleStatus
 import woman.calendar.every.day.health.domain.model.StateOfDay.*
-import woman.calendar.every.day.health.notifications.EverydayNotificationScheduler
 import woman.calendar.every.day.health.ui.calendar.CalendarFragment
 import woman.calendar.every.day.health.ui.symptoms.SymptomsFragment
+import woman.calendar.every.day.health.utils.BookmarksPreferences
 import woman.calendar.every.day.health.utils.LocalDateHelper
 import woman.calendar.every.day.health.utils.LocalDateHelper.getMonthName
 import java.util.*
@@ -29,7 +30,7 @@ import java.util.*
 
 class HomeFragment : Fragment(R.layout.fragment_home) {
     private val viewModel: HomeViewModel by viewModel()
-    private val everydayNotificationScheduler: EverydayNotificationScheduler by inject()
+    private val bookmarksPreferences: BookmarksPreferences by inject()
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
     private lateinit var symptomsRecyclerView: RecyclerView
@@ -309,35 +310,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                 )
             }
         }
-        /* val currentDate = LocalDate.now()
-         if (currentDate.isAfter(lastCycle.period.start.minusDays(1))
-             && currentDate.isBefore(lastCycle.period.finish.plusDays(1))
-         ) {
-             binding.statusCl.background = ResourcesCompat.getDrawable(
-                 resources,
-                 R.color.pale_red,
-                 null
-             )
-             binding.statusTitleTv.text = getString(R.string.period)
-             binding.statusDaysTv.text = String.format(
-                 getString(R.string.nn_day),
-                 lastCycle.getDaysAfterStartOfPeriod().toString()
-             )
-             binding.logPeriodBtn.text = getString(R.string.edit_period_dates)
-         } else if (currentDate.isAfter(lastCycle.fertileStart?.minusDays(1))
-             && currentDate.isBefore(lastCycle.fertileEnd?.plusDays(1))
-         ) {
-             binding.statusCl.background = ResourcesCompat.getDrawable(
-                 resources,
-                 R.color.green,
-                 null
-             )
-             binding.statusTitleTv.text = getString(R.string.ovulation_in)
-             binding.statusDaysTv.text = String.format(
-                 getString(R.string.nn_days),
-                 lastCycle.getDaysBeforeOvulation().toString()
-             )
-         }*/
     }
 
     private fun getPrevCycleFields(): List<ItemHomeFragmentCycleBinding> {
@@ -370,8 +342,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     private fun setUpListeners() {
         binding.bellIb.setOnClickListener {
-//            EverydayNotification(requireContext()).show(LocalDate.now(), "Hello")
-            everydayNotificationScheduler.schedule(1,15,47)
+            Timber.d(bookmarksPreferences.getBookmarks().toString())
         }
         binding.logPeriodBtn.setOnClickListener {
             findNavController().navigate(HomeFragmentDirections.actionNavigationHomeToCalendarFragment())

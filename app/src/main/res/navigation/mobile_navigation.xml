@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/notificationScreensContainerFragment">
+    app:startDestination="@+id/navigation_home">
 
     <action android:id="@+id/action_global_to_notificationScreen"
         app:destination="@id/notificationScreensContainerFragment"
@@ -70,8 +70,7 @@
         <action
             android:id="@+id/action_articleDetailsFragment_self"
             app:destination="@id/articleDetailsFragment"
-            app:popUpTo="@id/articleDetailsFragment"
-            app:popUpToInclusive="true" />
+            app:popUpTo="@id/articleDetailsFragment" />
     </fragment>
     <fragment
         android:id="@+id/notificationScreensContainerFragment"
@@ -80,8 +79,16 @@
         tools:layout="@layout/fragment_notification_screens_container" >
         <action
             android:id="@+id/action_notificationScreensContainerFragment_to_navigation_home"
-            app:destination="@id/navigation_home"
-            app:popUpToInclusive="true" />
+            app:destination="@id/navigation_home" />
+    </fragment>
+    <fragment
+        android:id="@+id/savedFragment"
+        android:name="woman.calendar.every.day.health.ui.articles.saved.SavedFragment"
+        android:label="fragment_saved"
+        tools:layout="@layout/fragment_saved" >
+        <action
+            android:id="@+id/action_savedFragment_to_articleDetailsFragment"
+            app:destination="@id/articleDetailsFragment" />
     </fragment>
 
 </navigation>

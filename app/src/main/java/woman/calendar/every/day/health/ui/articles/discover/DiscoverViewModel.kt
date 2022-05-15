@@ -1,22 +1,30 @@
 package woman.calendar.every.day.health.ui.articles.discover
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import kotlinx.coroutines.flow.map
+import timber.log.Timber
 import woman.calendar.every.day.health.domain.usecase.articles.GetArticleGroupsUseCase
-import woman.calendar.every.day.health.ui.articles.items.ArticleItem
+import woman.calendar.every.day.health.domain.usecase.articles.GetArticlesFlowUseCase
+import woman.calendar.every.day.health.domain.usecase.articles.GetArticlesUseCase
+import woman.calendar.every.day.health.ui.articles.ArticleItem
 import woman.calendar.every.day.health.ui.articles.ArticlesEvent
+import woman.calendar.every.day.health.utils.RecentArticlesPreferences
 
-class DiscoverViewModel(val getArticleGroupsUseCase: GetArticleGroupsUseCase) : ViewModel() {
+class DiscoverViewModel(
+    private val getArticleGroupsUseCase: GetArticleGroupsUseCase,
+    private val getArticlesUseCase: GetArticlesUseCase,
+    private val getArticlesFlowUseCase: GetArticlesFlowUseCase,
+    private val recentArticlesPreferences: RecentArticlesPreferences
+) : ViewModel() {
+    val articlesStateFlow = getArticlesFlowUseCase.execute()
+        .map { articles -> articles.map { ArticleItem.fromArticle(it) } }
+
     fun handleEvent(event: ArticlesEvent?) {
-        //TODO("Not yet implemented")
+
+        event?.let {
+            Timber.d("article: ${it.id}")
+//            recentArticlesPreferences.putRecentArticle(it.id)
+        }
     }
 
-    private val _articleGroups = MutableLiveData<List<ArticleItem>>()
-    val articleGroups: LiveData<List<ArticleItem>> = _articleGroups
-
-    init {
-        _articleGroups.postValue(
-            getArticleGroupsUseCase.execute().map { ArticleItem.fromArticleGroup(it) })
-    }
 }

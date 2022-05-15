@@ -6,8 +6,11 @@ import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
+import woman.calendar.every.day.health.R
 import woman.calendar.every.day.health.databinding.ItemArticlesBigCardBinding
-import woman.calendar.every.day.health.ui.articles.items.ArticleItem
+import woman.calendar.every.day.health.ui.articles.ArticleItem
 import woman.calendar.every.day.health.ui.articles.ArticlesEvent
 
 class ArticlesRecyclerGroupAdapter(
@@ -32,12 +35,23 @@ class ArticlesRecyclerGroupAdapter(
 
 class ArticleGroupHolder(private val binding: ItemArticlesBigCardBinding) :
     RecyclerView.ViewHolder(binding.root) {
+    companion object {
+        private val imageOption = RequestOptions()
+            .placeholder(R.drawable.im_placeholder)
+            .fallback(R.drawable.im_placeholder)
+    }
+
     fun onBind(
         item: ArticleItem,
         event: MutableLiveData<ArticlesEvent>
     ) {
         binding.itemTv.text = item.title
-        binding.root.setOnClickListener { event.postValue(ArticlesEvent.OnGroupClick(item.id)) }
+        binding.root.setOnClickListener { event.postValue(ArticlesEvent.OnArticleClick(item.id)) }
+        val url = item.smallImage.toString()
+        Glide.with(itemView.context)
+            .load(url)
+            .apply(imageOption)
+            .into(binding.itemIv)
     }
 }
 

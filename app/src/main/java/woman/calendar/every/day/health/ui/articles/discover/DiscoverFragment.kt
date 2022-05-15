@@ -7,9 +7,12 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import kotlinx.coroutines.flow.collectLatest
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import timber.log.Timber
 import woman.calendar.every.day.health.R
 import woman.calendar.every.day.health.databinding.FragmentDiscoverBinding
 import woman.calendar.every.day.health.domain.model.ArticleGroupType.*
@@ -30,7 +33,7 @@ class DiscoverFragment : Fragment(R.layout.fragment_discover), RecyclerView.OnIt
     private val yourCyclePhaseAdapter = ArticlesRecyclerGroupAdapter(articleEvent)
     private val theLatestAdapter = ArticlesRecyclerGroupAdapter(articleEvent)
     private val lgbtqAdapter = ArticlesRecyclerGroupAdapter(articleEvent)
-    private val tripsAdapter = ArticlesRecyclerGroupAdapter(articleEvent)
+    private val tipsAdapter = ArticlesRecyclerGroupAdapter(articleEvent)
     private val nutritionAdapter = ArticlesRecyclerGroupAdapter(articleEvent)
 
     private val viewModel: DiscoverViewModel by viewModel()
@@ -47,19 +50,31 @@ class DiscoverFragment : Fragment(R.layout.fragment_discover), RecyclerView.OnIt
         yourCyclePhaseAdapter.event.observe(viewLifecycleOwner, this)
         theLatestAdapter.event.observe(viewLifecycleOwner, this)
         lgbtqAdapter.event.observe(viewLifecycleOwner, this)
-        tripsAdapter.event.observe(viewLifecycleOwner, this)
+        tipsAdapter.event.observe(viewLifecycleOwner, this)
         nutritionAdapter.event.observe(viewLifecycleOwner, this)
     }
 
     private fun observeItems() {
-        viewModel.articleGroups.observe(viewLifecycleOwner) {
-            reproductiveHealthAdapter.submitList(it.filter { item -> item.type == REPRODUCTIVE_HEALTH })
-            sexAdapter.submitList(it.filter { item -> item.type == SEX })
-            yourCyclePhaseAdapter.submitList(it.filter { item -> item.type == YOUR_CYCLE_PHASE })
-            theLatestAdapter.submitList(it.filter { item -> item.type == THE_LATEST })
-            lgbtqAdapter.submitList(it.filter { item -> item.type == LGBTQ })
-            tripsAdapter.submitList(it.filter { item -> item.type == TRIPS })
-            nutritionAdapter.submitList(it.filter { item -> item.type == NUTRITION })
+        /*viewModel.articleGroups.observe(viewLifecycleOwner) {
+            reproductiveHealthAdapter.submitList(it.filter { item -> item.parentGroupType == REPRODUCTIVE_HEALTH })
+            sexAdapter.submitList(it.filter { item -> item.parentGroupType == SEX })
+            yourCyclePhaseAdapter.submitList(it.filter { item -> item.parentGroupType == YOUR_CYCLE_PHASE })
+            theLatestAdapter.submitList(it.filter { item -> item.parentGroupType == THE_LATEST })
+            lgbtqAdapter.submitList(it.filter { item -> item.parentGroupType == LGBTQ })
+            tripsAdapter.submitList(it.filter { item -> item.parentGroupType == TRIPS })
+            nutritionAdapter.submitList(it.filter { item -> item.parentGroupType == NUTRITION })
+        }*/
+        lifecycleScope.launchWhenStarted {
+            viewModel.articlesStateFlow.collectLatest {
+                Timber.d(it.toString())
+                reproductiveHealthAdapter.submitList(it.filter { item -> item.parentGroupType == REPRODUCTIVE_HEALTH })
+                sexAdapter.submitList(it.filter { item -> item.parentGroupType == SEX })
+                yourCyclePhaseAdapter.submitList(it.filter { item -> item.parentGroupType == YOUR_CYCLE_PHASE })
+                theLatestAdapter.submitList(it.filter { item -> item.parentGroupType == THE_LATEST })
+                lgbtqAdapter.submitList(it.filter { item -> item.parentGroupType == LGBTQ })
+                tipsAdapter.submitList(it.filter { item -> item.parentGroupType == TIPS_FOR_FREE_PAIN })
+                nutritionAdapter.submitList(it.filter { item -> item.parentGroupType == NUTRITION_AND_FITNESS })
+            }
         }
     }
 
@@ -85,7 +100,7 @@ class DiscoverFragment : Fragment(R.layout.fragment_discover), RecyclerView.OnIt
             addOnItemTouchListener(this@DiscoverFragment)
         }
         binding.tripsRv.apply {
-            adapter = tripsAdapter
+            adapter = tipsAdapter
             addOnItemTouchListener(this@DiscoverFragment)
         }
         binding.yourCyclePhaseRv.apply {
@@ -113,6 +128,7 @@ class DiscoverFragment : Fragment(R.layout.fragment_discover), RecyclerView.OnIt
     override fun onRequestDisallowInterceptTouchEvent(disallowIntercept: Boolean) {}
 
     override fun onChanged(event: ArticlesEvent?) {
+        viewModel.handleEvent(event)
         findNavController().navigate(
             R.id.action_navigation_articles_to_articleDetailsFragment,
             bundleOf(ArticleDetailsFragment.ARG_ID to event?.id)

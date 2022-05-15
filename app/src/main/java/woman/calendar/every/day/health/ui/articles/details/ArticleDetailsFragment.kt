@@ -2,21 +2,29 @@ package woman.calendar.every.day.health.ui.articles.details
 
 import android.os.Bundle
 import android.view.View
-import androidx.core.os.bundleOf
+import androidx.activity.OnBackPressedCallback
+import androidx.core.text.HtmlCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
+import kotlinx.coroutines.flow.collectLatest
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import timber.log.Timber
 import woman.calendar.every.day.health.R
 import woman.calendar.every.day.health.databinding.FragmentArticleDetailsBinding
 import woman.calendar.every.day.health.ui.articles.ArticlesEvent
 import woman.calendar.every.day.health.ui.articles.adapters.ArticlesRecyclerAdapter
+import woman.calendar.every.day.health.utils.BookmarksPreferences
+
 
 class ArticleDetailsFragment : Fragment(R.layout.fragment_article_details) {
     private var _binding: FragmentArticleDetailsBinding? = null
     private val binding get() = _binding!!
     private val viewModel: ArticleDetailsViewModel by viewModel()
+    private val bookmarksPreferences: BookmarksPreferences by inject()
     private var articleId: Int = 0
 
     private val articleEvent: MutableLiveData<ArticlesEvent> = MutableLiveData()
@@ -33,11 +41,24 @@ class ArticleDetailsFragment : Fragment(R.layout.fragment_article_details) {
                 articleId = getInt(ARG_ID)
                 viewModel.getArticle(articleId)
             }
+        activity?.onBackPressedDispatcher?.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                if (viewModel.isArticleStackEmpty()) {
+                    isEnabled = false
+                    activity?.onBackPressed()
+                } else {
+                    viewModel.popParentArticle()
+                }
+            }
+        })
     }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         _binding = FragmentArticleDetailsBinding.bind(view)
+        binding.contentNsv.fullScroll(View.FOCUS_UP)
 
+        setUpUi()
         setUpRecycler()
         setUpListeners()
 
@@ -46,30 +67,47 @@ class ArticleDetailsFragment : Fragment(R.layout.fragment_article_details) {
         observeItemEvents()
     }
 
+    private fun setUpUi() {
+        updateBookmarkButton()
+    }
+
     private fun observeItemEvents() {
-        adapter.event.observe(viewLifecycleOwner){
-            findNavController().navigate(
-                R.id.action_articleDetailsFragment_self,
-                bundleOf(ARG_ID to it?.id)
-            )
+        adapter.event.observe(viewLifecycleOwner) {
+            if (it is ArticlesEvent.OnArticleClick) {
+                viewModel.putCurrentArticleToStack(articleId)
+                viewModel.getArticle(it.id)
+            }
         }
     }
 
-
-
     private fun observeArticle() {
         viewModel.article.observe(viewLifecycleOwner) {
+            binding.contentNsv.fullScroll(View.FOCUS_UP)
             it?.let {
+                articleId = it.id
                 binding.titleTv.text = it.title
+                val text = HtmlCompat.fromHtml(
+                    it.content,
+                    HtmlCompat.FROM_HTML_MODE_COMPACT
+                )
+                binding.contentTv.text = text
+                val url = it.bigImage.toString()
+                val imageOption = RequestOptions()
+                    .placeholder(R.drawable.im_placeholder)
+                    .fallback(R.drawable.im_placeholder)
+                Glide.with(requireContext())
+                    .load(url)
+                    .apply(imageOption)
+                    .into(binding.imageIv)
             }
         }
     }
 
     private fun observeInternalArticles() {
-        viewModel.internalArticles.observe(viewLifecycleOwner) {
-            it?.let {
+        lifecycleScope.launchWhenStarted {
+            viewModel.internalArticlesFlow.collectLatest {
                 adapter.submitList(it)
-                Timber.d(it.toString())
+                binding.contentNsv.fullScroll(View.FOCUS_UP)
             }
         }
     }
@@ -82,8 +120,20 @@ class ArticleDetailsFragment : Fragment(R.layout.fragment_article_details) {
         binding.crossIb.setOnClickListener { findNavController().popBackStack() }
 
         binding.bookmarkIb.setOnClickListener {
-            TODO()
+            if (bookmarksPreferences.getBookmarks().contains(articleId)) {
+                bookmarksPreferences.removeBookmark(articleId)
+            } else {
+                bookmarksPreferences.putBookmark(articleId)
+            }
+            updateBookmarkButton()
+        }
+    }
+
+    private fun updateBookmarkButton() {
+        if (bookmarksPreferences.getBookmarks().contains(articleId)) {
             binding.bookmarkIb.setImageResource(R.drawable.ic_bookmark_full)
+        } else {
+            binding.bookmarkIb.setImageResource(R.drawable.ic_bookmark_empty)
         }
     }
 

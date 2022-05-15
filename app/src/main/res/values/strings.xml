@@ -55,11 +55,18 @@
     <string name="your_cycle_phase_luteal">Your Cycle Phase: Luteal</string>
     <string name="the_latest">The Latest</string>
     <string name="lgbtq">LGBTQ+</string>
-    <string name="trips_for_a_pain_free_cycle">Trips for a Pain-Free Cycle</string>
+    <string name="tips_for_a_pain_free_cycle">Tips for a Pain-Free Cycle</string>
     <string name="nutrition_and_fitness">Nutrition and Fitness</string>
     <string name="early_sights_of_pregnancy_content">Waiting for your period and puzzled if what you\'re feeling is pregnancy signs or just PMS? Not sure how and when to do a pregnancy test? Wondering if your birth control has you covered or you need a backup plan? Freaking out about getting pregnant so much you\'d rather avoid sex at all? Read on to get the answers!</string>
     <string name="text">Text</string>
-    <string name="text_long">Waiting for your period and puzzled if what you\'re feeling is pregnancy signs or just PMS? Not sure how and when to do a pregnancy test? Wondering if your birth control has you covered or you need a backup plan? Freaking out about getting pregnant so much you\'d rather avoid sex at all? Read on to get the answers!</string>
+    <string name="text_long"><![CDATA[<p>Waiting for your<p><br/>
+
+    <h5>period and puzzled</h5><br>
+     if what you\'re feeling is pregnancy<br/> signs or just PMS? Not sure how and when to do a pregnancy test? Wondering if your birth control has you covered or you need a backup plan? Freaking out about getting pregnant so much you\'d rather avoid sex at all? Read on to get the answers!]]></string>
+
+    <string name="test_bold"><![CDATA[
+    Waiting for your <b>period and puzzled</b> if what you\'re feeling is pregnancy signs or just PMS? Not sure how and when to do a pregnancy test? Wondering if your birth control has you covered or you need a backup plan? Freaking out about getting pregnant so much you\'d rather avoid sex at all? Read on to get the answers!
+  ]]></string>
     <string name="next">Next</string>
     <string name="today_is_n_your_cycle_day_s">Today is\n Your Cycle Day %s</string>
     <string name="the_prediction_is_based_on_the_last_period_n_you_logged">The prediction is based on the last period\n you logged</string>

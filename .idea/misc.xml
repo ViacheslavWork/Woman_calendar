@@ -1,5 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/AndroidProjects/woman_calendar/app/src/main/res/drawable-v24/bg_challenges_card_title.xml" value="0.1205" />
+        <entry key="..\:/AndroidProjects/woman_calendar/app/src/main/res/drawable/bg_wins_card_title.xml" value="0.1205" />
+        <entry key="..\:/AndroidProjects/woman_calendar/app/src/main/res/layout/fragment_article_details.xml" value="0.2636103151862464" />
+        <entry key="..\:/AndroidProjects/woman_calendar/app/src/main/res/layout/fragment_articles.xml" value="0.16271442986881937" />
+        <entry key="..\:/AndroidProjects/woman_calendar/app/src/main/res/layout/fragment_circle.xml" value="0.16271442986881937" />
+        <entry key="..\:/AndroidProjects/woman_calendar/app/src/main/res/layout/fragment_discover.xml" value="0.32382246376811596" />
+        <entry key="..\:/AndroidProjects/woman_calendar/app/src/main/res/layout/fragment_recent.xml" value="0.32382246376811596" />
+        <entry key="..\:/AndroidProjects/woman_calendar/app/src/main/res/layout/fragment_saved.xml" value="0.32382246376811596" />
+        <entry key="..\:/AndroidProjects/woman_calendar/app/src/main/res/layout/item_articles.xml" value="0.16271442986881937" />
+        <entry key="..\:/AndroidProjects/woman_calendar/app/src/main/res/layout/item_articles_big_card.xml" value="0.32382246376811596" />
+        <entry key="..\:/AndroidProjects/woman_calendar/app/src/main/res/layout/item_articles_tab.xml" value="0.32382246376811596" />
+        <entry key="..\:/AndroidProjects/woman_calendar/app/src/main/res/layout/item_calendar_day.xml" value="0.32382246376811596" />
+      </map>
+    </option>
+  </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>

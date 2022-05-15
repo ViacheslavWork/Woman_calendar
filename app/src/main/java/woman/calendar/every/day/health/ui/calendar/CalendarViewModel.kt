@@ -8,6 +8,7 @@ import kotlinx.coroutines.launch
 import org.threeten.bp.LocalDate
 import timber.log.Timber
 import woman.calendar.every.day.health.domain.usecase.days.GetMonthUseCase
+import woman.calendar.every.day.health.domain.usecase.notification.OnOffEverydayNotificationUseCase
 import woman.calendar.every.day.health.domain.usecase.periods.UpdatePeriodDayUseCase
 import woman.calendar.every.day.health.utils.LocalDateHelper
 
@@ -16,6 +17,7 @@ private const val monthsCashSize = 12L
 class CalendarViewModel(
     private val getMonthUseCase: GetMonthUseCase,
     private val updatePeriodDayUseCase: UpdatePeriodDayUseCase,
+    private val onOffEverydayNotificationUseCase: OnOffEverydayNotificationUseCase
 ) : ViewModel() {
     private val _months = MutableLiveData<List<ItemMonth>>()
     val months: LiveData<List<ItemMonth>> = _months
@@ -72,6 +74,7 @@ class CalendarViewModel(
                 viewModelScope.launch {
                     updatePeriodDayUseCase.execute(event.day)
                     fillInitialData()
+                    onOffEverydayNotificationUseCase.execute()
                 }
             }
         }

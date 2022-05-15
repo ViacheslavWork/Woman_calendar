@@ -5,10 +5,13 @@ import woman.calendar.every.day.health.domain.usecase.GetDailyNotificationDataUs
 import woman.calendar.every.day.health.domain.usecase.RecalculateFromDayUseCase
 import woman.calendar.every.day.health.domain.usecase.articles.GetArticleGroupsUseCase
 import woman.calendar.every.day.health.domain.usecase.articles.GetArticleUseCase
+import woman.calendar.every.day.health.domain.usecase.articles.GetArticlesFlowUseCase
+import woman.calendar.every.day.health.domain.usecase.articles.GetArticlesUseCase
 import woman.calendar.every.day.health.domain.usecase.cycles.GetLastCyclesUseCase
 import woman.calendar.every.day.health.domain.usecase.days.GetDayUseCase
 import woman.calendar.every.day.health.domain.usecase.days.GetMonthUseCase
 import woman.calendar.every.day.health.domain.usecase.days.GetWeekUseCase
+import woman.calendar.every.day.health.domain.usecase.notification.OnOffEverydayNotificationUseCase
 import woman.calendar.every.day.health.domain.usecase.periods.GetCountOfPeriodsUseCase
 import woman.calendar.every.day.health.domain.usecase.periods.GetLastPeriodsUseCase
 import woman.calendar.every.day.health.domain.usecase.periods.UpdatePeriodDayUseCase
@@ -55,9 +58,19 @@ val domainModule = module {
     }
     //articles
     single { GetArticleGroupsUseCase(articlesProvider = get()) }
+    single { GetArticlesUseCase(articlesProvider = get()) }
+    single { GetArticlesFlowUseCase(articlesProvider = get()) }
     single { GetArticleUseCase(articlesProvider = get()) }
     //water
     single<GetWaterPerDayUseCase> { GetWaterPerDayUseCase() }
     single<AddWaterUseCase> { AddWaterUseCase(getDayUseCase = get(), repository = get()) }
     single<SubWaterUseCase> { SubWaterUseCase(getDayUseCase = get(), repository = get()) }
+    //notification
+    single {
+        OnOffEverydayNotificationUseCase(
+            everydayNotificationScheduler = get(),
+            getCountOfPeriodsUseCase = get(),
+            notificationSchedulerPreferences = get()
+        )
+    }
 }

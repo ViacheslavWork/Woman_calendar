@@ -44,6 +44,7 @@
     </androidx.appcompat.widget.Toolbar>
 
     <androidx.core.widget.NestedScrollView
+        android:id="@+id/content_nsv"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -73,27 +74,27 @@
                 android:id="@+id/image_iv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:scaleType="fitXY"
+                android:adjustViewBounds="true"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/im_big_placeholder" />
+                app:srcCompat="@drawable/im_big_placeholder_jpg" />
 
             <TextView
                 android:id="@+id/title_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/segoe_print_bold"
-                app:layout_constraintHorizontal_bias="0"
-                android:hyphenationFrequency="full"
-                android:textColor="@color/text_color"
-                android:text="@string/text"
-                android:textSize="20sp"
                 android:layout_marginBottom="16dp"
+                android:fontFamily="@font/segoe_print_bold"
+                android:hyphenationFrequency="full"
+                android:text="@string/text"
+                android:textColor="@color/text_color"
+                android:textSize="20sp"
                 app:layout_constrainedWidth="true"
+                app:layout_constraintBottom_toBottomOf="@id/image_iv"
                 app:layout_constraintEnd_toEndOf="@id/content_end"
-                app:layout_constraintStart_toStartOf="@id/content_start"
-                app:layout_constraintBottom_toBottomOf="@id/image_iv" />
+                app:layout_constraintHorizontal_bias="0"
+                app:layout_constraintStart_toStartOf="@id/content_start" />
 
 
             <TextView
@@ -103,9 +104,9 @@
                 android:layout_marginTop="@dimen/margin_article_title_top"
                 android:fontFamily="@font/roboto_regular"
                 android:hyphenationFrequency="full"
-                android:textColor="@color/text_color_light"
                 android:text="@string/early_sights_of_pregnancy_content"
-                android:textSize="14sp"
+                android:textColor="@color/text_color_light"
+                android:textSize="16sp"
                 app:layout_constrainedWidth="true"
                 app:layout_constraintEnd_toEndOf="@id/content_end"
                 app:layout_constraintStart_toStartOf="@id/content_start"

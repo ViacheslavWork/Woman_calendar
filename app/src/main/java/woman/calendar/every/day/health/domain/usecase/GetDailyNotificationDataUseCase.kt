@@ -27,9 +27,9 @@ class GetDailyNotificationDataUseCase(
                 POST_FERTILE_START -> getNotificationDataProvider.getFertileStartData()
                 POST_FERTILE_MID -> getNotificationDataProvider.getFertileMidData()
                 POST_FERTILE_END -> getNotificationDataProvider.getFertileEndData()
-                PRE_PERIOD_START -> getNotificationDataProvider.getPeriodStartData()
-                PRE_PERIOD_MID -> getNotificationDataProvider.getPeriodMidData()
-                PRE_PERIOD_END -> getNotificationDataProvider.getPeriodEndData()
+                PRE_PERIOD_START -> getNotificationDataProvider.getPrePeriodStartData()
+                PRE_PERIOD_MID -> getNotificationDataProvider.getPrePeriodMidData()
+                PRE_PERIOD_END -> getNotificationDataProvider.getPrePeriodEndData()
             }
         } else return null
     }

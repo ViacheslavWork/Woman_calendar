@@ -8,6 +8,11 @@
             <LayoutPositions>
               <option name="myPositions">
                 <map>
+                  <entry key="action_global_to_notificationScreen">
+                    <value>
+                      <LayoutPositions />
+                    </value>
+                  </entry>
                   <entry key="articleDetailsFragment">
                     <value>
                       <LayoutPositions>
@@ -110,6 +115,18 @@
                               </value>
                             </entry>
                           </map>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
+                  <entry key="savedFragment">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="11" />
+                            <option name="y" value="503" />
+                          </Point>
                         </option>
                       </LayoutPositions>
                     </value>

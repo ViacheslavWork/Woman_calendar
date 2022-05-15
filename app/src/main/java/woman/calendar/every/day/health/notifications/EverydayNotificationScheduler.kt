@@ -5,13 +5,16 @@ import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import timber.log.Timber
+import woman.calendar.every.day.health.utils.NotificationSchedulerPreferences
 import java.util.*
 
 const val RUN_DAILY = (/*24 * 60 * 60 * */1000).toLong()
 
-class EverydayNotificationScheduler(private val context: Context) {
+class EverydayNotificationScheduler(
+    private val context: Context,
+    private val notificationSchedulerPreferences: NotificationSchedulerPreferences
+) {
     //TODO
-    private var started: Boolean = false
     fun schedule(notificationId: Int, hour: Int, minute: Int) {
         val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
         val intent = Intent(context, EverydayNotificationReceiver::class.java)
@@ -39,7 +42,7 @@ class EverydayNotificationScheduler(private val context: Context) {
         /*val alarmClockInfo =
             AlarmManager.AlarmClockInfo(calendar.timeInMillis, notificationPendingIntent)
         alarmManager.setAlarmClock(alarmClockInfo, notificationPendingIntent)*/
-        started = true
+        notificationSchedulerPreferences.setIsScheduled(isScheduled = true)
         Timber.d("scheduled at $hour:$minute")
     }
 
@@ -53,6 +56,7 @@ class EverydayNotificationScheduler(private val context: Context) {
             PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
         )
         alarmManager.cancel(alarmPendingIntent)
-        started = false
+        notificationSchedulerPreferences.setIsScheduled(isScheduled = false)
+        Timber.d("canceled notification: $notificationId")
     }
 }
