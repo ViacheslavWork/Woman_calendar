@@ -15,15 +15,15 @@ answers!
 You see, a period is what happens when your body sheds the lining of the uterus that it built up in the first half of your cycle. If you got pregnant, the lining would have been ready to support a baby. If you don\’t get pregnant, the lining clears out, and the process starts over the next cycle. <br><br>
 
 But here\’s the thing: It is possible to experience some bleeding that\’s not a period when you\’re pregnant. <br>
-<br><h5>OK, I\’m confused. What else could cause bleeding?</h5><br>
+<br><b>OK, I\’m confused. What else could cause bleeding?</b><br><br>
 If you are pregnant, it\’s possible to have what\’s called "implantation bleeding" when the developing embryo implants into the lining of the uterus. And, to make things more confusing, it often happens around the time your period would be due. <br><br>
-<h5>So how can I tell the difference? </h5> <br>
+<b>So how can I tell the difference? </b><br> <br>
 Implantation bleeding is light - just a little
 spotting - compared to a full-blown period.
 You might only notice it when you wipe, and it might be more pink or rust brown than red. You might also notice some of the other early signs of pregnancy (though not everyone does!).
 
 If your period should have arrived but you\’ve only had some spotting, and there\’s a chance you could be pregnant, your best bet is to take a pregnancy test to get a straight answer. <br><br>
-<h5>What if I\’ve had heavier bleeding? </h5> <br>
+<b>What if I\’ve had heavier bleeding? </b><br> <br>
 If you don\’t think it\’s your period because the timing is off or you have reason to believe you\’re pregnant (or have had a positive pregnancy test), it\’s possible you\’ve had a miscarriage or an ectopic pregnancy
 - the one that\’s not inside the uterus and is a medical emergency. <br><br>
 
@@ -419,8 +419,8 @@ practice withdrawal for birth control - you
 might know it as pulling out - this has a 78% effectiveness rate as a contraceptive method, which means that over the course of a year of using this method, 22 out of 100 people will get pregnant. However, this failure rate is not believed to be due to precum but user error, meaning they don\’t pull out fast enough and ejaculate within the vagina."
 As always, the best way to prevent pregnancy is to use contraception.
 <br><br><b>Pregnancy fear: Emergency contraception
-doesn\’t work. <br><br></b>
-<br><br><b>Reality: The sooner you take it, the more
+doesn\’t work.
+<br><br>Reality: The sooner you take it, the more
 effective it is. So don\’t dawdle. <br><br></b>
 Because emergency contraception needs to be used as soon as possible after unprotected sex to be most effective, some people wrongly believe that it doesn\’t work.
 
@@ -3835,7 +3835,7 @@ menstruation, log your symptoms and get tailored tips to ease your symptoms.
     <string name="Hot_Flashes_and_Sweating_Before_Menstruation">Hot Flashes and Sweating Before Menstruation</string>
     <string name="Hot_Flashes_and_Sweating_Before_Menstruation_content"><![CDATA[Hot Flashes and Sweating
 Before Menstruation
-<br><br><b>Is this normal? <br><br><b>
+<br><br><b>Is this normal? <br><br></b>
 A hot flash is like a heatwave starting around the middle of the body or around the neck and suddenly moving up to the face. It occurs suddenly and goes away within 20-30 seconds. Hot flashes are more common among women approaching menopause, but they can also occur in any age group just before the start of menstruation, because they\’re one of the many symptoms of PMS. Just before
 menstruation, estrogen levels drop suddenly, which may trigger a hot flash since estrogen influences the brain\’s center of temperature regulation.
 
@@ -4162,5 +4162,25 @@ lubricants, being underweight, and following a diet that can reduce the amount o
 production of cervical mucus and lessen its
 quality, which can adversely affect your ability to conceive.
 ]]></string>
+    <string name="Pregnancy_or_PMS_8_Symptoms">Pregnancy or PMS? 8 Symptoms</string>
+    <string name="Do_Late_Period_Remedies_Work_">Do Late Period Remedies Work?</string>
+    <string name="Late_Period">Late Period</string>
+    <string name="_9_Life_changing_Masturbation_Tips">9 Life-changing Masturbation Tips</string>
+    <string name="Coping_With_Pregnancy_Paranoia">Coping With Pregnancy Paranoia</string>
+    <string name="But_Play_How_to_Safely">But Play: How to Safely</string>
+    <string name="Could_You_Be_Pregnant_">Could You Be Pregnant?</string>
+    <string name="PMS_Action_Plan">PMS Action Plan</string>
+    <string name="Masturbation_Myths_to_Unlearn">Masturbation Myths to Unlearn</string>
+    <string name="Navigating_Sex_During_PMS">Navigating Sex During PMS</string>
+    <string name="Period_Poop_Talk">Period Poop Talk</string>
+    <string name="Reasons_to_Love_Your_Discharge">7 Reasons to Love Your Discharge</string>
+    <string name="Your_Sex_Toy_Starter_Kit">Your Sex Toy Starter Kit</string>
+    <string name="Period_Advice_for_Trans_People">Period Advice for Trans People</string>
+    <string name="An_LGBTQ_Guide_to_Birth_Comtrol">An LGBTQ+ Guide to Birth Comtrol</string>
+    <string name="How_to_Have_Safer_LGBTQ_Sex">How to Have Safer LGBTQ+ Sex</string>
+    <string name="Sore_Boods_Club_What_You_Can_Do_">Sore Boods Club: What You Can Do?</string>
+    <string name="Period_Headaches_Be_Gone">Period Headaches Be Gone</string>
+    <string name="Fatigue_and_Your_Cycle">Fatigue and Your Cycle</string>
+    <string name="Cramps_in_Your_Back_">Cramps in Your Back?</string>
 
 </resources>

@@ -185,7 +185,8 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                                     to LocalDateHelper.getByMonth(
                                 cycle.start.year,
                                 cycle.start.month
-                            )
+                            ),
+                            CalendarFragment.ARG_OPEN_DAY_INFO_BY_CLICK to true
                         )
                     )
                 }
@@ -354,7 +355,10 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             findNavController().navigate(HomeFragmentDirections.actionNavigationHomeToCalendarFragment())
         }
         binding.toolBarCalendarBtn.setOnClickListener {
-            findNavController().navigate(HomeFragmentDirections.actionNavigationHomeToCalendarFragment())
+            findNavController().navigate(
+                R.id.action_navigation_home_to_calendarFragment,
+                bundleOf(CalendarFragment.ARG_OPEN_DAY_INFO_BY_CLICK to true)
+            )
         }
         binding.plusSymptomIb.setOnClickListener {
             findNavController().navigate(

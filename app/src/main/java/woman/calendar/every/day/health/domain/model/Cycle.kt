@@ -60,6 +60,15 @@ data class Cycle(
         }
         return daysAfterPeriod
     }
+    fun getDaysAfterStartOfPeriod(date: LocalDate): Int {
+        var tempDate = start
+        var daysAfterPeriod = 1
+        while (tempDate != date) {
+            tempDate = tempDate.plusDays(1)
+            daysAfterPeriod++
+        }
+        return daysAfterPeriod
+    }
 
     fun getDaysBeforeOvulation(): Int? {
         var tempDate = LocalDate.now()

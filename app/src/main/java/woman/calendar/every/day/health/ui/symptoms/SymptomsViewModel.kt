@@ -28,6 +28,9 @@ class SymptomsViewModel(
     private val _volumeOfWater = MutableLiveData<Float>()
     val volumeOfWater: LiveData<Float> = _volumeOfWater
 
+    private val _notes = MutableLiveData<String?>()
+    val notes: LiveData<String?> = _notes
+
     private val selectedSymptoms = mutableSetOf<Symptom>()
     lateinit var date: LocalDate
 
@@ -41,14 +44,22 @@ class SymptomsViewModel(
 
     fun init(date: LocalDate) {
         this.date = date
-        downloadSymptoms()
+        downloadSymptoms(date)
+        downloadNotes(date)
+    }
+
+    private fun downloadNotes(date: LocalDate) {
+        viewModelScope.launch {
+            _notes.postValue(getDayUseCase.execute(date).notes)
+        }
     }
 
     fun updateUI() {
         setVolumeOfWater()
+        downloadNotes(date)
     }
 
-    private fun downloadSymptoms() {
+    private fun downloadSymptoms(date: LocalDate) {
         viewModelScope.launch {
             selectedSymptoms.addAll(getDayUseCase.execute(date).symptoms)
             _symptoms.value = getSymptomsUseCase.execute().map {

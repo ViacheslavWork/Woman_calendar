@@ -32,7 +32,7 @@ class RecentArticlesPreferences(private val context: Context) : KoinComponent {
             ?: mutableListOf()
         recentArticlesList.remove(articleId)
         recentArticlesList.add(0, articleId)
-        while (recentArticlesList.size > Constants.COUNT_OF_RECENT_ARTICLES) {
+        while (recentArticlesList.size > Constants.NUMBER_OF_RECENT_ARTICLES) {
             recentArticlesList.removeAt(recentArticlesList.size - 1)
         }
         sharedPreferences.edit().putString(PREF_RECENT_ARTICLES, listToJson(recentArticlesList))

@@ -179,5 +179,5 @@ healthy veggies with a big salad</string>
     <string name="notification_fertile">You might notice bloating today. What else to expect? Tap to see 👉</string>
     <string name="notification_ovulation_day">Your most fertile days are today! You might notice bloating today. What else to expect? Tap to see 👉</string>
     <string name="_month_dd_your_forecast">%s %d: Your forecast</string>
-
+    <string name="log_a_symptom_or_make_a_note">Log a symptom or make a note</string>
 </resources>

@@ -26,7 +26,7 @@ class GetLastCyclesUseCase(val repository: Repository) {
 
                 cycles.add(
                     Cycle(
-                        startOfPeriod,
+                        start = startOfPeriod,
                         endOfCycle,
                         Period(startOfPeriod, endOfPeriod),
                         startFertile,

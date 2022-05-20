@@ -21,6 +21,7 @@ private val mapDateToAdapter = mutableMapOf<LocalDate, DayAdapter>()
 private var timeStart = 0L
 
 class CalendarAdapter(
+    val isChangeColorByClick: Boolean = true,
     val event: MutableLiveData<CalendarEvent> = MutableLiveData(),
 ) : ListAdapter<ItemMonth, MonthHolder>(MonthDiffCallbacks()) {
     /*private val mapDateToAdapterPosition = mutableMapOf<LocalDate, Int>()
@@ -48,7 +49,7 @@ class CalendarAdapter(
         getItem(position).let {
             /*mapDateToAdapterPosition[LocalDateHelper.getByMonth(it.date.year, it.date.month)] =
                 position*/
-            holder.onBind(it, event)
+            holder.onBind(it, event, isChangeColorByClick)
         }
     }
 }
@@ -58,10 +59,11 @@ class MonthHolder(private val binding: ItemCalendarMonthBinding) :
     var isDateInitialized = false
     fun onBind(
         item: ItemMonth,
-        event: MutableLiveData<CalendarEvent>
+        event: MutableLiveData<CalendarEvent>,
+        isChangeColorByClick: Boolean
     ) {
         binding.monthTv.text = item.title
-        val dayAdapter = DayAdapter(event)
+        val dayAdapter = DayAdapter(event, isChangeColorByClick)
         mapDateToAdapter[item.date] = dayAdapter
         dayAdapter.submitList(item.daysWithStartDelay)
         binding.daysRv.adapter = dayAdapter
@@ -86,6 +88,7 @@ private class MonthDiffCallbacks : DiffUtil.ItemCallback<ItemMonth>() {
 
 class DayAdapter(
     private val event: MutableLiveData<CalendarEvent> = MutableLiveData(),
+    private val isChangeColorByClick: Boolean,
 ) : ListAdapter<ItemDay, DayHolder>(DayDiffCallbacks()) {
 
     lateinit var binding: ItemCalendarDayBinding
@@ -100,7 +103,7 @@ class DayAdapter(
     }
 
     override fun onBindViewHolder(holder: DayHolder, position: Int) {
-        getItem(position).let { holder.onBind(it, event) }
+        getItem(position).let { holder.onBind(it, event, isChangeColorByClick) }
     }
 }
 
@@ -108,11 +111,20 @@ class DayHolder(private val binding: ItemCalendarDayBinding) :
     RecyclerView.ViewHolder(binding.root) {
     fun onBind(
         item: ItemDay,
-        event: MutableLiveData<CalendarEvent>
+        event: MutableLiveData<CalendarEvent>,
+        isChangeColorByClick: Boolean
     ) {
 
         if (System.currentTimeMillis() - timeStart < 1000) {
             Timber.d("time between click and show ${item.date} ${System.currentTimeMillis() - timeStart}")
+        }
+        if (item.date == LocalDate.now()) {
+            binding.root.background =
+                ResourcesCompat.getDrawable(
+                    binding.root.resources,
+                    R.drawable.bg_today,
+                    null
+                )
         }
         item.stateOfDay?.let {
             when (it) {
@@ -123,28 +135,56 @@ class DayHolder(private val binding: ItemCalendarDayBinding) :
                             null
                         )
                     )
+                    if (item.date == LocalDate.now()) {
+                        binding.root.background =
+                            ResourcesCompat.getDrawable(
+                                binding.root.resources,
+                                R.drawable.bg_today,
+                                null
+                            )
+                    }
                 }
                 PERIOD -> {
-                    binding.root.background =
-                        ResourcesCompat.getDrawable(
+                    if (item.date == LocalDate.now()) {
+                        binding.root.background = ResourcesCompat.getDrawable(
+                            binding.root.resources,
+                            R.drawable.bg_today_period_day,
+                            null
+                        )
+                        binding.dateTv.setTextColor(
+                            binding.root.resources.getColor(
+                                R.color.pink,
+                                null
+                            )
+                        )
+                    } else {
+                        binding.root.background = ResourcesCompat.getDrawable(
                             binding.root.resources,
                             R.color.pink,
                             null
                         )
-                    binding.dateTv.setTextColor(
-                        binding.root.resources.getColor(
-                            R.color.white,
-                            null
+                        binding.dateTv.setTextColor(
+                            binding.root.resources.getColor(
+                                R.color.white,
+                                null
+                            )
                         )
-                    )
+                    }
                 }
                 OVULATION -> {
-                    binding.root.background =
+                    binding.root.background = if (item.date == LocalDate.now()) {
+                        ResourcesCompat.getDrawable(
+                            binding.root.resources,
+                            R.drawable.bg_today_ovulation_day,
+                            null
+                        )
+                    } else {
                         ResourcesCompat.getDrawable(
                             binding.root.resources,
                             R.drawable.bg_border_dashed_green,
                             null
                         )
+                    }
                     binding.dateTv.setTextColor(
                         binding.root.resources.getColor(
                             R.color.green,
@@ -167,12 +207,19 @@ class DayHolder(private val binding: ItemCalendarDayBinding) :
                             )
                         )
                     } else {
-                        binding.root.background =
+                        binding.root.background = if (item.date == LocalDate.now()) {
+                            ResourcesCompat.getDrawable(
+                                binding.root.resources,
+                                R.drawable.bg_today_expected_day,
+                                null
+                            )
+                        } else {
                             ResourcesCompat.getDrawable(
                                 binding.root.resources,
                                 R.drawable.bg_border_dashed_pink,
                                 null
                             )
+                        }
                         binding.dateTv.setTextColor(
                             binding.root.resources.getColor(
                                 R.color.pink,
@@ -188,32 +235,58 @@ class DayHolder(private val binding: ItemCalendarDayBinding) :
         item.numOfDay?.let { binding.dateTv.text = it }
 
         item.date?.let { date ->
-            if (date.isAfter(LocalDate.now())) return@let
             binding.root.setOnClickListener {
+                if (item.date.isAfter(LocalDate.now())) return@setOnClickListener
                 timeStart = System.currentTimeMillis()
 
                 if (item.stateOfDay != PERIOD) {
-                    binding.root.background =
-                        ResourcesCompat.getDrawable(
-                            binding.root.resources,
-                            R.color.pink,
-                            null
-                        )
-                    binding.dateTv.setTextColor(
-                        binding.root.resources.getColor(
-                            R.color.white,
-                            null
-                        )
-                    )
-                    event.postValue(CalendarEvent.OnDayClick(Day(date, PERIOD)))
+                    if (isChangeColorByClick) {
+                        if (item.date == LocalDate.now()) {
+                            binding.root.background = ResourcesCompat.getDrawable(
+                                binding.root.resources,
+                                R.drawable.bg_today_period_day,
+                                null
+                            )
+                            binding.dateTv.setTextColor(
+                                binding.root.resources.getColor(
+                                    R.color.pink,
+                                    null
+                                )
+                            )
+                        } else {
+                            binding.root.background = ResourcesCompat.getDrawable(
+                                binding.root.resources,
+                                R.color.pink,
+                                null
+                            )
+                            binding.dateTv.setTextColor(
+                                binding.root.resources.getColor(
+                                    R.color.white,
+                                    null
+                                )
+                            )
+                        }
+                    }
+                    event.postValue(CalendarEvent.OnDayClick(Day(date = date, stateOfDay = PERIOD)))
                 } else {
-                    binding.root.setBackgroundColor(Color.TRANSPARENT)
-                    binding.dateTv.setTextColor(
-                        binding.root.resources.getColor(
-                            R.color.text_color,
-                            null
+                    if (isChangeColorByClick) {
+                        binding.root.setBackgroundColor(Color.TRANSPARENT)
+                        if (item.date == LocalDate.now()) {
+                            binding.root.background = ResourcesCompat.getDrawable(
+                                binding.root.resources,
+                                R.drawable.bg_today,
+                                null
+                            )
+                        } else {
+                            binding.root.setBackgroundColor(Color.TRANSPARENT)
+                        }
+                        binding.dateTv.setTextColor(
+                            binding.root.resources.getColor(
+                                R.color.text_color,
+                                null
+                            )
                         )
-                    )
+                    }
                     event.postValue(CalendarEvent.OnDayClick(Day(date, null)))
                 }
             }

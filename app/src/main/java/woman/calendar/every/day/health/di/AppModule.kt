@@ -10,7 +10,9 @@ import woman.calendar.every.day.health.ui.articles.discover.DiscoverViewModel
 import woman.calendar.every.day.health.ui.articles.recent.RecentViewModel
 import woman.calendar.every.day.health.ui.articles.saved.SavedViewModel
 import woman.calendar.every.day.health.ui.calendar.CalendarViewModel
+import woman.calendar.every.day.health.ui.day_info.DayInfoViewModel
 import woman.calendar.every.day.health.ui.home.HomeViewModel
+import woman.calendar.every.day.health.ui.notes.NotesViewModel
 import woman.calendar.every.day.health.ui.notification_screens.NotificationScreenViewModel
 import woman.calendar.every.day.health.ui.symptoms.SymptomsViewModel
 import woman.calendar.every.day.health.ui.water.WaterViewModel
@@ -23,7 +25,8 @@ val appModule = module {
     viewModel {
         CalendarViewModel(
             getMonthUseCase = get(),
-            updatePeriodDayUseCase = get(),
+            markDayUseCase = get(),
+            recalculateFromDayUseCase = get(),
             onOffEverydayNotificationUseCase = get()
         )
     }
@@ -52,6 +55,8 @@ val appModule = module {
             getLastCyclesUseCase = get(),
         )
     }
+    viewModel { DayInfoViewModel(getDayUseCase = get(), getCycleUseCase = get()) }
+    viewModel { NotesViewModel(getDayUseCase = get(), getCycleUseCase = get(), saveDayUseCase = get()) }
     //articles
     viewModel {
         DiscoverViewModel(

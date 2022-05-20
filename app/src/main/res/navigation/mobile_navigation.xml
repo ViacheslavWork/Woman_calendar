@@ -39,7 +39,11 @@
         android:id="@+id/calendarFragment"
         android:name="woman.calendar.every.day.health.ui.calendar.CalendarFragment"
         android:label="fragment_calendrar"
-        tools:layout="@layout/fragment_calendrar" />
+        tools:layout="@layout/fragment_calendrar" >
+        <action
+            android:id="@+id/action_calendarFragment_to_dayInfoFragment"
+            app:destination="@id/dayInfoFragment" />
+    </fragment>
     <fragment
         android:id="@+id/symptomsFragment"
         android:name="woman.calendar.every.day.health.ui.symptoms.SymptomsFragment"
@@ -51,6 +55,9 @@
         <action
             android:id="@+id/action_symptomsFragment_to_weightFragment"
             app:destination="@id/weightFragment" />
+        <action
+            android:id="@+id/action_symptomsFragment_to_notesFragment"
+            app:destination="@id/notesFragment" />
     </fragment>
     <fragment
         android:id="@+id/waterFragment"
@@ -90,5 +97,15 @@
             android:id="@+id/action_savedFragment_to_articleDetailsFragment"
             app:destination="@id/articleDetailsFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/dayInfoFragment"
+        android:name="woman.calendar.every.day.health.ui.day_info.DayInfoFragment"
+        android:label="fragment_day_info"
+        tools:layout="@layout/fragment_day_info" />
+    <fragment
+        android:id="@+id/notesFragment"
+        android:name="woman.calendar.every.day.health.ui.notes.NotesFragment"
+        android:label="fragment_notes"
+        tools:layout="@layout/fragment_notes" />
 
 </navigation>

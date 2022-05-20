@@ -30,17 +30,18 @@ class RecalculateFromDayUseCase(
         while (initialDate != null) {
 //            val startTime = System.currentTimeMillis()
             initialDate =
-                calculatePeriod(initialDate, averagePeriodLength.await(), averageInterval.await())
+                calculateCycle(initialDate, averagePeriodLength.await(), averageInterval.await())
             Timber.d("Calculate period time: ${System.currentTimeMillis() - startTime}")
         }
     }
 
-    private suspend fun calculatePeriod(
+    private suspend fun calculateCycle(
         dateInPeriod: LocalDate,
         averagePeriodLength: Long,
         averageInterval: Long?
     ): LocalDate? = withContext(Dispatchers.IO) {
 //        val startOfPeriod = getStartOfPeriod(dateInPeriod)
+
         val endOfPeriod = async { getFinishOfPeriod(dateInPeriod) }
         val nextPeriodDate = getNextPeriodDate(endOfPeriod.await().plusDays(1))
 

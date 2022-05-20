@@ -11,7 +11,7 @@ class UpdatePeriodDayUseCase(
 ) {
     suspend fun execute(day: Day) {
         if (day.date.isAfter(LocalDate.now())) return
-        repository.setDay(day)
-        recalculateFromDayUseCase.execute(date = day.date)
+//        repository.setDay(day)
+//        recalculateFromDayUseCase.execute(date = day.date)
     }
 }

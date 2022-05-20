@@ -45,7 +45,7 @@ class ArticleGroupHolder(private val binding: ItemArticlesBigCardBinding) :
         item: ArticleItem,
         event: MutableLiveData<ArticlesEvent>
     ) {
-        binding.itemTv.text = item.title
+        binding.itemTv.text = item.smallTitle ?: item.title
         binding.root.setOnClickListener { event.postValue(ArticlesEvent.OnArticleClick(item.id)) }
         val url = item.smallImage.toString()
         Glide.with(itemView.context)

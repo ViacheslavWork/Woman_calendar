@@ -2,6 +2,7 @@ package woman.calendar.every.day.health.ui.symptoms
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.lifecycleScope
@@ -15,6 +16,7 @@ import timber.log.Timber
 import woman.calendar.every.day.health.R
 import woman.calendar.every.day.health.databinding.FragmentSymptomsBinding
 import woman.calendar.every.day.health.domain.model.SymptomType
+import woman.calendar.every.day.health.ui.notes.NotesFragment
 import woman.calendar.every.day.health.utils.LocalDateHelper.getMonthName
 import woman.calendar.every.day.health.utils.WeightPreferences
 
@@ -62,8 +64,15 @@ class SymptomsFragment : Fragment(R.layout.fragment_symptoms) {
         setUpRecyclerViews()
         setUpListeners()
         observeSymptoms()
+        observeNotes()
         observeSymptomsEvent()
         observeWater()
+    }
+
+    private fun observeNotes() {
+        viewModel.notes.observe(viewLifecycleOwner){
+            it?.let { binding.notesTv.text = it }
+        }
     }
 
 
@@ -110,6 +119,12 @@ class SymptomsFragment : Fragment(R.layout.fragment_symptoms) {
         binding.editWeightBtn.setOnClickListener {
             findNavController().navigate(
                 SymptomsFragmentDirections.actionSymptomsFragmentToWeightFragment()
+            )
+        }
+        binding.notesTv.setOnClickListener {
+            findNavController().navigate(
+                R.id.action_symptomsFragment_to_notesFragment,
+                bundleOf(NotesFragment.ARG_DATE to date)
             )
         }
     }

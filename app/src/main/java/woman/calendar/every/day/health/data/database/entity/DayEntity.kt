@@ -18,7 +18,8 @@ data class DayEntity(
     val stateOfDay: StateOfDay? = null,
     @TypeConverters(SymptomsSetConverter::class)
     val symptoms: MutableSet<Symptom>,
-    val volumeOfWater: Float = 0F
+    val volumeOfWater: Float = 0F,
+    val notes: String?,
 ) {
     companion object {
         fun fromDay(day: Day): DayEntity {
@@ -26,7 +27,8 @@ data class DayEntity(
                 date = day.date,
                 stateOfDay = day.stateOfDay,
                 symptoms = day.symptoms,
-                volumeOfWater = day.volumeOfWater
+                volumeOfWater = day.volumeOfWater,
+                notes = day.notes
             )
         }
     }
@@ -37,7 +39,8 @@ fun DayEntity.toDay(): Day {
         date = date,
         stateOfDay = stateOfDay,
         symptoms = symptoms,
-        volumeOfWater = volumeOfWater
+        volumeOfWater = volumeOfWater,
+        notes = notes
     )
 }
 

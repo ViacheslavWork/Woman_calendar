@@ -6,7 +6,8 @@ data class Day(
     val date: LocalDate,
     var stateOfDay: StateOfDay? = null,
     val symptoms: MutableSet<Symptom> = mutableSetOf<Symptom>(),
-    var volumeOfWater: Float = 0F
+    var volumeOfWater: Float = 0F,
+    var notes: String? = null
 )
 
 enum class StateOfDay {

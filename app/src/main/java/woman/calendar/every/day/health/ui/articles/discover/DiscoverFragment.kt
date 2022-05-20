@@ -15,7 +15,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 import timber.log.Timber
 import woman.calendar.every.day.health.R
 import woman.calendar.every.day.health.databinding.FragmentDiscoverBinding
-import woman.calendar.every.day.health.domain.model.ArticleGroupType.*
+import woman.calendar.every.day.health.domain.model.ArticleType.*
 import woman.calendar.every.day.health.ui.articles.ArticlesEvent
 import woman.calendar.every.day.health.ui.articles.adapters.ArticlesRecyclerGroupAdapter
 import woman.calendar.every.day.health.ui.articles.details.ArticleDetailsFragment
@@ -67,13 +67,13 @@ class DiscoverFragment : Fragment(R.layout.fragment_discover), RecyclerView.OnIt
         lifecycleScope.launchWhenStarted {
             viewModel.articlesStateFlow.collectLatest {
                 Timber.d(it.toString())
-                reproductiveHealthAdapter.submitList(it.filter { item -> item.parentGroupType == REPRODUCTIVE_HEALTH })
-                sexAdapter.submitList(it.filter { item -> item.parentGroupType == SEX })
-                yourCyclePhaseAdapter.submitList(it.filter { item -> item.parentGroupType == YOUR_CYCLE_PHASE })
-                theLatestAdapter.submitList(it.filter { item -> item.parentGroupType == THE_LATEST })
-                lgbtqAdapter.submitList(it.filter { item -> item.parentGroupType == LGBTQ })
-                tipsAdapter.submitList(it.filter { item -> item.parentGroupType == TIPS_FOR_FREE_PAIN })
-                nutritionAdapter.submitList(it.filter { item -> item.parentGroupType == NUTRITION_AND_FITNESS })
+                reproductiveHealthAdapter.submitList(it.filter { item -> item.parentType == REPRODUCTIVE_HEALTH })
+                sexAdapter.submitList(it.filter { item -> item.parentType == SEX })
+                yourCyclePhaseAdapter.submitList(it.filter { item -> item.parentType == YOUR_CYCLE_PHASE })
+                theLatestAdapter.submitList(it.filter { item -> item.parentType == THE_LATEST })
+                lgbtqAdapter.submitList(it.filter { item -> item.parentType == LGBTQ })
+                tipsAdapter.submitList(it.filter { item -> item.parentType == TIPS_FOR_FREE_PAIN })
+                nutritionAdapter.submitList(it.filter { item -> item.parentType == NUTRITION_AND_FITNESS })
             }
         }
     }

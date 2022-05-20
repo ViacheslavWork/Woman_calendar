@@ -9,7 +9,7 @@ import woman.calendar.every.day.health.data.database.entity.SymptomsSetConverter
 
 @Database(
     entities = [DayEntity::class],
-    version = 2,
+    version = 3,
     exportSchema = false
 )
 @TypeConverters(DateConverters::class, SymptomsSetConverter::class)

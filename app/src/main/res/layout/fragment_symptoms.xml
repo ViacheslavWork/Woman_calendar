@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingBottom="40dp"
     android:background="@color/beige"
     tools:context=".ui.symptoms.SymptomsFragment">
 
@@ -295,7 +296,7 @@
                 tools:listitem="@layout/item_symptom_small" />
 
             <TextView
-                android:id="@+id/notes_tv"
+                android:id="@+id/notes_title_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
@@ -304,6 +305,17 @@
                 app:layout_constraintStart_toStartOf="@id/content_start"
                 app:layout_constraintTop_toBottomOf="@+id/other_rv" />
 
+            <TextView
+                android:id="@+id/notes_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/log_a_symptom_or_make_a_note"
+                android:textColor="@color/gray3"
+                android:textSize="14sp"
+                android:fontFamily="@font/roboto_regular"
+                app:layout_constraintStart_toStartOf="@id/content_start"
+                app:layout_constraintTop_toBottomOf="@+id/notes_title_tv" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>

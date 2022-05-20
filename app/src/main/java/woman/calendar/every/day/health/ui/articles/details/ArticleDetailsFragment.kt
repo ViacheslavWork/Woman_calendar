@@ -15,6 +15,7 @@ import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import woman.calendar.every.day.health.R
 import woman.calendar.every.day.health.databinding.FragmentArticleDetailsBinding
+import woman.calendar.every.day.health.domain.model.ArticleTitleColor
 import woman.calendar.every.day.health.ui.articles.ArticlesEvent
 import woman.calendar.every.day.health.ui.articles.adapters.ArticlesRecyclerAdapter
 import woman.calendar.every.day.health.utils.BookmarksPreferences
@@ -86,6 +87,10 @@ class ArticleDetailsFragment : Fragment(R.layout.fragment_article_details) {
             it?.let {
                 articleId = it.id
                 binding.titleTv.text = it.title
+                when (it.titleColor) {
+                    ArticleTitleColor.BLACK -> binding.titleTv.setTextColor(resources.getColor(R.color.text_color,null))
+                    ArticleTitleColor.WHITE -> binding.titleTv.setTextColor(resources.getColor(R.color.white,null))
+                }
                 val text = HtmlCompat.fromHtml(
                     it.content,
                     HtmlCompat.FROM_HTML_MODE_COMPACT

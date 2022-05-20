@@ -6,16 +6,17 @@ data class Article(
     val id: Int,
     val title: String,
     val smallTitle: String? = null,
+    val titleColor: ArticleTitleColor = ArticleTitleColor.BLACK,
     val content: String,
     val bigImage: Uri,
     val smallImage: Uri,
     val isBookmark: Boolean = false,
     val internalArticlesId: List<Int>? = null,
-    val type: ArticleGroupType? = null,
-    val parentGroupType: ArticleGroupType
+    val type: ArticleType? = null,
+    val parentType: ArticleType
 )
 
-enum class ArticleGroupType {
+enum class ArticleType {
     MAIN,
     REPRODUCTIVE_HEALTH,
     SEX,
@@ -37,4 +38,8 @@ enum class ArticleGroupType {
     TIPS_TO_RELIEVE_PMS_SYMPTOM,
     WORKOUTS_AND_YOUR_CYCLE,
     FEMALE_HEALTH_AND_NUTRITION,
+}
+
+enum class ArticleTitleColor {
+    BLACK, WHITE
 }

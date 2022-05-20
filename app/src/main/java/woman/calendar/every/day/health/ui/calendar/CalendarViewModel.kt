@@ -7,16 +7,18 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 import org.threeten.bp.LocalDate
 import timber.log.Timber
+import woman.calendar.every.day.health.domain.usecase.RecalculateFromDayUseCase
 import woman.calendar.every.day.health.domain.usecase.days.GetMonthUseCase
 import woman.calendar.every.day.health.domain.usecase.notification.OnOffEverydayNotificationUseCase
-import woman.calendar.every.day.health.domain.usecase.periods.UpdatePeriodDayUseCase
+import woman.calendar.every.day.health.domain.usecase.periods.MarkDayUseCase
 import woman.calendar.every.day.health.utils.LocalDateHelper
 
 private const val monthsCashSize = 12L
 
 class CalendarViewModel(
     private val getMonthUseCase: GetMonthUseCase,
-    private val updatePeriodDayUseCase: UpdatePeriodDayUseCase,
+    private val markDayUseCase: MarkDayUseCase,
+    private val recalculateFromDayUseCase: RecalculateFromDayUseCase,
     private val onOffEverydayNotificationUseCase: OnOffEverydayNotificationUseCase
 ) : ViewModel() {
     private val _months = MutableLiveData<List<ItemMonth>>()
@@ -45,7 +47,7 @@ class CalendarViewModel(
                         )
                     }
                     it.forEach { Timber.d(it.date.toString()) }
-                    _months.value= it
+                    _months.value = it
                 }
         }
     }
@@ -72,7 +74,8 @@ class CalendarViewModel(
         when (event) {
             is CalendarEvent.OnDayClick -> {
                 viewModelScope.launch {
-                    updatePeriodDayUseCase.execute(event.day)
+                    markDayUseCase.execute(event.day)
+                    recalculateFromDayUseCase.execute(event.day.date)
                     fillInitialData()
                     onOffEverydayNotificationUseCase.execute()
                 }

@@ -45,7 +45,7 @@ class ArticleDetailsViewModel(
     private fun updateInternalArticles(article: Article?) {
         viewModelScope.launch {
             articlesStateFlow.collectLatest {
-                _internalArticlesFlow.emit(it.filter { articleItem -> article?.type == articleItem.parentGroupType })
+                _internalArticlesFlow.emit(it.filter { articleItem -> article?.type == articleItem.parentType })
             }
         }
     }
