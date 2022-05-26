@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/beige"
+    >
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="40dp">
+
+            <TextView
+                android:id="@+id/title_tv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/segoe_print_bold"
+                android:gravity="center"
+                android:text="@string/is_there_anything_you_want_to_improve_about_your_sleep"
+                android:textColor="@color/text_color"
+                android:textSize="24sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <RadioGroup
+                android:id="@+id/radio_group"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="20dp"
+                android:layoutDirection="rtl"
+                app:layout_constraintTop_toBottomOf="@id/title_tv">
+
+                <RadioButton
+                    android:id="@+id/no_I_sleep_well_rb"
+                    style="@style/OnBoardingRadioButtonStyle"
+                    android:layout_marginVertical="4dp"
+                    android:text="@string/no_i_sleep_well" />
+
+                <RadioButton
+                    android:id="@+id/difficulty_falling_asleep_rb"
+                    style="@style/OnBoardingRadioButtonStyle"
+                    android:layout_marginVertical="4dp"
+                    android:text="@string/difficulty_falling_asleep" />
+
+                <RadioButton
+                    android:id="@+id/waking_up_tired_rb"
+                    style="@style/OnBoardingRadioButtonStyle"
+                    android:layout_marginVertical="4dp"
+                    android:text="@string/waking_up_tired" />
+
+                <RadioButton
+                    android:id="@+id/waking_up_during_the_night_rb"
+                    style="@style/OnBoardingRadioButtonStyle"
+                    android:layout_marginVertical="4dp"
+                    android:text="@string/waking_up_during_the_night" />
+
+                <RadioButton
+                    android:id="@+id/lack_of_sleep_schedule_rb"
+                    style="@style/OnBoardingRadioButtonStyle"
+                    android:layout_marginVertical="4dp"
+                    android:text="@string/lack_of_sleep_schedule" />
+
+                <RadioButton
+                    android:id="@+id/insomnia_rb"
+                    style="@style/OnBoardingRadioButtonStyle"
+                    android:layout_marginVertical="4dp"
+                    android:text="@string/insomnia" />
+
+                <RadioButton
+                    android:id="@+id/other_rb"
+                    style="@style/OnBoardingRadioButtonStyle"
+                    android:layout_marginVertical="4dp"
+                    android:text="@string/other" />
+
+            </RadioGroup>
+
+            <Button
+                android:id="@+id/next_btn"
+                style="@style/GlobalButtonStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:paddingVertical="@dimen/btn_padding_vertical"
+                android:text="@string/next"
+                app:layout_constraintTop_toBottomOf="@id/radio_group" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

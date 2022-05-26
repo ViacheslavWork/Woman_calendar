@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/beige"
+    android:paddingVertical="20dp"
+    tools:context=".ui.onboarding.ContinueWithEmailFragment">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/content_start"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="20dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/content_end"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="20dp" />
+
+    <TextView
+        android:id="@+id/title_tv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:fontFamily="@font/segoe_print_bold"
+        android:text="@string/take_your_health_n_well_being_to_the_next_level_with_the_s"
+        android:textColor="@color/text_color"
+        android:textSize="22sp"
+        app:layout_constraintBottom_toTopOf="@id/continue_with_email_btn"
+        app:layout_constraintEnd_toEndOf="@id/content_end"
+        app:layout_constraintStart_toStartOf="@id/content_start"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/continue_with_email_btn"
+        style="@style/IconButtonStyle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/white"
+        android:fontFamily="@font/roboto_medium"
+        android:text="@string/continue_with_e_mail"
+        android:paddingVertical="@dimen/btn_padding_vertical"
+        android:textColor="@color/text_color"
+        app:icon="@drawable/ic_envelope"
+        app:iconGravity="textStart"
+        app:iconTint="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/content_end"
+        app:layout_constraintStart_toStartOf="@id/content_start"
+        app:layout_constraintTop_toBottomOf="@id/title_tv" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

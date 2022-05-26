@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/beige">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="40dp">
+
+            <TextView
+                android:id="@+id/title_tv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/segoe_print_bold"
+                android:gravity="center"
+                android:text="@string/do_you_have_any_reproductive_health_disorders_endometriosis_pcos_ect"
+                android:textColor="@color/text_color"
+                android:textSize="24sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.constraintlayout.helper.widget.Flow
+                android:id="@+id/btn_flow"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                app:constraint_referenced_ids="yes_btn, no_btn,no_but_I_used_to_btn, i_don_t_know_btn"
+                app:flow_horizontalStyle="spread_inside"
+                app:flow_verticalGap="8dp"
+                app:flow_wrapMode="chain"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/title_tv" />
+
+            <include
+                android:id="@+id/yes_btn"
+                layout="@layout/item_onboarding_btn" />
+
+            <include
+                android:id="@+id/no_btn"
+                layout="@layout/item_onboarding_btn" />
+
+            <include
+                android:id="@+id/no_but_I_used_to_btn"
+                layout="@layout/item_onboarding_btn" />
+
+            <include
+                android:id="@+id/i_don_t_know_btn"
+                layout="@layout/item_onboarding_btn" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

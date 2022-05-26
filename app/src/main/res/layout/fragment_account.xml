@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/beige"
+    android:paddingVertical="20dp"
+    tools:context=".ui.onboarding.AccountFragment">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/content_start"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="20dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/content_end"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="20dp" />
+
+    <TextView
+        android:id="@+id/title_tv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/segoe_print_bold"
+        android:gravity="center"
+        android:text="@string/account"
+        android:textColor="@color/text_color"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@id/content_end"
+        app:layout_constraintStart_toStartOf="@id/content_start"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tab_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@android:color/transparent"
+        app:layout_constraintTop_toBottomOf="@id/title_tv"
+        app:tabIndicatorColor="@color/black"
+        app:tabSelectedTextColor="@color/text_color"
+        app:tabTextAppearance="@style/TabLayoutTextStyle"
+        app:tabTextColor="@color/black_50">
+
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/sign_up" />
+
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/log_in" />
+
+    </com.google.android.material.tabs.TabLayout>
+
+    <EditText
+        android:id="@+id/email_et"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/bg_account_et"
+        android:fontFamily="@font/roboto_medium"
+        android:hint="@string/e_mail"
+        android:singleLine="true"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@id/content_end"
+        app:layout_constraintStart_toStartOf="@id/content_start"
+        app:layout_constraintTop_toBottomOf="@id/tab_layout" />
+
+    <EditText
+        android:id="@+id/password_et"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/bg_account_et"
+        android:fontFamily="@font/roboto_medium"
+        android:hint="@string/password"
+        android:singleLine="true"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@id/content_end"
+        app:layout_constraintStart_toStartOf="@id/content_start"
+        app:layout_constraintTop_toBottomOf="@id/email_et" />
+
+    <TextView
+        android:id="@+id/password_requirements_tv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/roboto_regular"
+        android:text="@string/password_requirements"
+        android:textColor="@color/text_color_50"
+        android:textSize="11sp"
+        app:layout_constraintEnd_toEndOf="@id/content_end"
+        app:layout_constraintStart_toStartOf="@id/content_start"
+        app:layout_constraintTop_toBottomOf="@id/password_et" />
+
+    <Button
+        android:id="@+id/btn"
+        style="@style/GlobalButtonStyle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:paddingVertical="@dimen/btn_padding_vertical"
+        android:text="@string/sign_up"
+        app:layout_constraintEnd_toEndOf="@id/content_end"
+        app:layout_constraintStart_toStartOf="@id/content_start"
+        app:layout_constraintTop_toBottomOf="@id/password_requirements_tv" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

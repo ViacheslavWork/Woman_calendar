@@ -8,6 +8,7 @@
     <color name="black">#FF000000</color>
     <color name="black_50">#80000000</color>
     <color name="text_color">#1D1D1D</color>
+    <color name="text_color_50">#801D1D1D</color>
     <color name="text_color_light">#373737</color>
     <color name="white">#FFFFFFFF</color>
     <color name="white_50">#80FFFFFF</color>
@@ -26,6 +27,7 @@
     <color name="gray3">#828282</color>
     <color name="gray4">#BDBDBD</color>
     <color name="gray_stories">#CCCCCC</color>
+    <color name="gray_et_border">#E5E5E5</color>
     <color name="brown_stories">#E8CCCC</color>
     <color name="yellow">#FFC700</color>
 </resources>

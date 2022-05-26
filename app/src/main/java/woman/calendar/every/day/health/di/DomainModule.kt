@@ -54,7 +54,13 @@ val domainModule = module {
             recalculateFromDayUseCase = get()
         )
     }
-    single { MarkDayUseCase(repository = get(), getDayUseCase = get()) }
+    single {
+        MarkDayUseCase(
+            repository = get(),
+            getDayUseCase = get(),
+            getCountOfPeriodsUseCase = get()
+        )
+    }
     //notifications
     single {
         GetDailyNotificationDataUseCase(

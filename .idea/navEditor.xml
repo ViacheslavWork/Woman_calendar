@@ -8,6 +8,53 @@
             <LayoutPositions>
               <option name="myPositions">
                 <map>
+                  <entry key="IWantToFragment">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="-1225" />
+                            <option name="y" value="-814" />
+                          </Point>
+                        </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="action_IWantToFragment_to_accountFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                            <entry key="action_IWantToFragment_to_birthDateFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
+                  <entry key="accountFragment">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="-454" />
+                            <option name="y" value="-811" />
+                          </Point>
+                        </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="action_accountFragment_to_savingDetailsFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
                   <entry key="action_global_to_notificationScreen">
                     <value>
                       <LayoutPositions />
@@ -34,18 +81,112 @@
                       </LayoutPositions>
                     </value>
                   </entry>
+                  <entry key="birthDateFragment">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="-964" />
+                            <option name="y" value="-843" />
+                          </Point>
+                        </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="action_birthDateFragment_to_continueWithEmailFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
                   <entry key="calendarFragment">
                     <value>
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
                             <option name="x" value="1142" />
-                            <option name="y" value="12" />
+                            <option name="y" value="-2" />
                           </Point>
                         </option>
                         <option name="myPositions">
                           <map>
                             <entry key="action_calendarFragment_to_dayInfoFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                            <entry key="action_calendarFragment_to_moreAccuratePredictionsFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                            <entry key="action_calendarFragment_to_navigation_home">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
+                  <entry key="coCreatedFragment">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="405" />
+                            <option name="y" value="-814" />
+                          </Point>
+                        </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="action_coCreatedFragment_to_creatingPersonalProgramFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
+                  <entry key="continueWithEmailFragment">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="-726" />
+                            <option name="y" value="-838" />
+                          </Point>
+                        </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="action_continueWithEmailFragment_to_accountFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
+                  <entry key="creatingPersonalProgramFragment">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="661" />
+                            <option name="y" value="-808" />
+                          </Point>
+                        </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="action_creatingPersonalProgramFragment_to_meetFragment">
                               <value>
                                 <LayoutPositions />
                               </value>
@@ -60,9 +201,72 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="1140" />
-                            <option name="y" value="-426" />
+                            <option name="x" value="1522" />
+                            <option name="y" value="7" />
                           </Point>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
+                  <entry key="helloFragment">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="-1481" />
+                            <option name="y" value="-816" />
+                          </Point>
+                        </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="action_helloFragment_to_IWantToFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
+                  <entry key="meetFragment">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="901" />
+                            <option name="y" value="-812" />
+                          </Point>
+                        </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="action_meetFragment_to_stayOnTopOfHealthFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
+                  <entry key="moreAccuratePredictionsFragment">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="1474" />
+                            <option name="y" value="-814" />
+                          </Point>
+                        </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="action_moreAccuratePredictionsFragment_to_calendarFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
                         </option>
                       </LayoutPositions>
                     </value>
@@ -152,6 +356,27 @@
                       </LayoutPositions>
                     </value>
                   </entry>
+                  <entry key="onBoardingContainerFragment">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="129" />
+                            <option name="y" value="-820" />
+                          </Point>
+                        </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="action_onBoardingContainerFragment_to_coCreatedFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
                   <entry key="savedFragment">
                     <value>
                       <LayoutPositions>
@@ -173,6 +398,48 @@
                       </LayoutPositions>
                     </value>
                   </entry>
+                  <entry key="savingDetailsFragment">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="-156" />
+                            <option name="y" value="-820" />
+                          </Point>
+                        </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="action_savingDetailsFragment_to_onBoardingContainerFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
+                  <entry key="stayOnTopOfHealthFragment">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="1171" />
+                            <option name="y" value="-807" />
+                          </Point>
+                        </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="action_stayOnTopOfHealthFragment_to_calendarFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
                   <entry key="symptomsFragment">
                     <value>
                       <LayoutPositions>
@@ -184,6 +451,11 @@
                         </option>
                         <option name="myPositions">
                           <map>
+                            <entry key="action_symptomsFragment_to_notesFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
                             <entry key="action_symptomsFragment_to_waterFragment">
                               <value>
                                 <LayoutPositions />
@@ -204,8 +476,8 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="1422" />
-                            <option name="y" value="65" />
+                            <option name="x" value="1519" />
+                            <option name="y" value="441" />
                           </Point>
                         </option>
                       </LayoutPositions>
@@ -216,8 +488,8 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="1422" />
-                            <option name="y" value="485" />
+                            <option name="x" value="1519" />
+                            <option name="y" value="861" />
                           </Point>
                         </option>
                       </LayoutPositions>

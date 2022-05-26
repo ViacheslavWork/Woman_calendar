@@ -4,16 +4,22 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/AndroidProjects/woman_calendar/app/src/main/res/drawable-v24/bg_challenges_card_title.xml" value="0.1205" />
+        <entry key="..\:/AndroidProjects/woman_calendar/app/src/main/res/drawable-v24/bg_onboarding_radiobutton.xml" value="0.211" />
+        <entry key="..\:/AndroidProjects/woman_calendar/app/src/main/res/drawable-v24/ic_radio_button_checked.xml" value="0.211" />
+        <entry key="..\:/AndroidProjects/woman_calendar/app/src/main/res/drawable/bg_account_et.xml" value="0.145" />
         <entry key="..\:/AndroidProjects/woman_calendar/app/src/main/res/drawable/bg_border_dashed_green.xml" value="0.239" />
         <entry key="..\:/AndroidProjects/woman_calendar/app/src/main/res/drawable/bg_border_dashed_pink.xml" value="0.239" />
         <entry key="..\:/AndroidProjects/woman_calendar/app/src/main/res/drawable/bg_challenges_card_title.xml" value="0.239" />
         <entry key="..\:/AndroidProjects/woman_calendar/app/src/main/res/drawable/bg_circle_red.xml" value="0.239" />
         <entry key="..\:/AndroidProjects/woman_calendar/app/src/main/res/drawable/bg_circle_red_pale.xml" value="0.239" />
         <entry key="..\:/AndroidProjects/woman_calendar/app/src/main/res/drawable/bg_circle_yellow.xml" value="0.239" />
+        <entry key="..\:/AndroidProjects/woman_calendar/app/src/main/res/drawable/bg_edit_text.xml" value="0.145" />
         <entry key="..\:/AndroidProjects/woman_calendar/app/src/main/res/drawable/bg_expected_day_today.xml" value="0.239" />
         <entry key="..\:/AndroidProjects/woman_calendar/app/src/main/res/drawable/bg_ovulation_day_today.xml" value="0.239" />
         <entry key="..\:/AndroidProjects/woman_calendar/app/src/main/res/drawable/bg_today.xml" value="0.239" />
         <entry key="..\:/AndroidProjects/woman_calendar/app/src/main/res/drawable/bg_today_period_day.xml" value="0.239" />
+        <entry key="..\:/AndroidProjects/woman_calendar/app/src/main/res/drawable/bg_weight_et.xml" value="0.2035" />
+        <entry key="..\:/AndroidProjects/woman_calendar/app/src/main/res/drawable/bg_wins_card.xml" value="0.2035" />
         <entry key="..\:/AndroidProjects/woman_calendar/app/src/main/res/drawable/bg_wins_card_title.xml" value="0.1205" />
         <entry key="..\:/AndroidProjects/woman_calendar/app/src/main/res/drawable/circle_shadow.xml" value="0.239" />
         <entry key="..\:/AndroidProjects/woman_calendar/app/src/main/res/drawable/frame_295.xml" value="0.3145" />
@@ -21,33 +27,69 @@
         <entry key="..\:/AndroidProjects/woman_calendar/app/src/main/res/drawable/gradient_calendar_bottom.xml" value="0.239" />
         <entry key="..\:/AndroidProjects/woman_calendar/app/src/main/res/drawable/group_44.xml" value="0.239" />
         <entry key="..\:/AndroidProjects/woman_calendar/app/src/main/res/drawable/ic_circle_period_end.xml" value="0.239" />
+        <entry key="..\:/AndroidProjects/woman_calendar/app/src/main/res/drawable/ic_envelope.xml" value="0.1125" />
         <entry key="..\:/AndroidProjects/woman_calendar/app/src/main/res/drawable/ic_im_ellipse.xml" value="0.239" />
+        <entry key="..\:/AndroidProjects/woman_calendar/app/src/main/res/drawable/ic_onboarding_ellipse.xml" value="0.211" />
+        <entry key="..\:/AndroidProjects/woman_calendar/app/src/main/res/drawable/ic_radio_button_checked.xml" value="0.211" />
+        <entry key="..\:/AndroidProjects/woman_calendar/app/src/main/res/drawable/ic_radio_button_empty.xml" value="0.211" />
         <entry key="..\:/AndroidProjects/woman_calendar/app/src/main/res/drawable/im_circle_fertile_end.xml" value="0.239" />
         <entry key="..\:/AndroidProjects/woman_calendar/app/src/main/res/drawable/im_circle_period_mid.xml" value="0.239" />
         <entry key="..\:/AndroidProjects/woman_calendar/app/src/main/res/drawable/im_circle_post_period.xml" value="0.239" />
         <entry key="..\:/AndroidProjects/woman_calendar/app/src/main/res/drawable/im_circle_pre_period_mid.xml" value="0.239" />
         <entry key="..\:/AndroidProjects/woman_calendar/app/src/main/res/drawable/im_circle_pre_period_start.xml" value="0.145" />
         <entry key="..\:/AndroidProjects/woman_calendar/app/src/main/res/drawable/im_ellipse.xml" value="0.239" />
+        <entry key="..\:/AndroidProjects/woman_calendar/app/src/main/res/drawable/im_hello.xml" value="0.1" />
         <entry key="..\:/AndroidProjects/woman_calendar/app/src/main/res/drawable/selector_global_btn.xml" value="0.239" />
+        <entry key="..\:/AndroidProjects/woman_calendar/app/src/main/res/drawable/selector_onboarding_radiobutton.xml" value="0.211" />
         <entry key="..\:/AndroidProjects/woman_calendar/app/src/main/res/drawable/slice_1.xml" value="0.239" />
+        <entry key="..\:/AndroidProjects/woman_calendar/app/src/main/res/layout/activity_main.xml" value="0.3359375" />
+        <entry key="..\:/AndroidProjects/woman_calendar/app/src/main/res/layout/fragment_account.xml" value="0.33" />
         <entry key="..\:/AndroidProjects/woman_calendar/app/src/main/res/layout/fragment_article_details.xml" value="0.2636103151862464" />
         <entry key="..\:/AndroidProjects/woman_calendar/app/src/main/res/layout/fragment_articles.xml" value="0.16271442986881937" />
+        <entry key="..\:/AndroidProjects/woman_calendar/app/src/main/res/layout/fragment_birth_date.xml" value="0.3359375" />
+        <entry key="..\:/AndroidProjects/woman_calendar/app/src/main/res/layout/fragment_calendrar.xml" value="0.3359375" />
         <entry key="..\:/AndroidProjects/woman_calendar/app/src/main/res/layout/fragment_circle.xml" value="0.33" />
+        <entry key="..\:/AndroidProjects/woman_calendar/app/src/main/res/layout/fragment_co_created.xml" value="0.3359375" />
+        <entry key="..\:/AndroidProjects/woman_calendar/app/src/main/res/layout/fragment_continue_with_email.xml" value="0.2" />
+        <entry key="..\:/AndroidProjects/woman_calendar/app/src/main/res/layout/fragment_creating_personal_program.xml" value="0.3359375" />
         <entry key="..\:/AndroidProjects/woman_calendar/app/src/main/res/layout/fragment_day_info.xml" value="0.22" />
         <entry key="..\:/AndroidProjects/woman_calendar/app/src/main/res/layout/fragment_discover.xml" value="0.32382246376811596" />
+        <entry key="..\:/AndroidProjects/woman_calendar/app/src/main/res/layout/fragment_hello.xml" value="0.25" />
         <entry key="..\:/AndroidProjects/woman_calendar/app/src/main/res/layout/fragment_home.xml" value="0.3359375" />
+        <entry key="..\:/AndroidProjects/woman_calendar/app/src/main/res/layout/fragment_i_want_to.xml" value="0.25" />
+        <entry key="..\:/AndroidProjects/woman_calendar/app/src/main/res/layout/fragment_meet.xml" value="0.3359375" />
+        <entry key="..\:/AndroidProjects/woman_calendar/app/src/main/res/layout/fragment_more_accurate_predictions.xml" value="0.3359375" />
         <entry key="..\:/AndroidProjects/woman_calendar/app/src/main/res/layout/fragment_note.xml" value="0.25" />
         <entry key="..\:/AndroidProjects/woman_calendar/app/src/main/res/layout/fragment_notes.xml" value="0.3359375" />
+        <entry key="..\:/AndroidProjects/woman_calendar/app/src/main/res/layout/fragment_notification_screens_container.xml" value="0.3359375" />
+        <entry key="..\:/AndroidProjects/woman_calendar/app/src/main/res/layout/fragment_onboarding_1.xml" value="0.3359375" />
+        <entry key="..\:/AndroidProjects/woman_calendar/app/src/main/res/layout/fragment_onboarding_10.xml" value="0.3359375" />
+        <entry key="..\:/AndroidProjects/woman_calendar/app/src/main/res/layout/fragment_onboarding_2.xml" value="0.22" />
+        <entry key="..\:/AndroidProjects/woman_calendar/app/src/main/res/layout/fragment_onboarding_3.xml" value="0.3359375" />
+        <entry key="..\:/AndroidProjects/woman_calendar/app/src/main/res/layout/fragment_onboarding_4.xml" value="0.3359375" />
+        <entry key="..\:/AndroidProjects/woman_calendar/app/src/main/res/layout/fragment_onboarding_5.xml" value="0.3359375" />
+        <entry key="..\:/AndroidProjects/woman_calendar/app/src/main/res/layout/fragment_onboarding_6.xml" value="0.3359375" />
+        <entry key="..\:/AndroidProjects/woman_calendar/app/src/main/res/layout/fragment_onboarding_7.xml" value="0.3359375" />
+        <entry key="..\:/AndroidProjects/woman_calendar/app/src/main/res/layout/fragment_onboarding_8.xml" value="0.3359375" />
+        <entry key="..\:/AndroidProjects/woman_calendar/app/src/main/res/layout/fragment_onboarding_9.xml" value="0.3359375" />
+        <entry key="..\:/AndroidProjects/woman_calendar/app/src/main/res/layout/fragment_onboarding_container.xml" value="0.3359375" />
         <entry key="..\:/AndroidProjects/woman_calendar/app/src/main/res/layout/fragment_recent.xml" value="0.32382246376811596" />
         <entry key="..\:/AndroidProjects/woman_calendar/app/src/main/res/layout/fragment_saved.xml" value="0.32382246376811596" />
+        <entry key="..\:/AndroidProjects/woman_calendar/app/src/main/res/layout/fragment_saving_details.xml" value="0.266304347826087" />
+        <entry key="..\:/AndroidProjects/woman_calendar/app/src/main/res/layout/fragment_staty_on_top_of_health.xml" value="0.3359375" />
+        <entry key="..\:/AndroidProjects/woman_calendar/app/src/main/res/layout/fragment_stay_on_top_of_health.xml" value="0.2418478260869565" />
         <entry key="..\:/AndroidProjects/woman_calendar/app/src/main/res/layout/fragment_symptoms.xml" value="0.3359375" />
+        <entry key="..\:/AndroidProjects/woman_calendar/app/src/main/res/layout/fragment_weight.xml" value="0.3359375" />
         <entry key="..\:/AndroidProjects/woman_calendar/app/src/main/res/layout/item_articles.xml" value="0.16271442986881937" />
         <entry key="..\:/AndroidProjects/woman_calendar/app/src/main/res/layout/item_articles_big_card.xml" value="0.32382246376811596" />
         <entry key="..\:/AndroidProjects/woman_calendar/app/src/main/res/layout/item_articles_tab.xml" value="0.32382246376811596" />
         <entry key="..\:/AndroidProjects/woman_calendar/app/src/main/res/layout/item_calendar_day.xml" value="0.32382246376811596" />
+        <entry key="..\:/AndroidProjects/woman_calendar/app/src/main/res/layout/item_i_want_to_btn.xml" value="0.2565789473684211" />
+        <entry key="..\:/AndroidProjects/woman_calendar/app/src/main/res/layout/item_onboarding_btn.xml" value="0.30886075949367087" />
         <entry key="..\:/AndroidProjects/woman_calendar/app/src/main/res/layout/item_symptom_big.xml" value="0.3359375" />
         <entry key="..\:/AndroidProjects/woman_calendar/app/src/main/res/layout/item_symptom_day_info.xml" value="0.3359375" />
         <entry key="..\:/AndroidProjects/woman_calendar/app/src/main/res/layout/item_symptom_small.xml" value="0.3359375" />
+        <entry key="..\:/Users/Viacheslav/AppData/Local/Android/Sdk/platforms/android-32/data/res/drawable/btn_radio.xml" value="0.211" />
       </map>
     </option>
   </component>

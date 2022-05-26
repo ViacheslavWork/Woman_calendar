@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/beige"
+    android:paddingVertical="20dp"
+    tools:context=".ui.onboarding.SavingDetailsFragment">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/content_start"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="20dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/content_end"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="20dp" />
+
+    <ImageView
+        android:id="@+id/load_ellipse_iv"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="50dp"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/im_load_ellipse" />
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/segoe_print_bold"
+        android:gravity="center"
+        android:layout_margin="15dp"
+        android:text="@string/saving_your_details"
+        android:textColor="@color/text_color"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@id/load_ellipse_iv"
+        app:layout_constraintEnd_toEndOf="@id/load_ellipse_iv"
+        app:layout_constraintStart_toStartOf="@id/load_ellipse_iv"
+        app:layout_constraintTop_toTopOf="@id/load_ellipse_iv" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

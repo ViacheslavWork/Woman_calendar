@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/beige"
+    android:paddingVertical="20dp"
+    tools:context=".ui.onboarding.CoCreatedFragment">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/content_start"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="20dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/content_end"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="20dp" />
+
+    <TextView
+        android:id="@+id/title_tv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/segoe_print_bold"
+        android:gravity="center"
+        android:text="@string/co_created_with_health_experts_emily_nagoski_dr_staci_t_amp_more"
+        android:textColor="@color/text_color"
+        android:textSize="22sp"
+        app:layout_constraintBottom_toTopOf="@id/content_tv"
+        app:layout_constraintEnd_toEndOf="@id/content_end"
+        app:layout_constraintStart_toStartOf="@id/content_start"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <TextView
+        android:id="@+id/content_tv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto_regular"
+        android:gravity="center"
+        android:text="@string/master_your_health_amp_well_being_knowledge_by_learning_from_experts_in_obstetrics_gynecology_psyhology_nutrition_physical_therapy_sexual_well_being_amp_more"
+        android:textColor="@color/text_color_50"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/content_end"
+        app:layout_constraintStart_toStartOf="@id/content_start"
+        app:layout_constraintTop_toBottomOf="@id/title_tv" />
+
+    <Button
+        android:id="@+id/continue_btn"
+        style="@style/GlobalButtonStyle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:paddingVertical="@dimen/btn_padding_vertical"
+        android:text="@string/contin"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/content_end"
+        app:layout_constraintStart_toStartOf="@id/content_start"
+        app:layout_constraintTop_toBottomOf="@id/title_tv" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

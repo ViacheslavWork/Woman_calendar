@@ -10,6 +10,7 @@ import timber.log.Timber
 import woman.calendar.every.day.health.domain.usecase.RecalculateFromDayUseCase
 import woman.calendar.every.day.health.domain.usecase.days.GetMonthUseCase
 import woman.calendar.every.day.health.domain.usecase.notification.OnOffEverydayNotificationUseCase
+import woman.calendar.every.day.health.domain.usecase.periods.GetCountOfPeriodsUseCase
 import woman.calendar.every.day.health.domain.usecase.periods.MarkDayUseCase
 import woman.calendar.every.day.health.utils.LocalDateHelper
 
@@ -19,10 +20,13 @@ class CalendarViewModel(
     private val getMonthUseCase: GetMonthUseCase,
     private val markDayUseCase: MarkDayUseCase,
     private val recalculateFromDayUseCase: RecalculateFromDayUseCase,
-    private val onOffEverydayNotificationUseCase: OnOffEverydayNotificationUseCase
+    private val onOffEverydayNotificationUseCase: OnOffEverydayNotificationUseCase,
+    private val getCountOfPeriodsUseCase: GetCountOfPeriodsUseCase
 ) : ViewModel() {
     private val _months = MutableLiveData<List<ItemMonth>>()
     val months: LiveData<List<ItemMonth>> = _months
+    private val _countOfPeriods = MutableLiveData<Int>()
+    val countOfPeriods: LiveData<Int> = _countOfPeriods
     private lateinit var prevMonth: LocalDate
     private var countOfMounts = monthsCashSize
 
@@ -54,6 +58,7 @@ class CalendarViewModel(
 
     private suspend fun fillInitialData() {
         val start = System.currentTimeMillis()
+        _countOfPeriods.postValue(getCountOfPeriodsUseCase.execute())
         val date = LocalDate.now().minusMonths(countOfMounts)
         prevMonth = date
         val months = mutableListOf<ItemMonth>()

@@ -19,10 +19,6 @@ class ArticlesViewPagerAdapter(fragment: Fragment, private val tabs: List<Articl
             ArticlesTab.SAVED.ordinal -> return SavedFragment()
             ArticlesTab.RECENT.ordinal -> return RecentFragment()
         }
-        /*val pagerFragment = PagerFragment()
-        pagerFragment.arguments = Bundle().apply {
-            putSerializable(ARG_CATEGORY, tabs[position])
-        }*/
         return Fragment()
     }
 }

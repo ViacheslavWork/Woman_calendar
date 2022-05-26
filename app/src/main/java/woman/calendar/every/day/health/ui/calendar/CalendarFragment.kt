@@ -2,6 +2,8 @@ package woman.calendar.every.day.health.ui.calendar
 
 import android.os.Bundle
 import android.view.View
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -11,6 +13,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.threeten.bp.LocalDate
 import woman.calendar.every.day.health.R
 import woman.calendar.every.day.health.databinding.FragmentCalendrarBinding
+import woman.calendar.every.day.health.ui.calendar.CalendarState.*
 import woman.calendar.every.day.health.ui.day_info.DayInfoFragment
 
 
@@ -24,11 +27,11 @@ class CalendarFragment : Fragment(R.layout.fragment_calendrar) {
     private val viewModel: CalendarViewModel by viewModel()
     private var dateForScroll: LocalDate? = null
     private var isAbleToDownloadNewMonth = true
-    private var isOpenDayInfoByClick = false
+    private var calendarState: CalendarState = PERIOD_SELECTION
 
     companion object {
         const val ARG_DATE_MONTH_FOR_SCROLL = "ARG_DATE_FOR_SCROLL"
-        const val ARG_OPEN_DAY_INFO_BY_CLICK = "ARG_OPEN_DAY_INFO_BY_CLICK"
+        const val ARG_CALENDAR_STATE = "ARG_CALENDAR_STATE"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,22 +39,65 @@ class CalendarFragment : Fragment(R.layout.fragment_calendrar) {
         dateForScroll = arguments?.getSerializable(ARG_DATE_MONTH_FOR_SCROLL) as LocalDate?
         dateForScroll?.let { isScrollToDate = true }
         arguments
-            ?.takeIf { it.containsKey(ARG_OPEN_DAY_INFO_BY_CLICK) }
-            ?.apply { isOpenDayInfoByClick = getBoolean(ARG_OPEN_DAY_INFO_BY_CLICK) }
+            ?.takeIf { it.containsKey(ARG_CALENDAR_STATE) }
+            ?.apply { calendarState = getSerializable(ARG_CALENDAR_STATE) as CalendarState }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         _binding = FragmentCalendrarBinding.bind(view)
 
+        setUpUI()
         setUpRecyclerView()
         setUpListeners()
 
         observeListEvent()
         observeMonths()
+        observeCountOfPeriods()
+    }
+
+    private fun observeCountOfPeriods() {
+        viewModel.countOfPeriods.observe(viewLifecycleOwner) {
+            if (calendarState == PERIOD_SELECTION_FROM_ON_BOARDING) {
+                binding.continueBtn.visibility = if (it > 0) VISIBLE else GONE
+            }
+        }
+    }
+
+    private fun setUpUI() {
+        when (calendarState) {
+            PERIOD_SELECTION_FROM_ON_BOARDING -> {
+                setUpOnBoardingUiState(getString(R.string.dates_are_auto_filled_tap_them_to_adjust))
+            }
+            PRE_PERIOD_SELECTION_FROM_ON_BOARDING -> {
+                setUpOnBoardingUiState(getString(R.string.you_can_log_previous_periods_here))
+                binding.continueBtn.visibility = VISIBLE
+            }
+            OPEN_INFO_BY_CLICK -> Unit
+            PERIOD_SELECTION -> Unit
+        }
+    }
+
+    private fun setUpOnBoardingUiState(title: String) {
+        binding.toolBar.visibility = GONE
+        binding.crossIb.visibility = GONE
+        binding.title.visibility = VISIBLE
+        binding.title.text = title
     }
 
     private fun setUpListeners() {
         binding.crossIb.setOnClickListener { findNavController().popBackStack() }
+        binding.continueBtn.setOnClickListener {
+            when (calendarState) {
+                PERIOD_SELECTION_FROM_ON_BOARDING -> findNavController().navigate(
+                    CalendarFragmentDirections.actionCalendarFragmentToMoreAccuratePredictionsFragment()
+                )
+                PRE_PERIOD_SELECTION_FROM_ON_BOARDING -> findNavController().navigate(
+                    CalendarFragmentDirections.actionCalendarFragmentToNavigationHome()
+                )
+                OPEN_INFO_BY_CLICK -> Unit
+                PERIOD_SELECTION -> Unit
+            }
+        }
     }
 
     private fun observeMonths() {
@@ -84,7 +130,7 @@ class CalendarFragment : Fragment(R.layout.fragment_calendrar) {
 
     private fun observeListEvent() {
         adapter.event.observe(viewLifecycleOwner) {
-            if (isOpenDayInfoByClick) {
+            if (calendarState == OPEN_INFO_BY_CLICK) {
                 findNavController().navigate(
                     R.id.action_calendarFragment_to_dayInfoFragment,
                     bundleOf(DayInfoFragment.ARG_DATE to it.day.date)
@@ -110,7 +156,8 @@ class CalendarFragment : Fragment(R.layout.fragment_calendrar) {
                 }
             }
         })
-        adapter = CalendarAdapter(isChangeColorByClick = !isOpenDayInfoByClick)
+        adapter =
+            CalendarAdapter(isChangeColorByClick = calendarState != OPEN_INFO_BY_CLICK)
         recyclerView.adapter = adapter
     }
 

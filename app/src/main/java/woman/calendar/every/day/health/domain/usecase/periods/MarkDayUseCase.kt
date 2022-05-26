@@ -13,17 +13,32 @@ import woman.calendar.every.day.health.utils.Constants
 
 class MarkDayUseCase(
     private val repository: Repository,
-    private val getDayUseCase: GetDayUseCase
+    private val getDayUseCase: GetDayUseCase,
+    private val getCountOfPeriodsUseCase: GetCountOfPeriodsUseCase
 ) {
     suspend fun execute(day: Day) = withContext(Dispatchers.IO) {
         if (day.stateOfDay == PERIOD) {
             if (getDayUseCase.execute(day.date).stateOfDay == EXPECTED_NEW_PERIOD) {
                 overrideExpectedDays(day)
+                return@withContext
+            }
+            if (getCountOfPeriodsUseCase.execute() < Constants.MIN_COUNT_PERIODS_FOR_INSIGHT) {
+                for (i in 0 until Constants.STANDARD_LENGTH_OF_PERIOD) {
+                    launch {
+                        repository.setDay(
+                            getDayUseCase
+                                .execute(day.date.plusDays(i.toLong()))
+                                .apply { stateOfDay = day.stateOfDay })
+                    }
+                }
             } else {
-                launch { repository.setDay(getDayUseCase.execute(day.date).apply { stateOfDay = day.stateOfDay }) }
-                launch { findPeriodDaysBefore(day) }
+                launch {
+                    repository.setDay(
+                        getDayUseCase.execute(day.date).apply { stateOfDay = day.stateOfDay })
+                }
                 launch { findPeriodDaysAfter(day) }
             }
+            launch { findPeriodDaysBefore(day) }
             return@withContext
         }
         repository.setDay(getDayUseCase.execute(day.date).apply { stateOfDay = day.stateOfDay })
@@ -70,7 +85,7 @@ class MarkDayUseCase(
         while (getDayUseCase.execute(tempDate.minusDays(1)).stateOfDay == EXPECTED_NEW_PERIOD) {
             tempDate = tempDate.minusDays(1)
         }
-        while (repository.getDay(tempDate)?.stateOfDay == EXPECTED_NEW_PERIOD) {
+        while (getDayUseCase.execute(tempDate).stateOfDay == EXPECTED_NEW_PERIOD) {
             repository.setDay(getDayUseCase.execute(tempDate).apply { stateOfDay = PERIOD })
             tempDate = tempDate.plusDays(1)
         }

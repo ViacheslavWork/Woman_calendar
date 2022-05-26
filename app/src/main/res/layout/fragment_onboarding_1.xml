@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/beige">
+
+    <TextView
+        android:id="@+id/title_tv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/segoe_print_bold"
+        android:gravity="center"
+        android:text="@string/is_your_menstrual_cycle_regular_varies_by_no_more_than_7_days"
+        android:textColor="@color/text_color"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.helper.widget.Flow
+        android:id="@+id/btn_flow"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        app:constraint_referenced_ids="my_cycle_is_regular_btn,my_cycle_is_irregular_btn,i_don_t_know_btn"
+        app:flow_horizontalStyle="spread_inside"
+        app:flow_verticalGap="8dp"
+        app:flow_wrapMode="chain"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/title_tv" />
+
+    <include
+        android:id="@+id/my_cycle_is_regular_btn"
+        layout="@layout/item_onboarding_btn" />
+
+    <include
+        android:id="@+id/my_cycle_is_irregular_btn"
+        layout="@layout/item_onboarding_btn" />
+
+    <include
+        android:id="@+id/i_don_t_know_btn"
+        layout="@layout/item_onboarding_btn" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

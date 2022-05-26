@@ -35,4 +35,24 @@
         <item name="textAllCaps">false</item>
     </style>
 
+    <style name="IconButtonStyle" parent="Widget.MaterialComponents.Button.Icon">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerRadius">32dp</item>
+        <item name="android:textColor">@color/text_color</item>
+        <item name="fontFamily">@font/roboto_medium</item>
+        <item name="android:textSize">14sp</item>
+        <item name="textAllCaps">false</item>
+    </style>
+
+    <style name="OnBoardingRadioButtonStyle" parent="Widget.MaterialComponents.CompoundButton.RadioButton">
+        <item name="android:textColor">@color/text_color</item>
+        <item name="fontFamily">@font/segoe_print_regular</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:background">@drawable/bg_onboarding_button</item>
+        <item name="android:button">@drawable/selector_onboarding_radiobutton</item>
+        <item name="android:buttonTint">@color/pink</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
 </resources>

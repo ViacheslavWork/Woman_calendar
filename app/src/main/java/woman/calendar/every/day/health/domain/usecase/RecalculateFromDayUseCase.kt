@@ -13,8 +13,8 @@ import woman.calendar.every.day.health.domain.model.StateOfDay
 import woman.calendar.every.day.health.domain.model.StateOfDay.*
 import woman.calendar.every.day.health.domain.usecase.days.GetDayUseCase
 import woman.calendar.every.day.health.utils.Constants
+import woman.calendar.every.day.health.utils.Constants.MIN_COUNT_PERIODS_FOR_INSIGHT
 
-private const val MIN_COUNT_PERIODS_FOR_INSIGHT = 2
 private const val MAX_COUNT_MONTHS_FOR_INSIGHT = 10L
 
 class RecalculateFromDayUseCase(

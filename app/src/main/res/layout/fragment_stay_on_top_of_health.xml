@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/beige"
+    tools:context=".ui.onboarding.StayOnTopOfHealthFragment">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/content_start"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="20dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/content_end"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="20dp" />
+
+
+    <TextView
+        android:id="@+id/title_1_tv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/segoe_print_bold"
+        android:gravity="start"
+        android:text="@string/stay_on_top_of_your_health"
+        android:textColor="@color/text_color"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@id/content_1_tv"
+        app:layout_constraintEnd_toEndOf="@id/content_end"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toStartOf="@id/content_start"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <TextView
+        android:id="@+id/content_1_tv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/roboto_regular"
+        android:gravity="start"
+        android:text="@string/logging_symptoms_helps_flo_detect_possible_imbalances_in_your_body_and_advice_you_to_see_a_doctor"
+        android:textColor="@color/text_color_50"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@id/title_2_tv"
+        app:layout_constraintEnd_toEndOf="@id/content_end"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toStartOf="@id/content_start"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="spread" />
+
+    <TextView
+        android:id="@+id/title_2_tv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/segoe_print_bold"
+        android:gravity="end"
+        android:text="@string/understand_yourself_better_than_ever"
+        android:textColor="@color/text_color"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@id/continue_btn"
+        app:layout_constraintEnd_toEndOf="@id/content_end"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toStartOf="@id/content_start"
+        app:layout_constraintTop_toBottomOf="@id/content_1_tv"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <TextView
+        android:id="@+id/content_2_tv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/roboto_regular"
+        android:gravity="end"
+        android:text="@string/enjoy_thousands_of_expert_articles_in_your_personal_feed_which_is_continuously_being_adapted_to_your_changing_lifestyle"
+        android:textColor="@color/text_color_50"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="@id/content_end"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toStartOf="@id/content_start"
+        app:layout_constraintTop_toBottomOf="@id/title_2_tv" />
+
+    <Button
+        android:id="@+id/continue_btn"
+        style="@style/GlobalButtonStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="60dp"
+        android:layout_marginBottom="48dp"
+        android:paddingVertical="@dimen/btn_padding_vertical"
+        android:text="@string/contin"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

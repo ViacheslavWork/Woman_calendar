@@ -7,4 +7,5 @@
     <dimen name="btn_padding_vertical">12dp</dimen>
     <dimen name="margin_article_title_top">16dp</dimen>
     <dimen name="margin_article_recycler_top">8dp</dimen>
+    <dimen name="margin_onboarding_horizontal">20dp</dimen>
 </resources>

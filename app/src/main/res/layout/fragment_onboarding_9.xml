@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/beige"
+    >
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="40dp">
+
+            <TextView
+                android:id="@+id/title_tv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/segoe_print_bold"
+                android:gravity="center"
+                android:text="@string/what_is_your_fitness_goal"
+                android:textColor="@color/text_color"
+                android:textSize="24sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <RadioGroup
+                android:id="@+id/radio_group"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="20dp"
+                android:layoutDirection="rtl"
+                app:layout_constraintTop_toBottomOf="@id/title_tv">
+
+                <RadioButton
+                    android:id="@+id/none_rb"
+                    style="@style/OnBoardingRadioButtonStyle"
+                    android:layout_marginVertical="4dp"
+                    android:text="@string/none" />
+
+                <RadioButton
+                    android:id="@+id/lose_weight_rb"
+                    style="@style/OnBoardingRadioButtonStyle"
+                    android:layout_marginVertical="4dp"
+                    android:text="@string/lose_weight" />
+
+                <RadioButton
+                    android:id="@+id/gain_weight_rb"
+                    style="@style/OnBoardingRadioButtonStyle"
+                    android:layout_marginVertical="4dp"
+                    android:text="@string/gain_weight" />
+
+                <RadioButton
+                    android:id="@+id/maintain_healthy_weight_rb"
+                    style="@style/OnBoardingRadioButtonStyle"
+                    android:layout_marginVertical="4dp"
+                    android:text="@string/maintain_healthy_weight" />
+
+                <RadioButton
+                    android:id="@+id/start_exercising_rb"
+                    style="@style/OnBoardingRadioButtonStyle"
+                    android:layout_marginVertical="4dp"
+                    android:text="@string/start_exercising" />
+
+                <RadioButton
+                    android:id="@+id/learn_about_nutrition_rb"
+                    style="@style/OnBoardingRadioButtonStyle"
+                    android:layout_marginVertical="4dp"
+                    android:text="@string/learn_about_nutrition" />
+
+                <RadioButton
+                    android:id="@+id/get_more_energy_rb"
+                    style="@style/OnBoardingRadioButtonStyle"
+                    android:layout_marginVertical="4dp"
+                    android:text="@string/get_more_energy" />
+
+                <RadioButton
+                    android:id="@+id/other_rb"
+                    style="@style/OnBoardingRadioButtonStyle"
+                    android:layout_marginVertical="4dp"
+                    android:text="@string/other" />
+
+            </RadioGroup>
+
+            <Button
+                android:id="@+id/next_btn"
+                style="@style/GlobalButtonStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:paddingVertical="@dimen/btn_padding_vertical"
+                android:text="@string/next"
+                app:layout_constraintTop_toBottomOf="@id/radio_group" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

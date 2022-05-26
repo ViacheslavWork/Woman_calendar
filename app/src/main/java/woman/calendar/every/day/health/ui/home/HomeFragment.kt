@@ -21,6 +21,7 @@ import woman.calendar.every.day.health.domain.model.Cycle
 import woman.calendar.every.day.health.domain.model.CycleStatus
 import woman.calendar.every.day.health.domain.model.StateOfDay.*
 import woman.calendar.every.day.health.ui.calendar.CalendarFragment
+import woman.calendar.every.day.health.ui.calendar.CalendarState
 import woman.calendar.every.day.health.ui.symptoms.SymptomsFragment
 import woman.calendar.every.day.health.utils.BookmarksPreferences
 import woman.calendar.every.day.health.utils.LocalDateHelper
@@ -186,7 +187,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                                 cycle.start.year,
                                 cycle.start.month
                             ),
-                            CalendarFragment.ARG_OPEN_DAY_INFO_BY_CLICK to true
+                            CalendarFragment.ARG_CALENDAR_STATE to CalendarState.OPEN_INFO_BY_CLICK
                         )
                     )
                 }
@@ -357,7 +358,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         binding.toolBarCalendarBtn.setOnClickListener {
             findNavController().navigate(
                 R.id.action_navigation_home_to_calendarFragment,
-                bundleOf(CalendarFragment.ARG_OPEN_DAY_INFO_BY_CLICK to true)
+                bundleOf(CalendarFragment.ARG_CALENDAR_STATE to CalendarState.OPEN_INFO_BY_CLICK)
             )
         }
         binding.plusSymptomIb.setOnClickListener {

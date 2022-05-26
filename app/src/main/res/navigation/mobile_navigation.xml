@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_home">
+    app:startDestination="@id/helloFragment">
 
     <action android:id="@+id/action_global_to_notificationScreen"
         app:destination="@id/notificationScreensContainerFragment"
@@ -43,6 +43,12 @@
         <action
             android:id="@+id/action_calendarFragment_to_dayInfoFragment"
             app:destination="@id/dayInfoFragment" />
+        <action
+            android:id="@+id/action_calendarFragment_to_moreAccuratePredictionsFragment"
+            app:destination="@id/moreAccuratePredictionsFragment" />
+        <action
+            android:id="@+id/action_calendarFragment_to_navigation_home"
+            app:destination="@id/navigation_home" />
     </fragment>
     <fragment
         android:id="@+id/symptomsFragment"
@@ -107,5 +113,116 @@
         android:name="woman.calendar.every.day.health.ui.notes.NotesFragment"
         android:label="fragment_notes"
         tools:layout="@layout/fragment_notes" />
+    <fragment
+        android:id="@+id/helloFragment"
+        android:name="woman.calendar.every.day.health.ui.onboarding.HelloFragment"
+        android:label="fragment_hello"
+        tools:layout="@layout/fragment_hello" >
+        <action
+            android:id="@+id/action_helloFragment_to_IWantToFragment"
+            app:destination="@id/IWantToFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/IWantToFragment"
+        android:name="woman.calendar.every.day.health.ui.onboarding.IWantToFragment"
+        android:label="fragment_i_want_to"
+        tools:layout="@layout/fragment_i_want_to" >
+        <action
+            android:id="@+id/action_IWantToFragment_to_birthDateFragment"
+            app:destination="@id/birthDateFragment" />
+        <action
+            android:id="@+id/action_IWantToFragment_to_accountFragment"
+            app:destination="@id/accountFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/continueWithEmailFragment"
+        android:name="woman.calendar.every.day.health.ui.onboarding.ContinueWithEmailFragment"
+        android:label="fragment_continue_with_email"
+        tools:layout="@layout/fragment_continue_with_email" >
+        <action
+            android:id="@+id/action_continueWithEmailFragment_to_accountFragment"
+            app:destination="@id/accountFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/accountFragment"
+        android:name="woman.calendar.every.day.health.ui.onboarding.AccountFragment"
+        android:label="fragment_account"
+        tools:layout="@layout/fragment_account" >
+        <action
+            android:id="@+id/action_accountFragment_to_savingDetailsFragment"
+            app:destination="@id/savingDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/savingDetailsFragment"
+        android:name="woman.calendar.every.day.health.ui.onboarding.SavingDetailsFragment"
+        android:label="fragment_saving_details"
+        tools:layout="@layout/fragment_saving_details" >
+        <action
+            android:id="@+id/action_savingDetailsFragment_to_onBoardingContainerFragment"
+            app:destination="@id/onBoardingContainerFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/birthDateFragment"
+        android:name="woman.calendar.every.day.health.ui.onboarding.BirthDateFragment"
+        android:label="fragment_birth_date"
+        tools:layout="@layout/fragment_birth_date" >
+        <action
+            android:id="@+id/action_birthDateFragment_to_continueWithEmailFragment"
+            app:destination="@id/continueWithEmailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/onBoardingContainerFragment"
+        android:name="woman.calendar.every.day.health.ui.onboarding.container.OnBoardingContainerFragment"
+        android:label="fragment_onboarding_container"
+        tools:layout="@layout/fragment_onboarding_container" >
+        <action
+            android:id="@+id/action_onBoardingContainerFragment_to_coCreatedFragment"
+            app:destination="@id/coCreatedFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/coCreatedFragment"
+        android:name="woman.calendar.every.day.health.ui.onboarding.CoCreatedFragment"
+        android:label="fragment_co_created"
+        tools:layout="@layout/fragment_co_created" >
+        <action
+            android:id="@+id/action_coCreatedFragment_to_creatingPersonalProgramFragment"
+            app:destination="@id/creatingPersonalProgramFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/creatingPersonalProgramFragment"
+        android:name="woman.calendar.every.day.health.ui.onboarding.CreatingPersonalProgramFragment"
+        android:label="fragment_creating_personal_program"
+        tools:layout="@layout/fragment_creating_personal_program" >
+        <action
+            android:id="@+id/action_creatingPersonalProgramFragment_to_meetFragment"
+            app:destination="@id/meetFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/meetFragment"
+        android:name="woman.calendar.every.day.health.ui.onboarding.MeetFragment"
+        android:label="fragment_meet"
+        tools:layout="@layout/fragment_meet" >
+        <action
+            android:id="@+id/action_meetFragment_to_stayOnTopOfHealthFragment"
+            app:destination="@id/stayOnTopOfHealthFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/stayOnTopOfHealthFragment"
+        android:name="woman.calendar.every.day.health.ui.onboarding.StayOnTopOfHealthFragment"
+        android:label="fragment_stay_on_top_of_health"
+        tools:layout="@layout/fragment_stay_on_top_of_health" >
+        <action
+            android:id="@+id/action_stayOnTopOfHealthFragment_to_calendarFragment"
+            app:destination="@id/calendarFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/moreAccuratePredictionsFragment"
+        android:name="woman.calendar.every.day.health.ui.onboarding.MoreAccuratePredictionsFragment"
+        android:label="fragment_more_accurate_predictions"
+        tools:layout="@layout/fragment_more_accurate_predictions" >
+        <action
+            android:id="@+id/action_moreAccuratePredictionsFragment_to_calendarFragment"
+            app:destination="@id/calendarFragment" />
+    </fragment>
 
 </navigation>

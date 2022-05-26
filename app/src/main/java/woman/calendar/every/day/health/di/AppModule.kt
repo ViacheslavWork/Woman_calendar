@@ -14,6 +14,7 @@ import woman.calendar.every.day.health.ui.day_info.DayInfoViewModel
 import woman.calendar.every.day.health.ui.home.HomeViewModel
 import woman.calendar.every.day.health.ui.notes.NotesViewModel
 import woman.calendar.every.day.health.ui.notification_screens.NotificationScreenViewModel
+import woman.calendar.every.day.health.ui.onboarding.container.OnBoardingContainerViewModel
 import woman.calendar.every.day.health.ui.symptoms.SymptomsViewModel
 import woman.calendar.every.day.health.ui.water.WaterViewModel
 import woman.calendar.every.day.health.utils.BookmarksPreferences
@@ -27,7 +28,8 @@ val appModule = module {
             getMonthUseCase = get(),
             markDayUseCase = get(),
             recalculateFromDayUseCase = get(),
-            onOffEverydayNotificationUseCase = get()
+            onOffEverydayNotificationUseCase = get(),
+            getCountOfPeriodsUseCase = get()
         )
     }
     viewModel {
@@ -56,7 +58,13 @@ val appModule = module {
         )
     }
     viewModel { DayInfoViewModel(getDayUseCase = get(), getCycleUseCase = get()) }
-    viewModel { NotesViewModel(getDayUseCase = get(), getCycleUseCase = get(), saveDayUseCase = get()) }
+    viewModel {
+        NotesViewModel(
+            getDayUseCase = get(),
+            getCycleUseCase = get(),
+            saveDayUseCase = get()
+        )
+    }
     //articles
     viewModel {
         DiscoverViewModel(
@@ -101,4 +109,7 @@ val appModule = module {
     single { NotificationSchedulerPreferences(androidContext()) }
     single { BookmarksPreferences(androidContext()) }
     single { RecentArticlesPreferences(androidContext()) }
+
+    //onBoarding
+    viewModel { OnBoardingContainerViewModel() }
 }
