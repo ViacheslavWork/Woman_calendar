@@ -16,8 +16,8 @@ class BookmarksPreferences(private val context: Context) : KoinComponent {
         val sharedPreferences =
             context.getSharedPreferences(PREF_BOOKMARKS_FILE, Context.MODE_PRIVATE)
         val bookmarksStr = sharedPreferences.getString(PREF_BOOKMARKS, null)
-        Timber.d(bookmarksStr?.let { jsonToSet(bookmarksStr) }.toString())
-        return bookmarksStr?.let { jsonToSet(bookmarksStr) } ?: setOf()
+        Timber.d(bookmarksStr?.let { jsonToSet(it) }.toString())
+        return bookmarksStr?.let { jsonToSet(it) } ?: setOf()
     }
 
     fun putBookmark(articleId: Int) {
@@ -25,7 +25,7 @@ class BookmarksPreferences(private val context: Context) : KoinComponent {
         val sharedPreferences =
             context.getSharedPreferences(PREF_BOOKMARKS_FILE, Context.MODE_PRIVATE)
         val bookmarksStr = sharedPreferences.getString(PREF_BOOKMARKS, null)
-        val bookmarks = bookmarksStr?.let { jsonToSet(bookmarksStr) } ?: mutableSetOf()
+        val bookmarks = bookmarksStr?.let { jsonToSet(it) } ?: mutableSetOf()
         bookmarks.add(articleId)
         sharedPreferences.edit().putString(PREF_BOOKMARKS, setToJson(bookmarks)).apply()
     }

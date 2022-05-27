@@ -55,7 +55,7 @@ class EverydayNotification(val context: Context) {
         .setAutoCancel(true)
         .setOngoing(false)
         //TODO
-        .setSmallIcon(R.drawable.ic_alcohol)
+        .setSmallIcon(R.drawable.ic_feather)
         .setContentIntent(getMainActivityPendingIntent())
 
     private fun getMainActivityPendingIntent() = PendingIntent.getActivity(

@@ -6,9 +6,10 @@ import androidx.fragment.app.Fragment
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import woman.calendar.every.day.health.R
 import woman.calendar.every.day.health.databinding.*
+import woman.calendar.every.day.health.ui.onboarding.container.OnBoardingContainerCallbacks
 import woman.calendar.every.day.health.ui.onboarding.container.OnBoardingContainerViewModel
 
-class OnBoarding8Fragment : Fragment(R.layout.fragment_onboarding_8) {
+class OnBoarding8Fragment(val onBoardingContainerCallbacks: OnBoardingContainerCallbacks) : Fragment(R.layout.fragment_onboarding_8) {
     private var _binding: FragmentOnboarding8Binding? = null
     private val binding get() = _binding!!
     private val viewModel: OnBoardingContainerViewModel by sharedViewModel()
@@ -18,7 +19,7 @@ class OnBoarding8Fragment : Fragment(R.layout.fragment_onboarding_8) {
         setUpListeners()
     }
     private fun setUpListeners() {
-        binding.nextBtn.setOnClickListener { viewModel.onNextFragmentClick() }
+        binding.nextBtn.setOnClickListener { onBoardingContainerCallbacks.onNextClick() }
     }
 
     private fun setUpUI() {

@@ -14,24 +14,40 @@ import woman.calendar.every.day.health.domain.model.StateOfDay.*
 import woman.calendar.every.day.health.domain.usecase.days.GetDayUseCase
 import woman.calendar.every.day.health.utils.Constants
 import woman.calendar.every.day.health.utils.Constants.MIN_COUNT_PERIODS_FOR_INSIGHT
+import woman.calendar.every.day.health.utils.LatestPeriodPreferences
 
 private const val MAX_COUNT_MONTHS_FOR_INSIGHT = 10L
 
 class RecalculateFromDayUseCase(
     private val repository: Repository,
-    private val getDayUseCase: GetDayUseCase
+    private val getDayUseCase: GetDayUseCase,
+    private val latestPeriodPreferences: LatestPeriodPreferences
 ) {
     suspend fun execute(date: LocalDate) = withContext(Dispatchers.IO) {
         val startTime = System.currentTimeMillis()
         val averagePeriodLength = async { calculateAveragePeriod() ?: 1L }
         val averageInterval = async { calculateAverageInterval() }
         var initialDate: LocalDate? = findNearestPeriod(date)
+        clearExpectedPeriodDaysBeforeDate(date)
 
         while (initialDate != null) {
 //            val startTime = System.currentTimeMillis()
             initialDate =
                 calculateCycle(initialDate, averagePeriodLength.await(), averageInterval.await())
             Timber.d("Calculate period time: ${System.currentTimeMillis() - startTime}")
+        }
+    }
+
+    private suspend fun clearExpectedPeriodDaysBeforeDate(date: LocalDate) {
+        var tempDate = date.minusDays(1)
+        while (getDayUseCase.execute(tempDate).stateOfDay != PERIOD
+            && tempDate.isAfter(date.minusMonths(2))
+        ) {
+            val day = getDayUseCase.execute(tempDate)
+            if (day.stateOfDay == EXPECTED_NEW_PERIOD) {
+                repository.setDay(day.apply { stateOfDay = null })
+            }
+            tempDate = tempDate.minusDays(1)
         }
     }
 
@@ -51,12 +67,14 @@ class RecalculateFromDayUseCase(
             val endFertileDays = setFertileDays(start = endDelayAfterPeriod.plusDays(1))
             val ovulationDay = setOvulationDay(endOfPeriod.await())
             clearStatusDaysUntilNextPeriod(start = endFertileDays.plusDays(1))
-            launch {
-                setExpectedPeriodDays(
-                    averagePeriodLength,
-                    averageInterval,
-                    endOfPeriod.await()
-                )
+            if (latestPeriodPreferences.getEnd()?.let { !endOfPeriod.await().isBefore(it) } == true) {
+                launch {
+                    setExpectedPeriodDays(
+                        averagePeriodLength,
+                        averageInterval,
+                        endOfPeriod.await()
+                    )
+                }
             }
         }
 

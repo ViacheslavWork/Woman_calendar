@@ -91,27 +91,74 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                         ResourcesCompat.getDrawable(resources, android.R.color.transparent, null)
                     itemWeekDayBinding.dateTv.background =
                         ResourcesCompat.getDrawable(resources, android.R.color.transparent, null)
+                    if (date == LocalDate.now()) {
+                        itemWeekDayBinding.root.background =
+                            ResourcesCompat.getDrawable(
+                                resources,
+                                R.drawable.bg_today,
+                                null
+                            )
+                    }
                     when (stateOfDay) {
                         FERTILE -> {
                             itemWeekDayBinding.dateTv.setTextColor(binding.root.resources.getColor(R.color.green))
+                            if (date == LocalDate.now()) {
+                                itemWeekDayBinding.root.background =
+                                    ResourcesCompat.getDrawable(
+                                        resources,
+                                        R.drawable.bg_today,
+                                        null
+                                    )
+                            }
                         }
                         PERIOD -> {
-                            itemWeekDayBinding.dateTv.background =
-                                ResourcesCompat.getDrawable(
+                            if (date == LocalDate.now()) {
+                                itemWeekDayBinding.root.background = ResourcesCompat.getDrawable(
                                     resources,
-                                    R.color.pink,
+                                    R.drawable.bg_today_period_day,
                                     null
                                 )
-                            itemWeekDayBinding.dateTv.setTextColor(binding.root.resources.getColor(R.color.white))
+                                itemWeekDayBinding.dateTv.setTextColor(
+                                    resources.getColor(
+                                        R.color.pink,
+                                        null
+                                    )
+                                )
+                            } else {
+                                itemWeekDayBinding.dateTv.background =
+                                    ResourcesCompat.getDrawable(
+                                        resources,
+                                        R.color.pink,
+                                        null
+                                    )
+                                itemWeekDayBinding.dateTv.setTextColor(
+                                    binding.root.resources.getColor(
+                                        R.color.white
+                                    )
+                                )
+                            }
                         }
                         OVULATION -> {
                             itemWeekDayBinding.dateTv.background =
-                                ResourcesCompat.getDrawable(
-                                    resources,
-                                    R.drawable.bg_border_dashed_green,
+                                if (date == LocalDate.now()) {
+                                    ResourcesCompat.getDrawable(
+                                        resources,
+                                        R.drawable.bg_today_ovulation_day,
+                                        null
+                                    )
+                                } else {
+                                    ResourcesCompat.getDrawable(
+                                        resources,
+                                        R.drawable.bg_border_dashed_green,
+                                        null
+                                    )
+                                }
+                            itemWeekDayBinding.dateTv.setTextColor(
+                                resources.getColor(
+                                    R.color.green,
                                     null
                                 )
-                            itemWeekDayBinding.dateTv.setTextColor(binding.root.resources.getColor(R.color.green))
+                            )
                         }
                         EXPECTED_NEW_PERIOD -> {
                             if (date.isBefore(LocalDate.now())) {
@@ -128,35 +175,25 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                                 )
                             } else {
                                 itemWeekDayBinding.dateTv.background =
-                                    ResourcesCompat.getDrawable(
-                                        resources,
-                                        R.drawable.bg_border_dashed_pink,
-                                        null
-                                    )
+                                    if (date == LocalDate.now()) {
+                                        ResourcesCompat.getDrawable(
+                                            resources,
+                                            R.drawable.bg_today_expected_day,
+                                            null
+                                        )
+                                    } else {
+                                        ResourcesCompat.getDrawable(
+                                            resources,
+                                            R.drawable.bg_border_dashed_pink,
+                                            null
+                                        )
+                                    }
                                 itemWeekDayBinding.dateTv.setTextColor(
                                     binding.root.resources.getColor(
                                         R.color.pink
                                     )
                                 )
                             }
-                        }
-                        null -> {
-                            itemWeekDayBinding.dateTv.setTextColor(
-                                resources.getColor(
-                                    R.color.text_color,
-                                    null
-                                )
-                            )
-                            itemWeekDayBinding.root.background = ResourcesCompat.getDrawable(
-                                resources,
-                                android.R.color.transparent,
-                                null
-                            )
-                            itemWeekDayBinding.dateTv.background = ResourcesCompat.getDrawable(
-                                resources,
-                                android.R.color.transparent,
-                                null
-                            )
                         }
                         PRE_PERIOD -> TODO()
                         DELAY -> TODO()

@@ -7,9 +7,10 @@ import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import woman.calendar.every.day.health.R
 import woman.calendar.every.day.health.databinding.FragmentOnboarding1Binding
+import woman.calendar.every.day.health.ui.onboarding.container.OnBoardingContainerCallbacks
 import woman.calendar.every.day.health.ui.onboarding.container.OnBoardingContainerViewModel
 
-class OnBoarding1Fragment : Fragment(R.layout.fragment_onboarding_1) {
+class OnBoarding1Fragment(val onBoardingContainerCallbacks: OnBoardingContainerCallbacks) : Fragment(R.layout.fragment_onboarding_1) {
     private var _binding: FragmentOnboarding1Binding? = null
     private val binding get() = _binding!!
     private val viewModel: OnBoardingContainerViewModel by sharedViewModel()
@@ -20,9 +21,9 @@ class OnBoarding1Fragment : Fragment(R.layout.fragment_onboarding_1) {
     }
 
     private fun setUpListeners() {
-        binding.myCycleIsRegularBtn.root.setOnClickListener { viewModel.onNextFragmentClick() }
-        binding.myCycleIsIrregularBtn.root.setOnClickListener { viewModel.onNextFragmentClick() }
-        binding.iDonTKnowBtn.root.setOnClickListener { viewModel.onNextFragmentClick() }
+        binding.myCycleIsRegularBtn.root.setOnClickListener { onBoardingContainerCallbacks.onNextClick() }
+        binding.myCycleIsIrregularBtn.root.setOnClickListener { onBoardingContainerCallbacks.onNextClick() }
+        binding.iDonTKnowBtn.root.setOnClickListener { onBoardingContainerCallbacks.onNextClick() }
     }
 
     private fun setUpUI() {

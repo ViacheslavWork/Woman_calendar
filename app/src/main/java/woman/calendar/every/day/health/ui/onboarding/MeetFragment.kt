@@ -13,7 +13,10 @@ class MeetFragment : Fragment(R.layout.fragment_meet) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         _binding = FragmentMeetBinding.bind(view)
         binding.continueBtn.setOnClickListener { findNavController().navigate(MeetFragmentDirections.actionMeetFragmentToStayOnTopOfHealthFragment()) }
-
+        binding.titleTv.text = String.format(
+            getString(R.string.meet_app_s_name),
+            getString(R.string.app_name)
+        )
     }
 
     override fun onDestroyView() {

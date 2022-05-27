@@ -9,9 +9,10 @@ import woman.calendar.every.day.health.databinding.FragmentOnboarding1Binding
 import woman.calendar.every.day.health.databinding.FragmentOnboarding2Binding
 import woman.calendar.every.day.health.databinding.FragmentOnboarding3Binding
 import woman.calendar.every.day.health.databinding.FragmentOnboarding4Binding
+import woman.calendar.every.day.health.ui.onboarding.container.OnBoardingContainerCallbacks
 import woman.calendar.every.day.health.ui.onboarding.container.OnBoardingContainerViewModel
 
-class OnBoarding4Fragment : Fragment(R.layout.fragment_onboarding_4) {
+class OnBoarding4Fragment(val onBoardingContainerCallbacks: OnBoardingContainerCallbacks) : Fragment(R.layout.fragment_onboarding_4) {
     private var _binding: FragmentOnboarding4Binding? = null
     private val binding get() = _binding!!
     private val viewModel: OnBoardingContainerViewModel by sharedViewModel()
@@ -21,7 +22,7 @@ class OnBoarding4Fragment : Fragment(R.layout.fragment_onboarding_4) {
         setUpListeners()
     }
     private fun setUpListeners() {
-        binding.nextBtn.setOnClickListener { viewModel.onNextFragmentClick() }
+        binding.nextBtn.setOnClickListener { onBoardingContainerCallbacks.onNextClick() }
     }
 
     private fun setUpUI() {

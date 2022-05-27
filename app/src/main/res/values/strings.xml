@@ -181,7 +181,7 @@ healthy veggies with a big salad</string>
     <string name="notification_ovulation_day">Your most fertile days are today! You might notice bloating today. What else to expect? Tap to see 👉</string>
     <string name="_month_dd_your_forecast">%s %d: Your forecast</string>
     <string name="log_a_symptom_or_make_a_note">Log a symptom or make a note</string>
-    <string name="hello_i_m_app_s_name">Hello, I\’m \“App\’s name\”</string>
+    <string name="hello_i_m_app_s_name">Hello, I\’m %s</string>
     <string name="i_m_your_women_s_health_assistant">I’m your women’s health assistant</string>
     <string name="start">Start</string>
     <string name="i_want_to">I want to:</string>
@@ -272,5 +272,5 @@ healthy veggies with a big salad</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <string name="no_but_I_used_to">No, but I used to</string>
-    <string name="meet_app_s_name">Meet “App’s name”</string>
+    <string name="meet_app_s_name">Meet %s</string>
 </resources>

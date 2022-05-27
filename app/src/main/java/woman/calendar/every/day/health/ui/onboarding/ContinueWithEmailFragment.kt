@@ -17,6 +17,10 @@ class ContinueWithEmailFragment : Fragment(R.layout.fragment_continue_with_email
                 ContinueWithEmailFragmentDirections.actionContinueWithEmailFragmentToAccountFragment()
             )
         }
+        binding.titleTv.text = String.format(
+            getString(R.string.take_your_health_n_well_being_to_the_next_level_with_the_s),
+            getString(R.string.app_name)
+        )
     }
 
     override fun onDestroyView() {

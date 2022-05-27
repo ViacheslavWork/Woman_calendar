@@ -1,7 +1,7 @@
 package woman.calendar.every.day.health.utils
 
 object Constants {
-    const val MIN_COUNT_PERIODS_FOR_INSIGHT = 2
+    const val MIN_COUNT_PERIODS_FOR_INSIGHT = 3
     const val STANDARD_LENGTH_OF_PERIOD = 5
     const val SIZE_OF_DELAY_AFTER_PERIOD = 4
     const val SIZE_OF_FERTILE_DAYS = 11

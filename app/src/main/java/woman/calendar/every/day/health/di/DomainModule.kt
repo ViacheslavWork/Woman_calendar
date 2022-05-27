@@ -14,10 +14,7 @@ import woman.calendar.every.day.health.domain.usecase.days.GetMonthUseCase
 import woman.calendar.every.day.health.domain.usecase.days.GetWeekUseCase
 import woman.calendar.every.day.health.domain.usecase.days.SaveDayUseCase
 import woman.calendar.every.day.health.domain.usecase.notification.OnOffEverydayNotificationUseCase
-import woman.calendar.every.day.health.domain.usecase.periods.GetCountOfPeriodsUseCase
-import woman.calendar.every.day.health.domain.usecase.periods.GetLastPeriodsUseCase
-import woman.calendar.every.day.health.domain.usecase.periods.MarkDayUseCase
-import woman.calendar.every.day.health.domain.usecase.periods.UpdatePeriodDayUseCase
+import woman.calendar.every.day.health.domain.usecase.periods.*
 import woman.calendar.every.day.health.domain.usecase.symptoms.GetSymptomsUseCase
 import woman.calendar.every.day.health.domain.usecase.symptoms.SaveSelectedSymptomsUseCase
 import woman.calendar.every.day.health.domain.usecase.water.AddWaterUseCase
@@ -37,7 +34,8 @@ val domainModule = module {
     single<RecalculateFromDayUseCase> {
         RecalculateFromDayUseCase(
             repository = get(),
-            getDayUseCase = get()
+            getDayUseCase = get(),
+            latestPeriodPreferences = get()
         )
     }
     single<GetSymptomsUseCase> { GetSymptomsUseCase(symptomsProvider = get()) }
@@ -58,9 +56,14 @@ val domainModule = module {
         MarkDayUseCase(
             repository = get(),
             getDayUseCase = get(),
-            getCountOfPeriodsUseCase = get()
+            getCountOfPeriodsUseCase = get(),
+            getEarliestPeriodUseCase = get(),
+            earliestPeriodPreferences = get(),
+            latestPeriodPreferences = get(),
+            getLastPeriodsUseCase = get()
         )
     }
+    single { GetEarliestPeriodUseCase(getDayUseCase = get()) }
     //notifications
     single {
         GetDailyNotificationDataUseCase(

@@ -6,9 +6,10 @@ import androidx.fragment.app.Fragment
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import woman.calendar.every.day.health.R
 import woman.calendar.every.day.health.databinding.FragmentOnboarding5Binding
+import woman.calendar.every.day.health.ui.onboarding.container.OnBoardingContainerCallbacks
 import woman.calendar.every.day.health.ui.onboarding.container.OnBoardingContainerViewModel
 
-class OnBoarding5Fragment : Fragment(R.layout.fragment_onboarding_5) {
+class OnBoarding5Fragment(val onBoardingContainerCallbacks: OnBoardingContainerCallbacks) : Fragment(R.layout.fragment_onboarding_5) {
     private var _binding: FragmentOnboarding5Binding? = null
     private val binding get() = _binding!!
     private val viewModel: OnBoardingContainerViewModel by sharedViewModel()
@@ -18,10 +19,10 @@ class OnBoarding5Fragment : Fragment(R.layout.fragment_onboarding_5) {
         setUpListeners()
     }
     private fun setUpListeners() {
-        binding.yesBtn.root.setOnClickListener { viewModel.onNextFragmentClick() }
-        binding.noBtn.root.setOnClickListener { viewModel.onNextFragmentClick() }
-        binding.noButIUsedToBtn.root.setOnClickListener { viewModel.onNextFragmentClick() }
-        binding.iDonTKnowBtn.root.setOnClickListener { viewModel.onNextFragmentClick() }
+        binding.yesBtn.root.setOnClickListener { onBoardingContainerCallbacks.onNextClick() }
+        binding.noBtn.root.setOnClickListener { onBoardingContainerCallbacks.onNextClick() }
+        binding.noButIUsedToBtn.root.setOnClickListener { onBoardingContainerCallbacks.onNextClick() }
+        binding.iDonTKnowBtn.root.setOnClickListener { onBoardingContainerCallbacks.onNextClick() }
     }
 
     private fun setUpUI() {

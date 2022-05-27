@@ -13,6 +13,10 @@ class HelloFragment : Fragment(R.layout.fragment_hello) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         _binding = FragmentHelloBinding.bind(view)
         binding.startBtn.setOnClickListener { findNavController().navigate(HelloFragmentDirections.actionHelloFragmentToIWantToFragment()) }
+        binding.titleTv.text = String.format(
+            getString(R.string.hello_i_m_app_s_name),
+            getString(R.string.app_name)
+        )
     }
 
     override fun onDestroyView() {

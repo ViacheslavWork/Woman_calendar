@@ -17,9 +17,7 @@ import woman.calendar.every.day.health.ui.notification_screens.NotificationScree
 import woman.calendar.every.day.health.ui.onboarding.container.OnBoardingContainerViewModel
 import woman.calendar.every.day.health.ui.symptoms.SymptomsViewModel
 import woman.calendar.every.day.health.ui.water.WaterViewModel
-import woman.calendar.every.day.health.utils.BookmarksPreferences
-import woman.calendar.every.day.health.utils.NotificationSchedulerPreferences
-import woman.calendar.every.day.health.utils.RecentArticlesPreferences
+import woman.calendar.every.day.health.utils.*
 
 
 val appModule = module {
@@ -109,6 +107,8 @@ val appModule = module {
     single { NotificationSchedulerPreferences(androidContext()) }
     single { BookmarksPreferences(androidContext()) }
     single { RecentArticlesPreferences(androidContext()) }
+    single { EarliestPeriodPreferences(androidContext()) }
+    single { LatestPeriodPreferences(androidContext()) }
 
     //onBoarding
     viewModel { OnBoardingContainerViewModel() }

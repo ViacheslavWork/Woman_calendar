@@ -236,7 +236,7 @@ class DayHolder(private val binding: ItemCalendarDayBinding) :
 
         item.date?.let { date ->
             binding.root.setOnClickListener {
-                if (item.date.isAfter(LocalDate.now())) return@setOnClickListener
+//                if (item.date.isAfter(LocalDate.now())) return@setOnClickListener
                 timeStart = System.currentTimeMillis()
 
                 if (item.stateOfDay != PERIOD) {
