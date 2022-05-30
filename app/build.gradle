@@ -10,7 +10,7 @@ android {
     compileSdk 32
 
     defaultConfig {
-        applicationId "woman.calendar.every.day.health"
+        applicationId "com.period.tracker.natural.cycles"
         minSdk 23
         targetSdk 32
         versionCode 1

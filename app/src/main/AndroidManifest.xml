@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="woman.calendar.every.day.health">
+    package="com.period.tracker.natural.cycles">
 
     <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
     <uses-permission android:name="android.permission.INTERNET" />
     <application
-        android:name=".App"
+        android:name="com.period.tracker.natural.cycles.App"
         android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.WomanCalendar">
         <activity
-            android:name=".ui.MainActivity"
+            android:name="com.period.tracker.natural.cycles.ui.MainActivity"
             android:exported="true"
             android:screenOrientation="portrait">
             <intent-filter>
@@ -23,10 +23,10 @@
             </intent-filter>
         </activity>
         <service
-            android:name=".notifications.EverydayNotificationService"
+            android:name="com.period.tracker.natural.cycles.notifications.EverydayNotificationService"
             android:foregroundServiceType="dataSync" />
         <receiver
-            android:name=".notifications.EverydayNotificationReceiver"
+            android:name="com.period.tracker.natural.cycles.notifications.EverydayNotificationReceiver"
             android:exported="false">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />

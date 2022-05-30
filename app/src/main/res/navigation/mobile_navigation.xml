@@ -11,7 +11,7 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="woman.calendar.every.day.health.ui.home.HomeFragment"
+        android:name="com.period.tracker.natural.cycles.ui.home.HomeFragment"
         android:label="@string/title_home"
         tools:layout="@layout/fragment_home">
         <action
@@ -27,7 +27,7 @@
 
     <fragment
         android:id="@+id/navigation_articles"
-        android:name="woman.calendar.every.day.health.ui.articles.ArticlesFragment"
+        android:name="com.period.tracker.natural.cycles.ui.articles.ArticlesContainerFragment"
         android:label="@string/title_articles"
         tools:layout="@layout/fragment_articles">
         <action
@@ -37,7 +37,7 @@
 
     <fragment
         android:id="@+id/calendarFragment"
-        android:name="woman.calendar.every.day.health.ui.calendar.CalendarFragment"
+        android:name="com.period.tracker.natural.cycles.ui.calendar.CalendarFragment"
         android:label="fragment_calendrar"
         tools:layout="@layout/fragment_calendrar" >
         <action
@@ -52,7 +52,7 @@
     </fragment>
     <fragment
         android:id="@+id/symptomsFragment"
-        android:name="woman.calendar.every.day.health.ui.symptoms.SymptomsFragment"
+        android:name="com.period.tracker.natural.cycles.ui.symptoms.SymptomsFragment"
         android:label="fragment_symptoms"
         tools:layout="@layout/fragment_symptoms">
         <action
@@ -67,17 +67,17 @@
     </fragment>
     <fragment
         android:id="@+id/waterFragment"
-        android:name="woman.calendar.every.day.health.ui.water.WaterFragment"
+        android:name="com.period.tracker.natural.cycles.ui.water.WaterFragment"
         android:label="fragment_water"
         tools:layout="@layout/fragment_water" />
     <fragment
         android:id="@+id/weightFragment"
-        android:name="woman.calendar.every.day.health.ui.weight.WeightFragment"
+        android:name="com.period.tracker.natural.cycles.ui.weight.WeightFragment"
         android:label="fragment_weight"
         tools:layout="@layout/fragment_weight" />
     <fragment
         android:id="@+id/articleDetailsFragment"
-        android:name="woman.calendar.every.day.health.ui.articles.details.ArticleDetailsFragment"
+        android:name="com.period.tracker.natural.cycles.ui.articles.details.ArticleDetailsFragment"
         android:label="ArticleDetailsFragment"
         tools:layout="@layout/fragment_article_details">
         <action
@@ -87,7 +87,7 @@
     </fragment>
     <fragment
         android:id="@+id/notificationScreensContainerFragment"
-        android:name="woman.calendar.every.day.health.ui.notification_screens.fragments.NotificationScreensContainerFragment"
+        android:name="com.period.tracker.natural.cycles.ui.notification_screens.fragments.NotificationScreensContainerFragment"
         android:label="fragment_notification_screens_container"
         tools:layout="@layout/fragment_notification_screens_container" >
         <action
@@ -96,7 +96,7 @@
     </fragment>
     <fragment
         android:id="@+id/savedFragment"
-        android:name="woman.calendar.every.day.health.ui.articles.saved.SavedFragment"
+        android:name="com.period.tracker.natural.cycles.ui.articles.saved.SavedFragment"
         android:label="fragment_saved"
         tools:layout="@layout/fragment_saved" >
         <action
@@ -105,17 +105,17 @@
     </fragment>
     <fragment
         android:id="@+id/dayInfoFragment"
-        android:name="woman.calendar.every.day.health.ui.day_info.DayInfoFragment"
+        android:name="com.period.tracker.natural.cycles.ui.day_info.DayInfoFragment"
         android:label="fragment_day_info"
         tools:layout="@layout/fragment_day_info" />
     <fragment
         android:id="@+id/notesFragment"
-        android:name="woman.calendar.every.day.health.ui.notes.NotesFragment"
+        android:name="com.period.tracker.natural.cycles.ui.notes.NotesFragment"
         android:label="fragment_notes"
         tools:layout="@layout/fragment_notes" />
     <fragment
         android:id="@+id/helloFragment"
-        android:name="woman.calendar.every.day.health.ui.onboarding.HelloFragment"
+        android:name="com.period.tracker.natural.cycles.ui.onboarding.HelloFragment"
         android:label="fragment_hello"
         tools:layout="@layout/fragment_hello" >
         <action
@@ -124,7 +124,7 @@
     </fragment>
     <fragment
         android:id="@+id/IWantToFragment"
-        android:name="woman.calendar.every.day.health.ui.onboarding.IWantToFragment"
+        android:name="com.period.tracker.natural.cycles.ui.onboarding.IWantToFragment"
         android:label="fragment_i_want_to"
         tools:layout="@layout/fragment_i_want_to" >
         <action
@@ -136,7 +136,7 @@
     </fragment>
     <fragment
         android:id="@+id/continueWithEmailFragment"
-        android:name="woman.calendar.every.day.health.ui.onboarding.ContinueWithEmailFragment"
+        android:name="com.period.tracker.natural.cycles.ui.onboarding.ContinueWithEmailFragment"
         android:label="fragment_continue_with_email"
         tools:layout="@layout/fragment_continue_with_email" >
         <action
@@ -145,7 +145,7 @@
     </fragment>
     <fragment
         android:id="@+id/accountFragment"
-        android:name="woman.calendar.every.day.health.ui.onboarding.AccountFragment"
+        android:name="com.period.tracker.natural.cycles.ui.onboarding.AccountFragment"
         android:label="fragment_account"
         tools:layout="@layout/fragment_account" >
         <action
@@ -154,7 +154,7 @@
     </fragment>
     <fragment
         android:id="@+id/savingDetailsFragment"
-        android:name="woman.calendar.every.day.health.ui.onboarding.SavingDetailsFragment"
+        android:name="com.period.tracker.natural.cycles.ui.onboarding.SavingDetailsFragment"
         android:label="fragment_saving_details"
         tools:layout="@layout/fragment_saving_details" >
         <action
@@ -163,7 +163,7 @@
     </fragment>
     <fragment
         android:id="@+id/birthDateFragment"
-        android:name="woman.calendar.every.day.health.ui.onboarding.BirthDateFragment"
+        android:name="com.period.tracker.natural.cycles.ui.onboarding.BirthDateFragment"
         android:label="fragment_birth_date"
         tools:layout="@layout/fragment_birth_date" >
         <action
@@ -172,7 +172,7 @@
     </fragment>
     <fragment
         android:id="@+id/onBoardingContainerFragment"
-        android:name="woman.calendar.every.day.health.ui.onboarding.container.OnBoardingContainerFragment"
+        android:name="com.period.tracker.natural.cycles.ui.onboarding.container.OnBoardingContainerFragment"
         android:label="fragment_onboarding_container"
         tools:layout="@layout/fragment_onboarding_container" >
         <action
@@ -181,7 +181,7 @@
     </fragment>
     <fragment
         android:id="@+id/coCreatedFragment"
-        android:name="woman.calendar.every.day.health.ui.onboarding.CoCreatedFragment"
+        android:name="com.period.tracker.natural.cycles.ui.onboarding.CoCreatedFragment"
         android:label="fragment_co_created"
         tools:layout="@layout/fragment_co_created" >
         <action
@@ -190,7 +190,7 @@
     </fragment>
     <fragment
         android:id="@+id/creatingPersonalProgramFragment"
-        android:name="woman.calendar.every.day.health.ui.onboarding.CreatingPersonalProgramFragment"
+        android:name="com.period.tracker.natural.cycles.ui.onboarding.CreatingPersonalProgramFragment"
         android:label="fragment_creating_personal_program"
         tools:layout="@layout/fragment_creating_personal_program" >
         <action
@@ -199,7 +199,7 @@
     </fragment>
     <fragment
         android:id="@+id/meetFragment"
-        android:name="woman.calendar.every.day.health.ui.onboarding.MeetFragment"
+        android:name="com.period.tracker.natural.cycles.ui.onboarding.MeetFragment"
         android:label="fragment_meet"
         tools:layout="@layout/fragment_meet" >
         <action
@@ -208,7 +208,7 @@
     </fragment>
     <fragment
         android:id="@+id/stayOnTopOfHealthFragment"
-        android:name="woman.calendar.every.day.health.ui.onboarding.StayOnTopOfHealthFragment"
+        android:name="com.period.tracker.natural.cycles.ui.onboarding.StayOnTopOfHealthFragment"
         android:label="fragment_stay_on_top_of_health"
         tools:layout="@layout/fragment_stay_on_top_of_health" >
         <action
@@ -217,7 +217,7 @@
     </fragment>
     <fragment
         android:id="@+id/moreAccuratePredictionsFragment"
-        android:name="woman.calendar.every.day.health.ui.onboarding.MoreAccuratePredictionsFragment"
+        android:name="com.period.tracker.natural.cycles.ui.onboarding.MoreAccuratePredictionsFragment"
         android:label="fragment_more_accurate_predictions"
         tools:layout="@layout/fragment_more_accurate_predictions" >
         <action

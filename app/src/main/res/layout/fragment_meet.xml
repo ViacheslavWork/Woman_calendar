@@ -37,6 +37,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:fontFamily="@font/segoe_print_bold"
+        android:gravity="center"
         android:text="@string/meet_app_s_name"
         android:textColor="@color/text_color"
         android:textSize="24sp"

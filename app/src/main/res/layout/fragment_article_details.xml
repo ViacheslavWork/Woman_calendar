@@ -78,7 +78,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/im_big_placeholder_jpg" />
+                tools:srcCompat="@drawable/im_big_placeholder_jpg" />
 
             <TextView
                 android:id="@+id/title_tv"
