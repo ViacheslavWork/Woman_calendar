@@ -1,11 +1,11 @@
-package com.period.tracker.natural.cycles.utils
+package com.period.tracker.natural.cycles.preferences
 
 import android.content.Context
 
 object WeightPreferences {
     private const val WEIGHT_IS_NOT_SETTLED = -1
     private const val PREF_WEIGHT = "weight"
-    private const val PREF_WEIGHT_FILE = "woman.calendar.every.day.health.utils.weight"
+    private const val PREF_WEIGHT_FILE = "com.period.tracker.natural.cycles.utils.weight"
     fun getWeight(context: Context): Int? {
         val sharedPreferences = context.getSharedPreferences(PREF_WEIGHT_FILE, Context.MODE_PRIVATE)
         val weight = sharedPreferences.getInt(PREF_WEIGHT, WEIGHT_IS_NOT_SETTLED)

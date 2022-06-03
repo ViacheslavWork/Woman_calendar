@@ -6,14 +6,19 @@ import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
-import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import com.period.tracker.natural.cycles.R
 import com.period.tracker.natural.cycles.databinding.FragmentArticlesBinding
 import com.period.tracker.natural.cycles.databinding.ItemArticlesTabBinding
+import com.period.tracker.natural.cycles.domain.usecase.firebase.bookmarks.DownloadArticlesBookmarksFromFirebaseUseCase
 import com.period.tracker.natural.cycles.ui.articles.adapters.ArticlesViewPagerAdapter
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import org.koin.android.ext.android.inject
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class ArticlesContainerFragment : Fragment(R.layout.fragment_articles) {
     private var _binding: FragmentArticlesBinding? = null
@@ -21,10 +26,20 @@ class ArticlesContainerFragment : Fragment(R.layout.fragment_articles) {
     private lateinit var viewPager: ViewPager2
     private lateinit var tabLayout: TabLayout
     private val viewModel: ArticlesViewModel by sharedViewModel()
+    private val downloadArticlesBookmarksFromFirebaseUseCase: DownloadArticlesBookmarksFromFirebaseUseCase by inject()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        lifecycleScope.launch(Dispatchers.IO) {
+            downloadArticlesBookmarksFromFirebaseUseCase.execute()
+        }
+    }
+
     override fun onResume() {
         viewModel.onContainerResume()
         super.onResume()
     }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         _binding = FragmentArticlesBinding.bind(view)
 

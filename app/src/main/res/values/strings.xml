@@ -47,8 +47,11 @@
     <string name="logged_weight">Logged Weight</string>
     <string name="apply">Apply</string>
     <string name="s_kg">%s kg</string>
+    <string name="s_lb">%s lb</string>
     <string name="kg">kg</string>
     <string name="__kg">-- kg</string>
+    <string name="lb">lb</string>
+    <string name="__lb">-- lb</string>
     <string name="__l">-- L</string>
     <string name="discover">Discover</string>
     <string name="reproductive_health">Reproductive Health</string>
@@ -273,4 +276,7 @@ healthy veggies with a big salad</string>
     <string name="no">No</string>
     <string name="no_but_I_used_to">No, but I used to</string>
     <string name="meet_app_s_name">Meet %s</string>
+    <string name="you_must_fill_in_all_fields">You must fill in all fields!</string>
+    <string name="authentification_failed">Authentication failed:</string>
+
 </resources>

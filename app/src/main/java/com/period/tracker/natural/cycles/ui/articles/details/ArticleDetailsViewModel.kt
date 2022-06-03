@@ -4,31 +4,31 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.period.tracker.natural.cycles.domain.model.Article
+import com.period.tracker.natural.cycles.domain.usecase.articles.GetArticleUseCase
+import com.period.tracker.natural.cycles.domain.usecase.articles.GetArticlesFlowUseCase
+import com.period.tracker.natural.cycles.domain.usecase.firebase.articles.SaveArticleToFirebaseUseCase
+import com.period.tracker.natural.cycles.preferences.RecentArticlesPreferences
+import com.period.tracker.natural.cycles.ui.articles.ArticleItem
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import timber.log.Timber
-import com.period.tracker.natural.cycles.domain.model.Article
-import com.period.tracker.natural.cycles.domain.usecase.articles.GetArticleUseCase
-import com.period.tracker.natural.cycles.domain.usecase.articles.GetArticlesFlowUseCase
-import com.period.tracker.natural.cycles.ui.articles.ArticleItem
-import com.period.tracker.natural.cycles.utils.RecentArticlesPreferences
 import java.util.*
 
 class ArticleDetailsViewModel(
     private val getArticleUseCase: GetArticleUseCase,
-    getArticlesFlowUseCase: GetArticlesFlowUseCase,
-    private val recentArticlesPreferences: RecentArticlesPreferences
+    private val recentArticlesPreferences: RecentArticlesPreferences,
+    private val saveArticleToFirebaseUseCase: SaveArticleToFirebaseUseCase,
+    getArticlesFlowUseCase: GetArticlesFlowUseCase
 ) : ViewModel() {
     private val _article = MutableLiveData<Article?>()
     val article: LiveData<Article?> = _article
 
     private var articlesStateFlow = getArticlesFlowUseCase.execute()
-        .map { articles ->
-            articles.map { ArticleItem.fromArticle(it) }
-        }
+        .map { articles -> articles.map { ArticleItem.fromArticle(it) } }
 
     private val _internalArticlesFlow = MutableStateFlow<List<ArticleItem>?>(null)
     val internalArticlesFlow: StateFlow<List<ArticleItem>?> = _internalArticlesFlow
@@ -40,6 +40,9 @@ class ArticleDetailsViewModel(
         val article = getArticleUseCase.execute(id)
         _article.value = article
         updateInternalArticles(article)
+
+        //for test
+//        article?.let { saveArticleToFirebaseUseCase.execute(it) }
     }
 
     private fun updateInternalArticles(article: Article?) {

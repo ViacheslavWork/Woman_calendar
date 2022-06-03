@@ -1,4 +1,4 @@
-package com.period.tracker.natural.cycles.utils
+package com.period.tracker.natural.cycles.preferences
 
 import android.content.Context
 import androidx.room.TypeConverter
@@ -11,7 +11,7 @@ class EarliestPeriodPreferences(private val context: Context) : KoinComponent {
     companion object {
         private const val PREF_EARLIEST_PERIOD_START = "earliest_period_start"
         private const val PREF_EARLIEST_PERIOD_FILE =
-            "woman.calendar.every.day.health.utils.earliest_period"
+            "com.period.tracker.natural.cycles.utils.earliest_period"
     }
 
     fun getStart(): LocalDate? {

@@ -1,25 +1,25 @@
 package com.period.tracker.natural.cycles.domain.usecase
 
+import com.period.tracker.natural.cycles.domain.model.Interval
+import com.period.tracker.natural.cycles.domain.model.Period
+import com.period.tracker.natural.cycles.domain.model.StateOfDay
+import com.period.tracker.natural.cycles.domain.model.StateOfDay.*
+import com.period.tracker.natural.cycles.domain.usecase.days.GetDayUseCase
+import com.period.tracker.natural.cycles.domain.usecase.days.SaveDayUseCase
+import com.period.tracker.natural.cycles.preferences.LatestPeriodPreferences
+import com.period.tracker.natural.cycles.utils.Constants
+import com.period.tracker.natural.cycles.utils.Constants.MIN_COUNT_PERIODS_FOR_INSIGHT
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.threeten.bp.LocalDate
 import timber.log.Timber
-import com.period.tracker.natural.cycles.domain.Repository
-import com.period.tracker.natural.cycles.domain.model.Interval
-import com.period.tracker.natural.cycles.domain.model.Period
-import com.period.tracker.natural.cycles.domain.model.StateOfDay
-import com.period.tracker.natural.cycles.domain.model.StateOfDay.*
-import com.period.tracker.natural.cycles.domain.usecase.days.GetDayUseCase
-import com.period.tracker.natural.cycles.utils.Constants
-import com.period.tracker.natural.cycles.utils.Constants.MIN_COUNT_PERIODS_FOR_INSIGHT
-import com.period.tracker.natural.cycles.utils.LatestPeriodPreferences
 
 private const val MAX_COUNT_MONTHS_FOR_INSIGHT = 10L
 
 class RecalculateFromDayUseCase(
-    private val repository: Repository,
+    private val saveDayUseCase: SaveDayUseCase,
     private val getDayUseCase: GetDayUseCase,
     private val latestPeriodPreferences: LatestPeriodPreferences
 ) {
@@ -45,7 +45,7 @@ class RecalculateFromDayUseCase(
         ) {
             val day = getDayUseCase.execute(tempDate)
             if (day.stateOfDay == EXPECTED_NEW_PERIOD) {
-                repository.setDay(day.apply { stateOfDay = null })
+                saveDayUseCase.execute(day.apply { stateOfDay = null })
             }
             tempDate = tempDate.minusDays(1)
         }
@@ -67,7 +67,9 @@ class RecalculateFromDayUseCase(
             val endFertileDays = setFertileDays(start = endDelayAfterPeriod.plusDays(1))
             val ovulationDay = setOvulationDay(endOfPeriod.await())
             clearStatusDaysUntilNextPeriod(start = endFertileDays.plusDays(1))
-            if (latestPeriodPreferences.getEnd()?.let { !endOfPeriod.await().isBefore(it) } == true) {
+            if (latestPeriodPreferences.getEnd()
+                    ?.let { !endOfPeriod.await().isBefore(it) } == true
+            ) {
                 launch {
                     setExpectedPeriodDays(
                         averagePeriodLength,
@@ -94,7 +96,7 @@ class RecalculateFromDayUseCase(
         var nextPeriodDate: LocalDate? = null
         while (isContinueRecalculation(tempDate)) {
             tempDate = tempDate.plusDays(1)
-            if (repository.getDay(tempDate)?.stateOfDay == PERIOD) {
+            if (getDayUseCase.execute(tempDate).stateOfDay == PERIOD) {
                 nextPeriodDate = tempDate
             }
         }
@@ -104,7 +106,7 @@ class RecalculateFromDayUseCase(
     private suspend fun findNearestPeriod(date: LocalDate): LocalDate? {
         var initialDate: LocalDate? = date
         while (initialDate != null
-            && repository.getDay(initialDate)?.stateOfDay != PERIOD
+            && getDayUseCase.execute(initialDate).stateOfDay != PERIOD
         ) {
             initialDate = initialDate.minusDays(1)
             if (initialDate.isBefore(date.minusMonths(2))) {
@@ -120,7 +122,7 @@ class RecalculateFromDayUseCase(
         while (isContinueRecalculation(tempDate)) {
             setStateToDay(tempDate, null)
             tempDate = tempDate.plusDays(1)
-            if (repository.getDay(tempDate)?.stateOfDay == PERIOD) {
+            if (getDayUseCase.execute(tempDate).stateOfDay == PERIOD) {
                 nextPeriodDate = tempDate
             }
         }
@@ -135,16 +137,16 @@ class RecalculateFromDayUseCase(
         var finishOfInterval: LocalDate? = null
         var sumOfIntervals = 0
         while (tempDate.isBefore(LocalDate.now())) {
-            if (repository.getDay(tempDate.minusDays(1))?.stateOfDay == PERIOD
-                && repository.getDay(tempDate)?.stateOfDay != PERIOD
+            if (getDayUseCase.execute(tempDate.minusDays(1)).stateOfDay == PERIOD
+                && getDayUseCase.execute(tempDate).stateOfDay != PERIOD
             ) {
                 startOfInterval = tempDate
                 do {
                     tempDate = tempDate.plusDays(1)
-                    if (repository.getDay(tempDate.plusDays(1))?.stateOfDay == PERIOD) {
+                    if (getDayUseCase.execute(tempDate.plusDays(1)).stateOfDay == PERIOD) {
                         finishOfInterval = tempDate
                     }
-                } while (repository.getDay(tempDate.plusDays(1))?.stateOfDay != PERIOD
+                } while (getDayUseCase.execute(tempDate.plusDays(1)).stateOfDay != PERIOD
                     && tempDate.isBefore(LocalDate.now())
                 )
                 finishOfInterval?.let { intervals.add(Interval(startOfInterval!!, it)) }
@@ -185,13 +187,13 @@ class RecalculateFromDayUseCase(
         var finishOfPeriod: LocalDate? = null
         var sumOfIntervals = 0
         while (tempDate.isBefore(LocalDate.now())) {
-            if (repository.getDay(tempDate.minusDays(1))?.stateOfDay != PERIOD
-                && repository.getDay(tempDate)?.stateOfDay == PERIOD
+            if (getDayUseCase.execute(tempDate.minusDays(1))?.stateOfDay != PERIOD
+                && getDayUseCase.execute(tempDate).stateOfDay == PERIOD
             ) {
                 startOfPeriod = tempDate
-                while (repository.getDay(tempDate) != null) {
-                    if (repository.getDay(tempDate)?.stateOfDay == PERIOD
-                        && repository.getDay(tempDate.plusDays(1))?.stateOfDay != PERIOD
+                while (true) {
+                    if (getDayUseCase.execute(tempDate).stateOfDay == PERIOD
+                        && getDayUseCase.execute(tempDate.plusDays(1)).stateOfDay != PERIOD
                     ) {
                         finishOfPeriod = tempDate
                         periods.add(Period(startOfPeriod, finishOfPeriod))
@@ -211,7 +213,7 @@ class RecalculateFromDayUseCase(
 
     private suspend fun setOvulationDay(finishOfPeriod: LocalDate): LocalDate {
         val ovulationDay = finishOfPeriod.plusDays(Constants.OVULATION_DELAY_AFTER_PERIOD.toLong())
-        if (repository.getDay(ovulationDay)?.stateOfDay == FERTILE)
+        if (getDayUseCase.execute(ovulationDay).stateOfDay == FERTILE)
             setStateToDay(ovulationDay, OVULATION)
         return ovulationDay
     }
@@ -244,12 +246,12 @@ class RecalculateFromDayUseCase(
 
     private suspend fun setStateToDay(date: LocalDate, stateOfDay: StateOfDay?) {
         val dayFromStorage = getDayUseCase.execute(date)
-        repository.setDay(dayFromStorage.apply { this.stateOfDay = stateOfDay })
+        saveDayUseCase.execute(dayFromStorage.apply { this.stateOfDay = stateOfDay })
     }
 
     private suspend fun getStartOfPeriod(initialDate: LocalDate): LocalDate {
         var tempDate = initialDate
-        while (repository.getDay(tempDate.minusDays(1))?.stateOfDay == PERIOD) {
+        while (getDayUseCase.execute(tempDate.minusDays(1)).stateOfDay == PERIOD) {
             tempDate = tempDate.minusDays(1)
         }
         return tempDate
@@ -257,13 +259,13 @@ class RecalculateFromDayUseCase(
 
     private suspend fun getFinishOfPeriod(initialDate: LocalDate): LocalDate {
         var tempDate = initialDate
-        while (repository.getDay(tempDate.plusDays(1))?.stateOfDay == PERIOD) {
+        while (getDayUseCase.execute(tempDate.plusDays(1)).stateOfDay == PERIOD) {
             tempDate = tempDate.plusDays(1)
         }
         return tempDate
     }
 
     private suspend fun isContinueRecalculation(date: LocalDate) =
-        repository.getDay(date)?.stateOfDay != PERIOD
+        getDayUseCase.execute(date).stateOfDay != PERIOD
                 && date.isBefore(LocalDate.now().plusMonths(2))
 }

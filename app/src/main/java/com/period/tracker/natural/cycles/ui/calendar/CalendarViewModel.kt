@@ -10,7 +10,7 @@ import timber.log.Timber
 import com.period.tracker.natural.cycles.domain.usecase.RecalculateFromDayUseCase
 import com.period.tracker.natural.cycles.domain.usecase.days.GetMonthUseCase
 import com.period.tracker.natural.cycles.domain.usecase.notification.OnOffEverydayNotificationUseCase
-import com.period.tracker.natural.cycles.domain.usecase.periods.GetCountOfPeriodsUseCase
+import com.period.tracker.natural.cycles.domain.usecase.periods.GetMinCountOfPeriodsUseCase
 import com.period.tracker.natural.cycles.domain.usecase.periods.MarkDayUseCase
 import com.period.tracker.natural.cycles.utils.LocalDateHelper
 
@@ -21,7 +21,7 @@ class CalendarViewModel(
     private val markDayUseCase: MarkDayUseCase,
     private val recalculateFromDayUseCase: RecalculateFromDayUseCase,
     private val onOffEverydayNotificationUseCase: OnOffEverydayNotificationUseCase,
-    private val getCountOfPeriodsUseCase: GetCountOfPeriodsUseCase
+    private val getMinCountOfPeriodsUseCase: GetMinCountOfPeriodsUseCase
 ) : ViewModel() {
     private val _months = MutableLiveData<List<ItemMonth>>()
     val months: LiveData<List<ItemMonth>> = _months
@@ -58,7 +58,7 @@ class CalendarViewModel(
 
     private suspend fun fillInitialData() {
         val start = System.currentTimeMillis()
-        _countOfPeriods.postValue(getCountOfPeriodsUseCase.execute())
+        _countOfPeriods.postValue(getMinCountOfPeriodsUseCase.execute())
         val date = LocalDate.now().minusMonths(countOfMounts)
         prevMonth = date
         val months = mutableListOf<ItemMonth>()

@@ -8,6 +8,9 @@ import com.period.tracker.natural.cycles.domain.model.Day
 
 class RepositoryTest() : Repository {
     private val mDays = mutableMapOf<LocalDate, Day>()
+    override suspend fun setDays(days: List<Day>) {
+        TODO("Not yet implemented")
+    }
 
     override suspend fun setDay(day: Day) = withContext(Dispatchers.IO) {
         mDays[day.date] = day

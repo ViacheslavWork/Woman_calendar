@@ -9,7 +9,7 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import com.period.tracker.natural.cycles.domain.usecase.articles.GetArticlesFlowUseCase
 import com.period.tracker.natural.cycles.ui.articles.ArticleItem
-import com.period.tracker.natural.cycles.utils.RecentArticlesPreferences
+import com.period.tracker.natural.cycles.preferences.RecentArticlesPreferences
 
 class RecentViewModel(
     private val getArticlesFlowUseCase: GetArticlesFlowUseCase,

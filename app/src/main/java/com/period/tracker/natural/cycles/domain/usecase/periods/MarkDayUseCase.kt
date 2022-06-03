@@ -1,24 +1,23 @@
 package com.period.tracker.natural.cycles.domain.usecase.periods
 
+import com.period.tracker.natural.cycles.domain.model.Day
+import com.period.tracker.natural.cycles.domain.model.StateOfDay.EXPECTED_NEW_PERIOD
+import com.period.tracker.natural.cycles.domain.model.StateOfDay.PERIOD
+import com.period.tracker.natural.cycles.domain.usecase.days.GetDayUseCase
+import com.period.tracker.natural.cycles.domain.usecase.days.SaveDayUseCase
+import com.period.tracker.natural.cycles.preferences.EarliestPeriodPreferences
+import com.period.tracker.natural.cycles.preferences.LatestPeriodPreferences
+import com.period.tracker.natural.cycles.utils.Constants
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.threeten.bp.LocalDate
 import timber.log.Timber
-import com.period.tracker.natural.cycles.domain.Repository
-import com.period.tracker.natural.cycles.domain.model.Day
-import com.period.tracker.natural.cycles.domain.model.StateOfDay.EXPECTED_NEW_PERIOD
-import com.period.tracker.natural.cycles.domain.model.StateOfDay.PERIOD
-import com.period.tracker.natural.cycles.domain.usecase.days.GetDayUseCase
-import com.period.tracker.natural.cycles.utils.Constants
-import com.period.tracker.natural.cycles.utils.EarliestPeriodPreferences
-import com.period.tracker.natural.cycles.utils.LatestPeriodPreferences
 
 class MarkDayUseCase(
-    private val repository: Repository,
+    private val saveDayUseCase: SaveDayUseCase,
     private val getDayUseCase: GetDayUseCase,
-    private val getCountOfPeriodsUseCase: GetCountOfPeriodsUseCase,
-    private val getEarliestPeriodUseCase: GetEarliestPeriodUseCase,
+    private val getMinCountOfPeriodsUseCase: GetMinCountOfPeriodsUseCase,
     private val earliestPeriodPreferences: EarliestPeriodPreferences,
     private val latestPeriodPreferences: LatestPeriodPreferences,
     private val getLastPeriodsUseCase: GetLastPeriodsUseCase
@@ -35,14 +34,14 @@ class MarkDayUseCase(
                 overrideExpectedDays(day)
                 return@withContext
             }
-            if (getCountOfPeriodsUseCase.execute() < Constants.MIN_COUNT_PERIODS_FOR_INSIGHT
+            if (getMinCountOfPeriodsUseCase.execute() < Constants.MIN_COUNT_PERIODS_FOR_INSIGHT
                 || earliestPeriodPreferences.getStart() == null
                 || day.date.isBefore(earliestPeriodPreferences.getStart())
             ) {
                 earliestPeriodPreferences.setStart(day.date)
                 for (i in 0 until Constants.STANDARD_LENGTH_OF_PERIOD) {
                     launch {
-                        repository.setDay(
+                        saveDayUseCase.execute(
                             getDayUseCase
                                 .execute(day.date.plusDays(i.toLong()))
                                 .apply { stateOfDay = day.stateOfDay })
@@ -56,7 +55,7 @@ class MarkDayUseCase(
                 }
             } else {
                 launch {
-                    repository.setDay(
+                    saveDayUseCase.execute(
                         getDayUseCase.execute(day.date).apply { stateOfDay = day.stateOfDay })
                 }
                 launch { findPeriodDaysAfter(day) }
@@ -64,9 +63,12 @@ class MarkDayUseCase(
             launch { findPeriodDaysBefore(day) }
             return@withContext
         }
-        repository.setDay(getDayUseCase.execute(day.date).apply { stateOfDay = day.stateOfDay })
+        saveDayUseCase.execute(
+            getDayUseCase.execute(day.date).apply { stateOfDay = day.stateOfDay })
         if (latestPeriodPreferences.getEnd() == day.date) {
-            latestPeriodPreferences.setEnd(getLastPeriodsUseCase.execute(1)[0].finish)
+            if (getLastPeriodsUseCase.execute(1).isNotEmpty()) {
+                latestPeriodPreferences.setEnd(getLastPeriodsUseCase.execute(1)[0].finish)
+            }
             Timber.d(latestPeriodPreferences.getEnd().toString())
         }
     }
@@ -81,7 +83,7 @@ class MarkDayUseCase(
             dayCounter++
             if (getDayUseCase.execute(tempDate).stateOfDay == PERIOD) {
                 tempDates.forEach {
-                    repository.setDay(
+                    saveDayUseCase.execute(
                         getDayUseCase.execute(it).apply { stateOfDay = PERIOD })
                 }
                 return
@@ -99,7 +101,7 @@ class MarkDayUseCase(
             dayCounter++
             if (getDayUseCase.execute(tempDate).stateOfDay == PERIOD) {
                 tempDates.forEach {
-                    repository.setDay(
+                    saveDayUseCase.execute(
                         getDayUseCase.execute(it).apply { stateOfDay = PERIOD })
                 }
                 return
@@ -113,7 +115,7 @@ class MarkDayUseCase(
             tempDate = tempDate.minusDays(1)
         }
         while (getDayUseCase.execute(tempDate).stateOfDay == EXPECTED_NEW_PERIOD) {
-            repository.setDay(getDayUseCase.execute(tempDate).apply { stateOfDay = PERIOD })
+            saveDayUseCase.execute(getDayUseCase.execute(tempDate).apply { stateOfDay = PERIOD })
             tempDate = tempDate.plusDays(1)
         }
     }

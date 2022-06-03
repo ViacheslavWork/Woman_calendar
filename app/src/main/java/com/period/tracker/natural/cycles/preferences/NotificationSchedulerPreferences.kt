@@ -1,4 +1,4 @@
-package com.period.tracker.natural.cycles.utils
+package com.period.tracker.natural.cycles.preferences
 
 import android.content.Context
 import org.koin.core.component.KoinComponent
@@ -7,7 +7,7 @@ class NotificationSchedulerPreferences(private val context: Context) : KoinCompo
     companion object {
         private const val PREF_SCHEDULED = "scheduled"
         private const val PREF_SCHEDULED_FILE =
-            "woman.calendar.every.day.health.utils.notification_scheduler"
+            "com.period.tracker.natural.cycles.utils.notification_scheduler"
     }
 
     fun isScheduled(): Boolean {

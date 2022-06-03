@@ -11,17 +11,18 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.coroutines.launch
-import org.koin.androidx.viewmodel.ext.android.viewModel
-import org.threeten.bp.LocalDate
-import timber.log.Timber
 import com.period.tracker.natural.cycles.R
 import com.period.tracker.natural.cycles.databinding.FragmentSymptomsBinding
 import com.period.tracker.natural.cycles.domain.model.StateOfDay
 import com.period.tracker.natural.cycles.domain.model.SymptomType
+import com.period.tracker.natural.cycles.preferences.WeightPreferences
 import com.period.tracker.natural.cycles.ui.notes.NotesFragment
 import com.period.tracker.natural.cycles.utils.LocalDateHelper.getMonthName
-import com.period.tracker.natural.cycles.utils.WeightPreferences
+import kotlinx.coroutines.launch
+import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.threeten.bp.LocalDate
+import timber.log.Timber
+import java.util.*
 
 class SymptomsFragment : Fragment(R.layout.fragment_symptoms) {
     private var _binding: FragmentSymptomsBinding? = null
@@ -98,6 +99,10 @@ class SymptomsFragment : Fragment(R.layout.fragment_symptoms) {
     }
 
     private fun setUpUI() {
+        /*binding.weightNumberTv.text = when (Locale.getDefault().country) {
+            "US" -> getString(R.string.__lb)
+            else -> getString(R.string.__kg)
+        }*/
         binding.dateToolbarTv.text = String.format(
             resources.getString(R.string.dd_month),
             date.dayOfMonth, date.getMonthName()
@@ -108,9 +113,19 @@ class SymptomsFragment : Fragment(R.layout.fragment_symptoms) {
                 viewModel.getDayOfLastCycle().toString()
             )
         }
-        WeightPreferences.getWeight(requireContext())?.also {
-            binding.weightNumberTv.text =
-                String.format(resources.getString(R.string.s_kg), it.toString())
+
+        WeightPreferences.getWeight(requireContext()).also {
+            if (it == null) {
+                binding.weightNumberTv.text = when (Locale.getDefault().country) {
+                    "US" -> resources.getString(R.string.__lb)
+                    else -> resources.getString(R.string.__kg)
+                }
+            } else {
+                binding.weightNumberTv.text = when (Locale.getDefault().country) {
+                    "US" -> String.format(resources.getString(R.string.s_lb), it.toString())
+                    else -> String.format(resources.getString(R.string.s_kg), it.toString())
+                }
+            }
         }
         lifecycleScope.launch { Timber.d(viewModel.isPeriod(date).toString()) }
     }

@@ -5,7 +5,7 @@ import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import timber.log.Timber
-import com.period.tracker.natural.cycles.utils.NotificationSchedulerPreferences
+import com.period.tracker.natural.cycles.preferences.NotificationSchedulerPreferences
 import java.util.*
 
 const val RUN_DAILY = (24 * 60 * 60 * 1000).toLong()

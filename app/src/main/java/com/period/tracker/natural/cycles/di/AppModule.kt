@@ -1,9 +1,11 @@
 package com.period.tracker.natural.cycles.di
 
-import org.koin.android.ext.koin.androidContext
-import org.koin.androidx.viewmodel.dsl.viewModel
-import org.koin.dsl.module
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
 import com.period.tracker.natural.cycles.notifications.EverydayNotificationScheduler
+import com.period.tracker.natural.cycles.preferences.*
+import com.period.tracker.natural.cycles.ui.MainViewModel
 import com.period.tracker.natural.cycles.ui.articles.ArticlesViewModel
 import com.period.tracker.natural.cycles.ui.articles.details.ArticleDetailsViewModel
 import com.period.tracker.natural.cycles.ui.articles.discover.DiscoverViewModel
@@ -17,25 +19,29 @@ import com.period.tracker.natural.cycles.ui.notification_screens.NotificationScr
 import com.period.tracker.natural.cycles.ui.onboarding.container.OnBoardingContainerViewModel
 import com.period.tracker.natural.cycles.ui.symptoms.SymptomsViewModel
 import com.period.tracker.natural.cycles.ui.water.WaterViewModel
-import com.period.tracker.natural.cycles.utils.*
+import org.koin.android.ext.koin.androidContext
+import org.koin.androidx.viewmodel.dsl.viewModel
+import org.koin.dsl.module
 
 
 val appModule = module {
+    viewModel { MainViewModel(downloadDaysFromFirebaseUseCase = get()) }
     viewModel {
         CalendarViewModel(
             getMonthUseCase = get(),
             markDayUseCase = get(),
             recalculateFromDayUseCase = get(),
             onOffEverydayNotificationUseCase = get(),
-            getCountOfPeriodsUseCase = get()
+            getMinCountOfPeriodsUseCase = get()
         )
     }
     viewModel {
         HomeViewModel(
             getWeekUseCase = get(),
-            getCountOfPeriodsUseCase = get(),
+            getMinCountOfPeriodsUseCase = get(),
             getLastCyclesUseCase = get(),
-            getDayUseCase = get()
+            getDayUseCase = get(),
+            downloadDaysFromFirebaseUseCase = get()
         )
     }
     viewModel { ArticlesViewModel() }
@@ -88,7 +94,8 @@ val appModule = module {
         ArticleDetailsViewModel(
             getArticleUseCase = get(),
             getArticlesFlowUseCase = get(),
-            recentArticlesPreferences = get()
+            recentArticlesPreferences = get(),
+            saveArticleToFirebaseUseCase = get()
         )
     }
     //notification
@@ -104,11 +111,21 @@ val appModule = module {
             getLastCyclesUseCase = get()
         )
     }
+    //preferences
     single { NotificationSchedulerPreferences(androidContext()) }
-    single { BookmarksPreferences(androidContext()) }
+    single {
+        BookmarksPreferences(
+            androidContext(),
+            saveArticlesBookmarksToFirebaseUseCase = get()
+        )
+    }
     single { RecentArticlesPreferences(androidContext()) }
     single { EarliestPeriodPreferences(androidContext()) }
     single { LatestPeriodPreferences(androidContext()) }
+    single { FirstRunPreferences(androidContext()) }
+
+    //firebase
+    single<DatabaseReference> { Firebase.database.reference }
 
     //onBoarding
     viewModel { OnBoardingContainerViewModel() }

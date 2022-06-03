@@ -1,28 +1,33 @@
 package com.period.tracker.natural.cycles.domain.usecase.notification
 
-import org.threeten.bp.LocalTime
-import com.period.tracker.natural.cycles.domain.usecase.periods.GetCountOfPeriodsUseCase
+import com.period.tracker.natural.cycles.domain.usecase.periods.GetMinCountOfPeriodsUseCase
 import com.period.tracker.natural.cycles.notifications.EverydayNotificationScheduler
+import com.period.tracker.natural.cycles.preferences.NotificationSchedulerPreferences
 import com.period.tracker.natural.cycles.utils.Constants
-import com.period.tracker.natural.cycles.utils.NotificationSchedulerPreferences
+import timber.log.Timber
 
 class OnOffEverydayNotificationUseCase(
     private val everydayNotificationScheduler: EverydayNotificationScheduler,
-    private val getCountOfPeriodsUseCase: GetCountOfPeriodsUseCase,
+    private val getMinCountOfPeriodsUseCase: GetMinCountOfPeriodsUseCase,
     private val notificationSchedulerPreferences: NotificationSchedulerPreferences
 ) {
     suspend fun execute() {
-        if (getCountOfPeriodsUseCase.execute() < Constants.COUNT_OF_PERIODS_FOR_ACTIVATION_NOTIFICATIONS) {
+        Timber.d("count of periods: ${getMinCountOfPeriodsUseCase.execute()}")
+        if (getMinCountOfPeriodsUseCase.execute() < Constants.COUNT_OF_PERIODS_FOR_ACTIVATION_NOTIFICATIONS) {
+            Timber.d("Notification: canceled")
             everydayNotificationScheduler.cancel(Constants.EVERYDAY_NOTIFICATION_ID)
             return
         }
-        if (!notificationSchedulerPreferences.isScheduled()) {
-            everydayNotificationScheduler.schedule(
-                notificationId = Constants.EVERYDAY_NOTIFICATION_ID,
-                hour = Constants.EVERYDAY_NOTIFICATION_HOUR,
-                minute = Constants.EVERYDAY_NOTIFICATION_MINUTE
-            )
+        if (notificationSchedulerPreferences.isScheduled()) {
+            Timber.d("Notification is already scheduled")
+            return
         }
+        everydayNotificationScheduler.schedule(
+            notificationId = Constants.EVERYDAY_NOTIFICATION_ID,
+            hour = Constants.EVERYDAY_NOTIFICATION_HOUR,
+            minute = Constants.EVERYDAY_NOTIFICATION_MINUTE
+        )
+
 
         /**for test*/
         /*everydayNotificationScheduler.schedule(

@@ -79,25 +79,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <!--<com.raycoarana.codeinputview.CodeInputView
-            android:id="@+id/weight_input"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            app:animate_on_complete="false"
-            app:code_text_color="@color/text_color"
-            app:code_text_size="16sp"
-            app:error_color="@color/red"
-            app:input_type="numeric"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/kg_tv"
-            app:layout_constraintHorizontal_chainStyle="packed"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:length_of_code="3"
-            app:underline_color="@color/text_color"
-            app:underline_selected_color="#9e1ace"
-            app:underline_width="30sp" />-->
 
         <TextView
             android:id="@+id/kg_tv"

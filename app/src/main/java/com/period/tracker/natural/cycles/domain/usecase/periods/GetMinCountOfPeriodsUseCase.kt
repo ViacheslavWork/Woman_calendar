@@ -5,11 +5,12 @@ import kotlinx.coroutines.withContext
 import org.threeten.bp.LocalDate
 import com.period.tracker.natural.cycles.domain.Repository
 import com.period.tracker.natural.cycles.domain.model.StateOfDay
+import com.period.tracker.natural.cycles.utils.Constants
 
-const val MAX_PERIODS = 3
+const val MAX_PERIODS = Constants.MIN_COUNT_PERIODS_FOR_INSIGHT
 const val MAX_NUMBER_OF_MOUNTS = 12L
 
-class GetCountOfPeriodsUseCase(val repository: Repository) {
+class GetMinCountOfPeriodsUseCase(val repository: Repository) {
     suspend fun execute(): Int = withContext(Dispatchers.IO) {
         val initialDate = LocalDate.now()
         var tempDate = initialDate

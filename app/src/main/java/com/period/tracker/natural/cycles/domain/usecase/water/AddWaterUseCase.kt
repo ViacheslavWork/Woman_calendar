@@ -1,12 +1,16 @@
 package com.period.tracker.natural.cycles.domain.usecase.water
 
-import org.threeten.bp.LocalDate
-import com.period.tracker.natural.cycles.domain.Repository
 import com.period.tracker.natural.cycles.domain.usecase.days.GetDayUseCase
+import com.period.tracker.natural.cycles.domain.usecase.days.SaveDayUseCase
+import org.threeten.bp.LocalDate
 
-class AddWaterUseCase(private val getDayUseCase: GetDayUseCase, val repository: Repository) {
+class AddWaterUseCase(
+    private val getDayUseCase: GetDayUseCase,
+    private val saveDayUseCase: SaveDayUseCase
+) {
     suspend fun execute(date: LocalDate, volumeOfWaterForAdd: Float) {
-        repository.setDay(getDayUseCase.execute(date)
-            .apply { this.volumeOfWater += volumeOfWaterForAdd })
+        saveDayUseCase.execute(
+            getDayUseCase.execute(date)
+                .apply { this.volumeOfWater += volumeOfWaterForAdd })
     }
 }

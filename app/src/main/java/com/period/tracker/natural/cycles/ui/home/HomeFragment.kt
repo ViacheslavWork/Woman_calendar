@@ -9,10 +9,6 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import org.koin.android.ext.android.inject
-import org.koin.androidx.viewmodel.ext.android.viewModel
-import org.threeten.bp.LocalDate
-import timber.log.Timber
 import com.period.tracker.natural.cycles.R
 import com.period.tracker.natural.cycles.databinding.FragmentHomeBinding
 import com.period.tracker.natural.cycles.databinding.ItemHomeFragmentCycleBinding
@@ -20,30 +16,36 @@ import com.period.tracker.natural.cycles.databinding.ItemWeekDayBinding
 import com.period.tracker.natural.cycles.domain.model.Cycle
 import com.period.tracker.natural.cycles.domain.model.CycleStatus
 import com.period.tracker.natural.cycles.domain.model.StateOfDay.*
+import com.period.tracker.natural.cycles.preferences.BookmarksPreferences
+import com.period.tracker.natural.cycles.preferences.FirstRunPreferences
 import com.period.tracker.natural.cycles.ui.calendar.CalendarFragment
 import com.period.tracker.natural.cycles.ui.calendar.CalendarState
 import com.period.tracker.natural.cycles.ui.symptoms.SymptomsFragment
-import com.period.tracker.natural.cycles.utils.BookmarksPreferences
 import com.period.tracker.natural.cycles.utils.LocalDateHelper
 import com.period.tracker.natural.cycles.utils.LocalDateHelper.getMonthName
+import org.koin.android.ext.android.inject
+import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.threeten.bp.LocalDate
+import timber.log.Timber
 import java.util.*
-
 
 class HomeFragment : Fragment(R.layout.fragment_home) {
     private val viewModel: HomeViewModel by viewModel()
     private val bookmarksPreferences: BookmarksPreferences by inject()
+    private val firstRunPreferences: FirstRunPreferences by inject()
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
     private lateinit var symptomsRecyclerView: RecyclerView
     private lateinit var symptomsAdapter: HomeSymptomsAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        viewModel.updateUI()
         super.onCreate(savedInstanceState)
+        viewModel.downloadDaysFromFirebase()
     }
 
     override fun onStart() {
         viewModel.updateUI()
+        firstRunPreferences.setIsFirstRun(false)
         super.onStart()
     }
 
@@ -54,10 +56,19 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         setUpListeners()
         setUpSymptomsRecycler()
 
+        observeFirebaseDays()
         observeWeek()
         observeLastCycles()
         observeCountOfPeriods()
         observeSymptoms()
+
+    }
+
+    private fun observeFirebaseDays() {
+        viewModel.isDaysFromFirebaseDownloaded.observe(viewLifecycleOwner) {
+            Timber.d("Update ui")
+            viewModel.updateUI()
+        }
     }
 
     private fun setUpSymptomsRecycler() {
@@ -88,8 +99,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                         )
                     )
                     itemWeekDayBinding.root.background =
-                        ResourcesCompat.getDrawable(resources, android.R.color.transparent, null)
-                    itemWeekDayBinding.dateTv.background =
                         ResourcesCompat.getDrawable(resources, android.R.color.transparent, null)
                     if (date == LocalDate.now()) {
                         itemWeekDayBinding.root.background =
@@ -125,7 +134,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                                     )
                                 )
                             } else {
-                                itemWeekDayBinding.dateTv.background =
+                                itemWeekDayBinding.root.background =
                                     ResourcesCompat.getDrawable(
                                         resources,
                                         R.color.pink,
@@ -139,7 +148,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                             }
                         }
                         OVULATION -> {
-                            itemWeekDayBinding.dateTv.background =
+                            itemWeekDayBinding.root.background =
                                 if (date == LocalDate.now()) {
                                     ResourcesCompat.getDrawable(
                                         resources,
@@ -162,7 +171,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                         }
                         EXPECTED_NEW_PERIOD -> {
                             if (date.isBefore(LocalDate.now())) {
-                                itemWeekDayBinding.dateTv.background =
+                                itemWeekDayBinding.root.background =
                                     ResourcesCompat.getDrawable(
                                         resources,
                                         R.color.gray4,
@@ -174,7 +183,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                                     )
                                 )
                             } else {
-                                itemWeekDayBinding.dateTv.background =
+                                itemWeekDayBinding.root.background =
                                     if (date == LocalDate.now()) {
                                         ResourcesCompat.getDrawable(
                                             resources,

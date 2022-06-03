@@ -7,10 +7,12 @@ import android.view.View
 import android.view.inputmethod.EditorInfo
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import org.koin.androidx.viewmodel.ext.android.viewModel
 import com.period.tracker.natural.cycles.R
 import com.period.tracker.natural.cycles.databinding.FragmentWeightBinding
-import com.period.tracker.natural.cycles.utils.WeightPreferences
+import com.period.tracker.natural.cycles.preferences.WeightPreferences
+import org.koin.androidx.viewmodel.ext.android.viewModel
+import timber.log.Timber
+import java.util.*
 
 class WeightFragment : Fragment(R.layout.fragment_weight) {
     private var _binding: FragmentWeightBinding? = null
@@ -18,8 +20,16 @@ class WeightFragment : Fragment(R.layout.fragment_weight) {
     private val viewModel: WeightViewModel by viewModel()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         _binding = FragmentWeightBinding.bind(view)
+        setUpUi()
         setInitialWeight()
         setUpListeners()
+    }
+
+    private fun setUpUi() {
+        binding.kgTv.text = when (Locale.getDefault().country) {
+            "US" -> getString(R.string.lb)
+            else -> getString(R.string.kg)
+        }
     }
 
     private fun setInitialWeight() {

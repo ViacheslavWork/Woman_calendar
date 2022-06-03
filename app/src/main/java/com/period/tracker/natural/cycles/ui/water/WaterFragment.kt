@@ -10,7 +10,7 @@ import androidx.navigation.fragment.findNavController
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import com.period.tracker.natural.cycles.R
 import com.period.tracker.natural.cycles.databinding.FragmentWaterBinding
-import com.period.tracker.natural.cycles.utils.WeightPreferences
+import com.period.tracker.natural.cycles.preferences.WeightPreferences
 
 class WaterFragment : Fragment(R.layout.fragment_water) {
     private var _binding: FragmentWaterBinding? = null

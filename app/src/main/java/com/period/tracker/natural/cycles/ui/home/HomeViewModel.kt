@@ -8,16 +8,19 @@ import kotlinx.coroutines.launch
 import org.threeten.bp.LocalDate
 import com.period.tracker.natural.cycles.domain.model.Cycle
 import com.period.tracker.natural.cycles.domain.usecase.cycles.GetLastCyclesUseCase
-import com.period.tracker.natural.cycles.domain.usecase.periods.GetCountOfPeriodsUseCase
+import com.period.tracker.natural.cycles.domain.usecase.periods.GetMinCountOfPeriodsUseCase
 import com.period.tracker.natural.cycles.domain.usecase.days.GetDayUseCase
 import com.period.tracker.natural.cycles.domain.usecase.days.GetWeekUseCase
+import com.period.tracker.natural.cycles.domain.usecase.firebase.days.DownloadDaysFromFirebaseUseCase
+import kotlinx.coroutines.flow.collectLatest
 
 
 class HomeViewModel(
     private val getWeekUseCase: GetWeekUseCase,
-    private val getCountOfPeriodsUseCase: GetCountOfPeriodsUseCase,
+    private val getMinCountOfPeriodsUseCase: GetMinCountOfPeriodsUseCase,
     private val getLastCyclesUseCase: GetLastCyclesUseCase,
-    private val getDayUseCase: GetDayUseCase
+    private val getDayUseCase: GetDayUseCase,
+    private val downloadDaysFromFirebaseUseCase: DownloadDaysFromFirebaseUseCase
 ) : ViewModel() {
     private val _weekDays = MutableLiveData<List<ItemDayOfWeek>>()
     val weekDays: LiveData<List<ItemDayOfWeek>> = _weekDays
@@ -31,6 +34,9 @@ class HomeViewModel(
     private val _symptoms = MutableLiveData<List<HomeSymptomItem>>()
     val symptoms: LiveData<List<HomeSymptomItem>> = _symptoms
 
+    private val _isDaysFromFirebaseDownloaded = MutableLiveData<Boolean>()
+    val isDaysFromFirebaseDownloaded: LiveData<Boolean> = _isDaysFromFirebaseDownloaded
+
     init {
         updateUI()
     }
@@ -40,6 +46,14 @@ class HomeViewModel(
         updateWeek()
         updateCountOfPeriods()
         updateLastCycles()
+    }
+
+    fun downloadDaysFromFirebase() {
+        viewModelScope.launch {
+            downloadDaysFromFirebaseUseCase.execute().collectLatest {
+                it?.let { _isDaysFromFirebaseDownloaded.postValue(it) }
+            }
+        }
     }
 
     private fun updateSymptoms() {
@@ -62,7 +76,7 @@ class HomeViewModel(
 
     private fun updateCountOfPeriods() {
         viewModelScope.launch {
-            _countOfPeriods.postValue(getCountOfPeriodsUseCase.execute())
+            _countOfPeriods.postValue(getMinCountOfPeriodsUseCase.execute())
         }
     }
 

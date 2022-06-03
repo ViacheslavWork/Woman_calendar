@@ -1,4 +1,4 @@
-package com.period.tracker.natural.cycles.utils
+package com.period.tracker.natural.cycles.preferences
 
 import android.content.Context
 import androidx.room.TypeConverter
@@ -11,7 +11,7 @@ class LatestPeriodPreferences(private val context: Context) : KoinComponent {
     companion object {
         private const val PREF_LATEST_PERIOD_END = "LATEST_period_End"
         private const val PREF_LATEST_PERIOD_FILE =
-            "woman.calendar.every.day.health.utils.LATEST_period"
+            "com.period.tracker.natural.cycles.utils.LATEST_period"
     }
 
     fun getEnd(): LocalDate? {

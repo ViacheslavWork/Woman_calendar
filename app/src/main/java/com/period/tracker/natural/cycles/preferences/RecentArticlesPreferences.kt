@@ -1,8 +1,9 @@
-package com.period.tracker.natural.cycles.utils
+package com.period.tracker.natural.cycles.preferences
 
 import android.content.Context
 import androidx.room.TypeConverter
 import com.google.gson.Gson
+import com.period.tracker.natural.cycles.utils.Constants
 import org.koin.core.component.KoinComponent
 import timber.log.Timber
 import java.util.*
@@ -11,7 +12,7 @@ class RecentArticlesPreferences(private val context: Context) : KoinComponent {
     companion object {
         private const val PREF_RECENT_ARTICLES = "recent_articles"
         private const val PREF_RECENT_ARTICLES_FILE =
-            "woman.calendar.every.day.health.utils.recent_articles"
+            "com.period.tracker.natural.cycles.utils.recent_articles"
 
     }
 

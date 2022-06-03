@@ -6,11 +6,11 @@ import android.view.animation.AnimationUtils
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.period.tracker.natural.cycles.R
+import com.period.tracker.natural.cycles.databinding.FragmentCreatingPersonalProgramBinding
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import com.period.tracker.natural.cycles.R
-import com.period.tracker.natural.cycles.databinding.FragmentCreatingPersonalProgramBinding
 
 class CreatingPersonalProgramFragment : Fragment(R.layout.fragment_creating_personal_program) {
     private var _binding: FragmentCreatingPersonalProgramBinding? = null

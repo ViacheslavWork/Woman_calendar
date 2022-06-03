@@ -19,4 +19,8 @@ object Constants {
     const val EVERYDAY_NOTIFICATION_HOUR = 10
     const val EVERYDAY_NOTIFICATION_MINUTE = 0
     const val COUNT_OF_PERIODS_FOR_ACTIVATION_NOTIFICATIONS = 3
+
+    const val FIREBASE_DATABASE_DAYS_NAME = "days"
+    const val FIREBASE_DATABASE_ARTICLES_BOOKMARKS_NAME = "articles_bookmarks"
+    const val FIREBASE_DATABASE_ARTICLES_NAME = "articles"
 }

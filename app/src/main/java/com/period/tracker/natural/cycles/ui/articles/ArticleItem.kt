@@ -12,7 +12,6 @@ data class ArticleItem(
     val titleColor: ArticleTitleColor,
     val type: ArticleType?,
     val parentType: ArticleType,
-    val articlesId: List<Int>?,
     val bigImage: Uri,
     val smallImage: Uri
 ) {
@@ -25,7 +24,6 @@ data class ArticleItem(
                 titleColor = article.titleColor,
                 type = article.type,
                 parentType = article.parentType,
-                articlesId = article.internalArticlesId,
                 bigImage = article.bigImage,
                 smallImage = article.smallImage
             )

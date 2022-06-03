@@ -8,7 +8,7 @@ import com.period.tracker.natural.cycles.domain.usecase.articles.GetArticlesFlow
 import com.period.tracker.natural.cycles.domain.usecase.articles.GetArticlesUseCase
 import com.period.tracker.natural.cycles.ui.articles.ArticleItem
 import com.period.tracker.natural.cycles.ui.articles.ArticlesEvent
-import com.period.tracker.natural.cycles.utils.RecentArticlesPreferences
+import com.period.tracker.natural.cycles.preferences.RecentArticlesPreferences
 
 class DiscoverViewModel(
     private val getArticleGroupsUseCase: GetArticleGroupsUseCase,

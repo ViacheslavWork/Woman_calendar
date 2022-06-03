@@ -121,6 +121,12 @@
         <action
             android:id="@+id/action_helloFragment_to_IWantToFragment"
             app:destination="@id/IWantToFragment" />
+        <action
+            android:id="@+id/action_helloFragment_to_accountFragment"
+            app:destination="@id/accountFragment" />
+        <action
+            android:id="@+id/action_helloFragment_to_navigation_home"
+            app:destination="@id/navigation_home" />
     </fragment>
     <fragment
         android:id="@+id/IWantToFragment"
@@ -145,12 +151,15 @@
     </fragment>
     <fragment
         android:id="@+id/accountFragment"
-        android:name="com.period.tracker.natural.cycles.ui.onboarding.AccountFragment"
+        android:name="com.period.tracker.natural.cycles.ui.onboarding.login.AccountContainerFragment"
         android:label="fragment_account"
-        tools:layout="@layout/fragment_account" >
+        tools:layout="@layout/fragment_account_container" >
         <action
             android:id="@+id/action_accountFragment_to_savingDetailsFragment"
             app:destination="@id/savingDetailsFragment" />
+        <action
+            android:id="@+id/action_accountFragment_to_navigation_home"
+            app:destination="@id/navigation_home" />
     </fragment>
     <fragment
         android:id="@+id/savingDetailsFragment"

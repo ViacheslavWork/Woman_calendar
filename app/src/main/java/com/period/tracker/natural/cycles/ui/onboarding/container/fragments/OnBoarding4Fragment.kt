@@ -8,6 +8,7 @@ import com.period.tracker.natural.cycles.R
 import com.period.tracker.natural.cycles.databinding.FragmentOnboarding4Binding
 import com.period.tracker.natural.cycles.ui.onboarding.container.OnBoardingContainerCallbacks
 import com.period.tracker.natural.cycles.ui.onboarding.container.OnBoardingContainerViewModel
+import java.util.*
 
 class OnBoarding4Fragment(val onBoardingContainerCallbacks: OnBoardingContainerCallbacks) : Fragment(R.layout.fragment_onboarding_4) {
     private var _binding: FragmentOnboarding4Binding? = null
@@ -23,7 +24,10 @@ class OnBoarding4Fragment(val onBoardingContainerCallbacks: OnBoardingContainerC
     }
 
     private fun setUpUI() {
-        
+        binding.kgTv.text = when (Locale.getDefault().country) {
+            "US" -> resources.getString(R.string.lb)
+            else -> resources.getString(R.string.kg)
+        }
     }
 
     override fun onDestroyView() {

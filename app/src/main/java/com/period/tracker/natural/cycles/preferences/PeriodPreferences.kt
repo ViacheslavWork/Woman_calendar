@@ -1,4 +1,4 @@
-package com.period.tracker.natural.cycles.utils
+package com.period.tracker.natural.cycles.preferences
 
 import android.content.Context
 import android.preference.PreferenceManager

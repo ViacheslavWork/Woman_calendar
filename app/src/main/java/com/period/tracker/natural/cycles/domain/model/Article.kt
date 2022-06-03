@@ -10,8 +10,6 @@ data class Article(
     val content: String,
     val bigImage: Uri,
     val smallImage: Uri,
-    val isBookmark: Boolean = false,
-    val internalArticlesId: List<Int>? = null,
     val type: ArticleType? = null,
     val parentType: ArticleType
 )
@@ -43,3 +41,5 @@ enum class ArticleType {
 enum class ArticleTitleColor {
     BLACK, WHITE
 }
+
+

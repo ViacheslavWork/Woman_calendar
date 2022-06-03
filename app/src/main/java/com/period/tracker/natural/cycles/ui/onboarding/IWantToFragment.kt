@@ -2,10 +2,12 @@ package com.period.tracker.natural.cycles.ui.onboarding
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.period.tracker.natural.cycles.R
 import com.period.tracker.natural.cycles.databinding.FragmentIWantToBinding
+import com.period.tracker.natural.cycles.ui.onboarding.login.AccountContainerFragment
 
 class IWantToFragment : Fragment(R.layout.fragment_i_want_to) {
     private var _binding: FragmentIWantToBinding? = null
@@ -31,8 +33,18 @@ class IWantToFragment : Fragment(R.layout.fragment_i_want_to) {
     }
 
     private fun setUpListeners() {
-        binding.signUpBtn.setOnClickListener { findNavController().navigate(IWantToFragmentDirections.actionIWantToFragmentToAccountFragment()) }
-        binding.logInBtn.setOnClickListener { findNavController().navigate(IWantToFragmentDirections.actionIWantToFragmentToAccountFragment()) }
+        binding.signUpBtn.setOnClickListener {
+            findNavController().navigate(
+                R.id.action_IWantToFragment_to_accountFragment,
+                bundleOf(AccountContainerFragment.ARG_TAB to AccountContainerFragment.ARG_SIGN_UP)
+            )
+        }
+        binding.logInBtn.setOnClickListener {
+            findNavController().navigate(
+                R.id.action_IWantToFragment_to_accountFragment,
+                bundleOf(AccountContainerFragment.ARG_TAB to AccountContainerFragment.ARG_LOGIN)
+            )
+        }
         binding.trackMyFemaleHealthBtn.root.setOnClickListener {
             binding.trackMyFemaleHealthBtn.root.animate()
                 .setDuration(100)

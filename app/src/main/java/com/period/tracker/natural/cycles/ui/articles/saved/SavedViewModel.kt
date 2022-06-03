@@ -9,7 +9,7 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import com.period.tracker.natural.cycles.domain.usecase.articles.GetArticlesFlowUseCase
 import com.period.tracker.natural.cycles.ui.articles.ArticleItem
-import com.period.tracker.natural.cycles.utils.BookmarksPreferences
+import com.period.tracker.natural.cycles.preferences.BookmarksPreferences
 
 class SavedViewModel(
     private val getArticlesFlowUseCase: GetArticlesFlowUseCase,

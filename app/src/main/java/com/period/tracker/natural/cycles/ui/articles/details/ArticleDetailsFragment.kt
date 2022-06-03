@@ -18,7 +18,7 @@ import com.period.tracker.natural.cycles.databinding.FragmentArticleDetailsBindi
 import com.period.tracker.natural.cycles.domain.model.ArticleTitleColor
 import com.period.tracker.natural.cycles.ui.articles.ArticlesEvent
 import com.period.tracker.natural.cycles.ui.articles.adapters.ArticlesRecyclerAdapter
-import com.period.tracker.natural.cycles.utils.BookmarksPreferences
+import com.period.tracker.natural.cycles.preferences.BookmarksPreferences
 
 
 class ArticleDetailsFragment : Fragment(R.layout.fragment_article_details) {
