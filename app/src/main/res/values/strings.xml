@@ -278,5 +278,15 @@ healthy veggies with a big salad</string>
     <string name="meet_app_s_name">Meet %s</string>
     <string name="you_must_fill_in_all_fields">You must fill in all fields!</string>
     <string name="authentification_failed">Authentication failed:</string>
+    <string name="unlimited_experience_how_your_free_trial_works">Unlimited experience. How your free trial works?</string>
+    <string name="start_free_trial_now">Start Free Trial Now</string>
+    <string name="start_your">Start your</string>
+    <string name="_3_day_free_trial">3-day free trial</string>
+    <string name="then_sum_per_month">Then %s/mo</string>
+    <string name="then_sum__">Then --/mo</string>
+    <string name="access_to_all_premium_features">Access to all premium features</string>
+    <string name="get_a_notification_before_trial_ends">Get a notification before trial ends</string>
+    <string name="cancel_anytime">Cancel anytime</string>
+    <string name="premium">Premium</string>
 
 </resources>

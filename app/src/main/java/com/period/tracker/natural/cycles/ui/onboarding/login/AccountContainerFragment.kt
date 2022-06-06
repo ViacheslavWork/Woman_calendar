@@ -21,16 +21,16 @@ class AccountContainerFragment : Fragment(R.layout.fragment_account_container) {
     private var _binding: FragmentAccountContainerBinding? = null
     private val binding get() = _binding!!
     private lateinit var adapter: AccountViewPagerAdapter
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        Firebase.auth.currentUser?.also {
-            Timber.d("user email: ${it.email}")
-            findNavController().navigate(AccountContainerFragmentDirections.actionAccountFragmentToSavingDetailsFragment())
-        }
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         _binding = FragmentAccountContainerBinding.bind(view)
+
+        /*Firebase.auth.currentUser?.also {
+            Timber.d("user email: ${it.email}")
+            findNavController().navigate(AccountContainerFragmentDirections.actionAccountFragmentToSavingDetailsFragment())
+            return
+        }*/
+
         adapter = AccountViewPagerAdapter(requireParentFragment())
         binding.accountVp.adapter = adapter
 

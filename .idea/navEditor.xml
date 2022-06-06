@@ -45,6 +45,11 @@
                         </option>
                         <option name="myPositions">
                           <map>
+                            <entry key="action_accountFragment_to_navigation_home">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
                             <entry key="action_accountFragment_to_savingDetailsFragment">
                               <value>
                                 <LayoutPositions />
@@ -124,6 +129,11 @@
                               </value>
                             </entry>
                             <entry key="action_calendarFragment_to_navigation_home">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                            <entry key="action_calendarFragment_to_subscriptionFragment">
                               <value>
                                 <LayoutPositions />
                               </value>
@@ -224,6 +234,16 @@
                                 <LayoutPositions />
                               </value>
                             </entry>
+                            <entry key="action_helloFragment_to_accountFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                            <entry key="action_helloFragment_to_navigation_home">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
                           </map>
                         </option>
                       </LayoutPositions>
@@ -309,6 +329,16 @@
                               </value>
                             </entry>
                             <entry key="action_navigation_home_to_notificationScreensContainerFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                            <entry key="action_navigation_home_to_settingsFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                            <entry key="action_navigation_home_to_subscriptionFragment">
                               <value>
                                 <LayoutPositions />
                               </value>
@@ -419,6 +449,27 @@
                       </LayoutPositions>
                     </value>
                   </entry>
+                  <entry key="settingsFragment">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="528" />
+                            <option name="y" value="-324" />
+                          </Point>
+                        </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="action_settingsFragment_to_subscriptionFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
                   <entry key="stayOnTopOfHealthFragment">
                     <value>
                       <LayoutPositions>
@@ -431,6 +482,27 @@
                         <option name="myPositions">
                           <map>
                             <entry key="action_stayOnTopOfHealthFragment_to_calendarFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
+                  <entry key="subscriptionFragment">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="835" />
+                            <option name="y" value="-324" />
+                          </Point>
+                        </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="action_subscriptionFragment_to_navigation_home">
                               <value>
                                 <LayoutPositions />
                               </value>

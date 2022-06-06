@@ -79,15 +79,18 @@
         <entry key="..\:/AndroidProjects/woman_calendar/app/src/main/res/layout/fragment_recent.xml" value="0.32382246376811596" />
         <entry key="..\:/AndroidProjects/woman_calendar/app/src/main/res/layout/fragment_saved.xml" value="0.32382246376811596" />
         <entry key="..\:/AndroidProjects/woman_calendar/app/src/main/res/layout/fragment_saving_details.xml" value="0.266304347826087" />
+        <entry key="..\:/AndroidProjects/woman_calendar/app/src/main/res/layout/fragment_settings.xml" value="0.33" />
         <entry key="..\:/AndroidProjects/woman_calendar/app/src/main/res/layout/fragment_sign_up.xml" value="0.22" />
         <entry key="..\:/AndroidProjects/woman_calendar/app/src/main/res/layout/fragment_staty_on_top_of_health.xml" value="0.3359375" />
         <entry key="..\:/AndroidProjects/woman_calendar/app/src/main/res/layout/fragment_stay_on_top_of_health.xml" value="0.2418478260869565" />
+        <entry key="..\:/AndroidProjects/woman_calendar/app/src/main/res/layout/fragment_subscription.xml" value="0.25" />
         <entry key="..\:/AndroidProjects/woman_calendar/app/src/main/res/layout/fragment_symptoms.xml" value="0.3359375" />
         <entry key="..\:/AndroidProjects/woman_calendar/app/src/main/res/layout/fragment_weight.xml" value="0.3359375" />
         <entry key="..\:/AndroidProjects/woman_calendar/app/src/main/res/layout/item_articles.xml" value="0.16271442986881937" />
         <entry key="..\:/AndroidProjects/woman_calendar/app/src/main/res/layout/item_articles_big_card.xml" value="0.32382246376811596" />
         <entry key="..\:/AndroidProjects/woman_calendar/app/src/main/res/layout/item_articles_tab.xml" value="0.32382246376811596" />
         <entry key="..\:/AndroidProjects/woman_calendar/app/src/main/res/layout/item_calendar_day.xml" value="0.32382246376811596" />
+        <entry key="..\:/AndroidProjects/woman_calendar/app/src/main/res/layout/item_home_fragment_cycle.xml" value="0.3359375" />
         <entry key="..\:/AndroidProjects/woman_calendar/app/src/main/res/layout/item_i_want_to_btn.xml" value="0.2565789473684211" />
         <entry key="..\:/AndroidProjects/woman_calendar/app/src/main/res/layout/item_onboarding_btn.xml" value="0.30886075949367087" />
         <entry key="..\:/AndroidProjects/woman_calendar/app/src/main/res/layout/item_symptom_big.xml" value="0.3359375" />

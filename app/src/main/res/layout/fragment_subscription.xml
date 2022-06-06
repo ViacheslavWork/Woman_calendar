@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/beige"
+    android:paddingBottom="40dp"
+    tools:context=".ui.subscription.SubscriptionFragment">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/tool_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/pink_15"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageButton
+                android:id="@+id/back_ib"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@android:color/transparent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_left_arrow" />
+
+            <Button
+                android:id="@+id/skip_btn"
+                style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/segoe_print_bold"
+                android:text="@string/skip"
+                android:textAllCaps="false"
+                android:textColor="@color/text_color"
+                android:textSize="14sp"
+                app:iconTint="@color/black"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.appcompat.widget.Toolbar>
+
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/content_start"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="20dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/content_end"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="20dp" />
+
+    <TextView
+        android:id="@+id/title_tv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/segoe_print_bold"
+        android:gravity="center"
+        android:layout_marginTop="24dp"
+        android:text="@string/unlimited_experience_how_your_free_trial_works"
+        android:textColor="@color/text_color"
+        android:textSize="22sp"
+        app:layout_constraintEnd_toEndOf="@id/content_end"
+        app:layout_constraintStart_toStartOf="@id/content_start"
+        app:layout_constraintTop_toBottomOf="@id/tool_bar" />
+
+    <TextView
+        android:id="@+id/start_your_tv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="64dp"
+        android:fontFamily="@font/segoe_print_bold"
+        android:gravity="center"
+        android:text="@string/start_your"
+        android:textColor="@color/text_color"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="@id/content_end"
+        app:layout_constraintStart_toStartOf="@id/content_start"
+        app:layout_constraintTop_toBottomOf="@id/title_tv" />
+
+    <TextView
+        android:id="@+id/_three_day_trial_tv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:fontFamily="@font/segoe_print_bold"
+        android:gravity="center"
+        android:text="@string/_3_day_free_trial"
+        android:textColor="@color/text_color"
+        android:textSize="22sp"
+        app:layout_constraintEnd_toEndOf="@id/content_end"
+        app:layout_constraintStart_toStartOf="@id/content_start"
+        app:layout_constraintTop_toBottomOf="@id/start_your_tv" />
+
+    <TextView
+        android:id="@+id/then_tv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:fontFamily="@font/segoe_print_regular"
+        android:gravity="center"
+        android:text="@string/then_sum__"
+        android:textColor="@color/text_color"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="@id/content_end"
+        app:layout_constraintStart_toStartOf="@id/content_start"
+        app:layout_constraintTop_toBottomOf="@id/_three_day_trial_tv" />
+
+    <ImageView
+        android:id="@+id/_first_check_iv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/_second_check_iv"
+        app:layout_constraintStart_toStartOf="@id/content_start"
+        app:layout_constraintTop_toBottomOf="@+id/then_tv"
+        app:layout_constraintVertical_chainStyle="packed"
+        app:srcCompat="@drawable/ic_check_in_round" />
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:fontFamily="@font/segoe_print_regular"
+        android:text="@string/access_to_all_premium_features"
+        android:textColor="@color/text_color"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="@id/_first_check_iv"
+        app:layout_constraintEnd_toEndOf="@id/content_end"
+        app:layout_constraintStart_toEndOf="@id/_first_check_iv"
+        app:layout_constraintTop_toTopOf="@id/_first_check_iv" />
+
+    <ImageView
+        android:id="@+id/_second_check_iv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/_third_check_iv"
+        app:layout_constraintStart_toStartOf="@id/content_start"
+        app:layout_constraintTop_toBottomOf="@+id/_first_check_iv"
+        app:srcCompat="@drawable/ic_check_in_round" />
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:fontFamily="@font/segoe_print_regular"
+        android:text="@string/get_a_notification_before_trial_ends"
+        android:textColor="@color/text_color"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="@id/_second_check_iv"
+        app:layout_constraintEnd_toEndOf="@id/content_end"
+        app:layout_constraintStart_toEndOf="@id/_second_check_iv"
+        app:layout_constraintTop_toTopOf="@id/_second_check_iv" />
+
+    <ImageView
+        android:id="@+id/_third_check_iv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/continue_btn"
+        app:layout_constraintStart_toStartOf="@id/content_start"
+        app:layout_constraintTop_toBottomOf="@+id/_second_check_iv"
+        app:srcCompat="@drawable/ic_check_in_round" />
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:fontFamily="@font/segoe_print_regular"
+        android:text="@string/cancel_anytime"
+        android:textColor="@color/text_color"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="@id/_third_check_iv"
+        app:layout_constraintEnd_toEndOf="@id/content_end"
+        app:layout_constraintStart_toEndOf="@id/_third_check_iv"
+        app:layout_constraintTop_toTopOf="@id/_third_check_iv" />
+
+
+    <Button
+        android:id="@+id/continue_btn"
+        style="@style/GlobalButtonStyle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:paddingVertical="@dimen/btn_padding_vertical"
+        android:text="@string/start_free_trial_now"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/content_end"
+        app:layout_constraintStart_toStartOf="@id/content_start" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

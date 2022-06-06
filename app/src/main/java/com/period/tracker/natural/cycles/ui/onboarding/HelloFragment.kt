@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.period.tracker.natural.cycles.R
@@ -19,11 +18,14 @@ class HelloFragment : Fragment(R.layout.fragment_hello) {
     private val firstRunPreferences: FirstRunPreferences by inject()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        if (!firstRunPreferences.isFirstRun()) {
+        if (!firstRunPreferences.isFirstRun() || Firebase.auth.currentUser != null) {
             navigate()
         }
         _binding = FragmentHelloBinding.bind(view)
-        binding.startBtn.setOnClickListener { findNavController().navigate(HelloFragmentDirections.actionHelloFragmentToIWantToFragment()) }
+        binding.startBtn.setOnClickListener {
+            findNavController().navigate(HelloFragmentDirections.actionHelloFragmentToIWantToFragment())
+//            findNavController().navigate(HelloFragmentDirections.actionHelloFragmentToNavigationHome())
+        }
         binding.titleTv.text = String.format(
             getString(R.string.hello_i_m_app_s_name),
             getString(R.string.app_name)

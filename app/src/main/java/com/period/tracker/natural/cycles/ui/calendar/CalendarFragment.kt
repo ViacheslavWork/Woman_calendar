@@ -92,7 +92,7 @@ class CalendarFragment : Fragment(R.layout.fragment_calendrar) {
                     CalendarFragmentDirections.actionCalendarFragmentToMoreAccuratePredictionsFragment()
                 )
                 PRE_PERIOD_SELECTION_FROM_ON_BOARDING -> findNavController().navigate(
-                    CalendarFragmentDirections.actionCalendarFragmentToNavigationHome()
+                    CalendarFragmentDirections.actionCalendarFragmentToSubscriptionFragment()
                 )
                 OPEN_INFO_BY_CLICK -> Unit
                 PERIOD_SELECTION -> Unit

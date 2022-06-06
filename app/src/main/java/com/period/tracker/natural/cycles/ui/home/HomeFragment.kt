@@ -392,6 +392,9 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         binding.bellIb.setOnClickListener {
             Timber.d(bookmarksPreferences.getBookmarks().toString())
         }
+        binding.menuIb.setOnClickListener {
+            findNavController().navigate(HomeFragmentDirections.actionNavigationHomeToSettingsFragment())
+        }
         binding.logPeriodBtn.setOnClickListener {
             findNavController().navigate(HomeFragmentDirections.actionNavigationHomeToCalendarFragment())
         }

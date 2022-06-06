@@ -10,15 +10,15 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.coroutines.flow.collectLatest
-import org.koin.androidx.viewmodel.ext.android.viewModel
-import timber.log.Timber
 import com.period.tracker.natural.cycles.R
 import com.period.tracker.natural.cycles.databinding.FragmentDiscoverBinding
 import com.period.tracker.natural.cycles.domain.model.ArticleType.*
 import com.period.tracker.natural.cycles.ui.articles.ArticlesEvent
 import com.period.tracker.natural.cycles.ui.articles.adapters.ArticlesRecyclerGroupAdapter
 import com.period.tracker.natural.cycles.ui.articles.details.ArticleDetailsFragment
+import kotlinx.coroutines.flow.collectLatest
+import org.koin.androidx.viewmodel.ext.android.viewModel
+import timber.log.Timber
 
 
 class DiscoverFragment : Fragment(R.layout.fragment_discover), RecyclerView.OnItemTouchListener,
