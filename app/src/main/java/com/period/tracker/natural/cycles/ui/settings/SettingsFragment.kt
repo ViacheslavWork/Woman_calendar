@@ -23,7 +23,7 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
         binding.premiumIb.setOnClickListener {
             findNavController().navigate(
                 R.id.action_settingsFragment_to_subscriptionFragment,
-                bundleOf(SubscriptionFragment.ARG_IS_TOOL_BAR to false)
+                bundleOf(SubscriptionFragment.ARG_HAS_TOOL_BAR to false)
             )
         }
     }

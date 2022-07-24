@@ -281,12 +281,15 @@ healthy veggies with a big salad</string>
     <string name="unlimited_experience_how_your_free_trial_works">Unlimited experience. How your free trial works?</string>
     <string name="start_free_trial_now">Start Free Trial Now</string>
     <string name="start_your">Start your</string>
+    <string name="day_free_trial">%d-day free trial</string>
     <string name="_3_day_free_trial">3-day free trial</string>
     <string name="then_sum_per_month">Then %s/mo</string>
     <string name="then_sum__">Then --/mo</string>
+    <string name="then_">Then %s/mo</string>
     <string name="access_to_all_premium_features">Access to all premium features</string>
     <string name="get_a_notification_before_trial_ends">Get a notification before trial ends</string>
     <string name="cancel_anytime">Cancel anytime</string>
     <string name="premium">Premium</string>
+    <string name="licence_key">"MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAptpxL4M9lgLhuAd3ZBmptM8c3Ba/RUeenfb5SwdLvuNwEin/m13DPILyhqEMDhecGnhUyVXDOAekPHryvnnRT6RvhXg0iEytwYw4zvAJ/H/ISvfaj4Y909ABedzmWxWBMsLhGD6zM1qhi4chvHBAKPExdZlS3/Kjca78NC2W8i7ztefJqDN043DiMQAtN5lDZSwfDBa2eZMawVnQ3tk8lMfM9qfRxUSMf3MDfTDb7azGMDysQshtepKeRPg8CCHdcWe5pS2ZzP19GDSsi3d3xxLE/F0f7dP6lt20DZ9k9IytBk+8oH6wTbxsRXpcakHIkq/pNZ+unZIcLcYKzm2FbwIDAQAB "</string>
 
 </resources>

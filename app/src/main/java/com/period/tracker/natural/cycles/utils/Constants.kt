@@ -23,4 +23,6 @@ object Constants {
     const val FIREBASE_DATABASE_DAYS_NAME = "days"
     const val FIREBASE_DATABASE_ARTICLES_BOOKMARKS_NAME = "articles_bookmarks"
     const val FIREBASE_DATABASE_ARTICLES_NAME = "articles"
+
+    const val TRIAL_LENGTH_DAYS = 3L
 }

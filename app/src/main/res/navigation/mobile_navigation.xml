@@ -40,6 +40,9 @@
         <action
             android:id="@+id/action_navigation_articles_to_articleDetailsFragment"
             app:destination="@id/articleDetailsFragment" />
+        <action
+            android:id="@+id/action_navigation_articles_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
     </fragment>
 
     <fragment

@@ -20,7 +20,6 @@ class AccountLogInFragment : Fragment(R.layout.fragment_account_log_in) {
     private var _binding: FragmentAccountLogInBinding? = null
     private val binding get() = _binding!!
     private val mainViewModel: MainViewModel by sharedViewModel()
-    private val firstRunPreferences: FirstRunPreferences by inject()
     private lateinit var auth: FirebaseAuth
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

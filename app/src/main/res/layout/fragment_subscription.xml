@@ -92,7 +92,7 @@
         app:layout_constraintTop_toBottomOf="@id/title_tv" />
 
     <TextView
-        android:id="@+id/_three_day_trial_tv"
+        android:id="@+id/three_day_trial_tv"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
@@ -117,7 +117,7 @@
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="@id/content_end"
         app:layout_constraintStart_toStartOf="@id/content_start"
-        app:layout_constraintTop_toBottomOf="@id/_three_day_trial_tv" />
+        app:layout_constraintTop_toBottomOf="@id/three_day_trial_tv" />
 
     <ImageView
         android:id="@+id/_first_check_iv"
@@ -173,7 +173,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/continue_btn"
+        app:layout_constraintBottom_toTopOf="@+id/subscription_btn"
         app:layout_constraintStart_toStartOf="@id/content_start"
         app:layout_constraintTop_toBottomOf="@+id/_second_check_iv"
         app:srcCompat="@drawable/ic_check_in_round" />
@@ -193,7 +193,7 @@
 
 
     <Button
-        android:id="@+id/continue_btn"
+        android:id="@+id/subscription_btn"
         style="@style/GlobalButtonStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"

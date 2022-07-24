@@ -113,16 +113,12 @@ val appModule = module {
     }
     //preferences
     single { NotificationSchedulerPreferences(androidContext()) }
-    single {
-        BookmarksPreferences(
-            androidContext(),
-            saveArticlesBookmarksToFirebaseUseCase = get()
-        )
-    }
+    single { BookmarksPreferences(androidContext(),saveArticlesBookmarksToFirebaseUseCase = get()) }
     single { RecentArticlesPreferences(androidContext()) }
     single { EarliestPeriodPreferences(androidContext()) }
     single { LatestPeriodPreferences(androidContext()) }
     single { FirstRunPreferences(androidContext()) }
+    single { PremiumStatusPreferences(androidContext()) }
 
     //firebase
     single<DatabaseReference> { Firebase.database.reference }

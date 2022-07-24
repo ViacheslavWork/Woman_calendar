@@ -9,6 +9,8 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import com.period.tracker.natural.cycles.R
 import com.period.tracker.natural.cycles.databinding.FragmentHomeBinding
 import com.period.tracker.natural.cycles.databinding.ItemHomeFragmentCycleBinding
@@ -18,19 +20,27 @@ import com.period.tracker.natural.cycles.domain.model.CycleStatus
 import com.period.tracker.natural.cycles.domain.model.StateOfDay.*
 import com.period.tracker.natural.cycles.preferences.BookmarksPreferences
 import com.period.tracker.natural.cycles.preferences.FirstRunPreferences
+import com.period.tracker.natural.cycles.ui.MainViewModel
 import com.period.tracker.natural.cycles.ui.calendar.CalendarFragment
 import com.period.tracker.natural.cycles.ui.calendar.CalendarState
+import com.period.tracker.natural.cycles.ui.subscription.SubscriptionFragment
 import com.period.tracker.natural.cycles.ui.symptoms.SymptomsFragment
+import com.period.tracker.natural.cycles.utils.Constants
 import com.period.tracker.natural.cycles.utils.LocalDateHelper
 import com.period.tracker.natural.cycles.utils.LocalDateHelper.getMonthName
 import org.koin.android.ext.android.inject
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.threeten.bp.Instant
 import org.threeten.bp.LocalDate
+import org.threeten.bp.LocalDateTime
+import org.threeten.bp.ZoneId
 import timber.log.Timber
 import java.util.*
 
 class HomeFragment : Fragment(R.layout.fragment_home) {
     private val viewModel: HomeViewModel by viewModel()
+    private val mainViewModel: MainViewModel by sharedViewModel()
     private val bookmarksPreferences: BookmarksPreferences by inject()
     private val firstRunPreferences: FirstRunPreferences by inject()
     private var _binding: FragmentHomeBinding? = null
@@ -61,12 +71,38 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         observeLastCycles()
         observeCountOfPeriods()
         observeSymptoms()
+        observePremiumStatus()
+    }
 
+    private fun observePremiumStatus() {
+        mainViewModel.isPremium.observe(viewLifecycleOwner) {
+            Firebase.auth.currentUser?.metadata?.creationTimestamp
+                ?.let { creationTimeInMillis ->
+                    LocalDateTime.ofInstant(
+                        Instant.ofEpochMilli(creationTimeInMillis),
+                        ZoneId.systemDefault()
+                    )
+                        .toLocalDate()
+                }
+                ?.let { creationDate ->
+                    if (LocalDate.now()
+                            .isBefore(creationDate.plusDays(Constants.TRIAL_LENGTH_DAYS))
+                    )
+                        return@observe
+                }
+
+            if (!it) {
+                findNavController().navigate(
+                    R.id.action_navigation_home_to_subscriptionFragment,
+                    bundleOf(SubscriptionFragment.ARG_HAS_TOOL_BAR to false)
+                )
+            }
+
+        }
     }
 
     private fun observeFirebaseDays() {
         viewModel.isDaysFromFirebaseDownloaded.observe(viewLifecycleOwner) {
-            Timber.d("Update ui")
             viewModel.updateUI()
         }
     }

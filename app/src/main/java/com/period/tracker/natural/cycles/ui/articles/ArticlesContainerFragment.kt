@@ -7,6 +7,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
@@ -46,6 +47,15 @@ class ArticlesContainerFragment : Fragment(R.layout.fragment_articles) {
         setUpViewPager()
         setUpTubLayout()
         setData()
+        setUpListeners()
+    }
+
+    private fun setUpListeners() {
+        binding.menuIb.setOnClickListener {
+            findNavController().navigate(
+                ArticlesContainerFragmentDirections.actionNavigationArticlesToSettingsFragment()
+            )
+        }
     }
 
     private fun setData() {

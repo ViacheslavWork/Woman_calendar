@@ -4,20 +4,6 @@ import com.google.firebase.database.DatabaseReference
 import com.period.tracker.natural.cycles.domain.model.Article
 import com.period.tracker.natural.cycles.utils.Constants
 
-/*
-val id: Int,
-val title: String,
-val smallTitle: String? = null,
-val titleColor: ArticleTitleColor = ArticleTitleColor.BLACK,
-val content: String,
-val bigImage: Uri,
-val smallImage: Uri,
-val isBookmark: Boolean = false,
-val internalArticlesId: List<Int>? = null,
-val type: ArticleType? = null,
-val parentType: ArticleType
-*/
-
 class SaveArticleToFirebaseUseCase(private val firebaseDatabase: DatabaseReference) {
     fun execute(article: Article) {
         firebaseDatabase
