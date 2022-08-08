@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "1045813591985",
-    "project_id": "calendar-a981c",
-    "storage_bucket": "calendar-a981c.appspot.com"
+    "project_number": "194559007916",
+    "project_id": "calendar-9253c",
+    "storage_bucket": "calendar-9253c.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1045813591985:android:a4e44adb783ed8d36ec790",
+        "mobilesdk_app_id": "1:194559007916:android:86ad63e97e460513a8d309",
         "android_client_info": {
-          "package_name": "com.period.tracker.natural.cycles"
+          "package_name": "com.natural.cycles.period.tracker"
         }
       },
       "oauth_client": [
         {
-          "client_id": "1045813591985-qeveapueo991kqci8pv13n7e214mgidf.apps.googleusercontent.com",
+          "client_id": "194559007916-p12qponvl87dndt7vj3ld4dk9irnda18.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDW3DKDBEyLpm3EMrCcXXigG4XxaJGr7sI"
+          "current_key": "AIzaSyCpV5V_O3M71B9sjjv0dhKipNxQA8yq5qo"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "1045813591985-qeveapueo991kqci8pv13n7e214mgidf.apps.googleusercontent.com",
+              "client_id": "194559007916-p12qponvl87dndt7vj3ld4dk9irnda18.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

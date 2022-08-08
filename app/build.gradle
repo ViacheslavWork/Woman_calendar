@@ -12,7 +12,7 @@ android {
     compileSdk 32
 
     defaultConfig {
-        applicationId "com.period.tracker.natural.cycles"
+        applicationId "com.natural.cycles.period.tracker"
         minSdk 23
         targetSdk 32
         versionCode 2
